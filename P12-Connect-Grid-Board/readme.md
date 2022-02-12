@@ -1,7 +1,3 @@
----
-title: "Connect Grid Board"
-slug: connect-grid-board
----
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
@@ -61,7 +57,7 @@ need `connect` from `React-Redux`.
 > [action]
 >
 > Import `connect` from 'react-redux' at the top of `/src/components/GridBoard.js`:
->
+
 ```js
 import { useSelector } from 'react-redux'
 ```
@@ -94,7 +90,7 @@ You'll need to map the row arrays then map each row to get the value at each col
 > [action]
 >
 > Import `shapes` from utils.js. Add the following at the top of `GridBoard.js`
->
+
 ```JS
 ...
 import { shapes } from '../utils'
@@ -118,17 +114,17 @@ But enough talking, let's crank this out!
 > [action]
 >
 > Rewrite the `makeGrid` method in `/src/components/grid-board.js` that follows the description as outlined above:
->
+
 ```JavaScript
 import React from 'react'
 import { useSelector } from 'react-redux'
 import GridSquare from './GridSquare'
 import { shapes } from '../utils'
->
+
 export default function GridBoard(props) {
 	const game = useSelector((state) => state.game)
 	const { grid, shape, rotation, x, y, isRunning, speed } = game
->
+
 	const block = shapes[shape][rotation]
   const blockColor = shape
   // map rows
@@ -153,7 +149,7 @@ export default function GridBoard(props) {
               color={color} />
     })
   })
->
+
 	return (
 		<div className='grid-board'>
 			{gridSquares}
@@ -169,7 +165,7 @@ No visual changes quite yet, but make sure everything still loads correctly in t
 # Now Commit
 
 >[action]
->
+
 ```bash
 $ git add .
 $ git commit -m 'Added connection for grid board'
