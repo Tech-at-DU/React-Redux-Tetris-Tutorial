@@ -1,7 +1,3 @@
----
-title: "Connect Next Block"
-slug: connect-next-block
----
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
@@ -55,15 +51,15 @@ Luckily you built that `defaultState` function in `/utils`. Time to use it!
 > [action]
 >
 > Import the `defaultState` function into `/src/reducers/game-reducer.js`, and then update `state` in the `gameReducer` const to the following:
->
+
 ```js
 ...
 import { defaultState } from '../utils'
->
+
 const gameReducer = (state = defaultState(), action) => {
->
+
 ...
->
+
 }
 ```
 
@@ -73,10 +69,10 @@ The useSelector hook give your components access to the redux store.
 
 > [action]
 > Add the following import near the top of `/src/components/NextBlock.js`:
->
+
 ```js
 import { useSelector } from 'react-redux'
-import { shapes } from '../shapes'
+import { shapes } from '../utils'
 ```
 
 # Get a piece of state
@@ -103,7 +99,7 @@ To get `nextShape` the syntax might look like: `state.game.nextShape`
 > [action]
 >
 > Use the `useSelector` hook to get the `nextShape` from state. 
->
+
 ```JavaScript
 ...
 export default function NextBlock(props) {
@@ -119,10 +115,10 @@ Shapes are stored in an array of arrays of arrays. Seriously the data is nested 
 > [action]
 >
 > Add the following to the NextBlock component in `/src/components/NextBlock.js`:
->
+
 ```js
 ...
->
+
 export default function NextBlock(props) {
 	const nextShape = useSelector((state) => state.game.nextShape)
 	const box = shapes[nextShape][0] // Get the first rotation
