@@ -1,7 +1,3 @@
----
-title: "Connect Message Popup"
-slug: connect-message-popup
----
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
@@ -55,19 +51,19 @@ Again, try this on your own, and then check against the solution to see how well
 > [solution]
 >
 > Updated `render` method in `/src/components/message-popup.js`:
->
+
 ```js
 import React from 'react'
 import { useSelector } from 'react-redux'
->
+
 // Displays a message
 export default function MessagePopup(props) {
   const isRunning = useSelector((state) => state.game.isRunning)
   const gameOver = useSelector((state) => state.game.gameOver)
->
+
   let message = ''
   let isHidden = 'hidden'
->
+
   if (gameOver) {
     message = 'Game Over'
     isHidden = ''
@@ -75,7 +71,7 @@ export default function MessagePopup(props) {
     message = 'Paused'
     isHidden = ''
   }
->
+
   return (
     <div className={`message-popup ${isHidden}`}>
       <h1>{message}</h1>
