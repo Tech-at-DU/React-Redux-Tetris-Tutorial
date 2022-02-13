@@ -1,7 +1,3 @@
----
-title: "Connect Score Board"
-slug: connect-score-board
----
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
@@ -42,17 +38,17 @@ The value displayed for score will come from the game's `state`. The buttons wil
 > [action]
 >
 > Updated `/src/components/score-board.js`:
->
+
 ```js
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { pause, resume, restart } from '../actions'
->
+
 export default function ScoreBoard(props) {
 	const dispatch = useDispatch()
 	const game = useSelector((state) => state.game)
 	const { score, isRunning, gameOver } = game
->
+
 	return (
 		<div className="score-board">
 			<div>Score:{ score }</div>
