@@ -1,7 +1,4 @@
----
-title: "Tetris - Introduction"
-slug: tetris-introduction
----
+# Tetris - Introduction
 
 This tutorial uses React and Redux to recreate the classic arcade game Tetris.
 
@@ -19,7 +16,7 @@ Here is what we will build with this tutorial. This version of Tetris will run i
 
 # Why is this important?
 
-Completing this project will give you a chance to practice creating advanced front end applications with React. It will also give you an opportunity to look at managing complex appication satte with Redux. Beyond all of this the tutorial uses complex Objects and Arrays. This should give you new tools to practice your JavaScript skills.
+Completing this project will give you a chance to practice creating advanced front end applications with React. It will also give you an opportunity to look at managing complex appication state with Redux. Beyond all of this the tutorial uses complex Objects and Arrays. This should give you new tools to practice your JavaScript skills and learn some new things!
 
 # Prerequisites
 
@@ -39,7 +36,7 @@ The tutorial will also delve into related topics like CSS, CSS Grid, and Flex Bo
 
 # Learning Outcomes
 
-By the end of this tutorial, students should be able to...
+By the end of this tutorial, students should be able to:
 
 1. Implement an advanced single page application with React
 1. Use Redux to manage application state
@@ -76,9 +73,6 @@ Much like we've done in earlier tutorials, make sure you're committing your code
 
 Set up your repo!
 
->[action]
-> Make your first commit
->
 ```bash
 $ git init
 $ git add .
@@ -87,11 +81,8 @@ $ git commit -m 'project init'
 
 Now go to GitHub and create a public repository called REPO-NAME, and now associate it as a remote for your local git project and then push to it.
 
->[action]
-> Push it!
->
 ```bash
-$ git remote add origin GITHUB-REPO-URL
+$ git remote add origin <GITHUB-REPO-URL>
 $ git push origin main -u
 ```
 
@@ -99,11 +90,13 @@ $ git push origin main -u
 
 First thing we need to do is get our default React app set up
 
-> [action]
->
-> Create a default app using Create React App. You can follow the instructions [here](https://github.com/facebook/create-react-app).
->
-> Test your app with: `npm start` or `yarn start` to make sure everything is working.
+Create a default app using Create React App. You can follow the instructions [here](https://github.com/facebook/create-react-app).
+
+```bash
+npx create-react-app react-redux-tetris
+```
+
+Test your app with: `npm start` to make sure everything is working.
 
 You can visit the project in a browser at `http://localhost:3000/`. It should open at the this address automatically. If all went well, you should see the below in your browser:
 
@@ -114,10 +107,8 @@ You can visit the project in a browser at `http://localhost:3000/`. It should op
 Clean up the default project by removing the header and default
 content.
 
-> [action]
->
-> In `/src/App.js` edit the `render` method to provide the following JSX:
->
+In `/src/App.js` edit the `render` method to provide the following JSX:
+
 ```js
 function App() {
   return (
@@ -129,11 +120,12 @@ function App() {
   );
 }
 ```
->
-> Since we removed the logo we should remove the import for it:
-> remove the `import logo from './logo.svg';` line from the top of `/src/App.js`
->
-> Lastly, make a folder for components: `src/components`
+
+Since we removed the logo we should remove the import for it:
+
+remove the `import logo from './logo.svg';` line from the top of `/src/App.js`
+
+Lastly, make a folder for components: `src/components`
 
 # Test the changes
 
@@ -146,37 +138,19 @@ trigger the server to refresh automatically. You should now see the below in the
 
 Redux is a library that manages Application state. The React-Redux library acts as bindings between React and Redux. We will need to install both as dependancies.
 
+Add Redux and React-Redux as a dependency to your project.
 
-> [action]
->
-> Add Redux and React-Redux as a dependency to your project.
->
 ```bash
-$ npm install --save redux react-redux
+$ npm install @reduxjs/toolkit react-redux
 ```
-
-# Add some folders
-
-This next step adds a couple folders to organize your code.
-
-> [action]
->
-> Make a folder for Actions: `src/actions`
->
-> Then, make a folder for Reducers: `src/reducers`
->
-> Finally, make another folder to hold some utility functions: `src/utils`
 
 # Now Commit
 
->[action]
->
 ```bash
 $ git add .
 $ git commit -m 'proj setup complete'
 $ git push
 ```
-
 
 ## Resources
 
