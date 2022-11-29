@@ -1,7 +1,3 @@
----
-title: "Organizing Code"
-slug: organizing-code
----
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
@@ -42,7 +38,7 @@ The game needs to generate random numbers. The `Math.random()` works but we will
 > [action]
 >
 > Add a new file `/src/utils/index.js` with the following function in it:
->
+
 ```JavaScript
 export const random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min
@@ -54,7 +50,7 @@ As the project progresses any time we need more general purpose code we can add 
 # Now Commit
 
 >[action]
->
+
 ```bash
 $ git add .
 $ git commit -m 'Added utils'
@@ -70,23 +66,23 @@ Define the store in App and Create a Provider component that wraps the component
 > [action]
 >
 > Update `/src/App.js` to include the following:
->
+
 ```js
 import React from 'react';
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import reducers from './reducers'
->
+
 import './App.css';
->
+
 import GridBoard from './components/GridBoard'
 import NextBlock from './components/NextBlock'
 import ScoreBoard from './components/ScoreBoard'
 import Controls from './components/Controls'
 import MessagePopup from './components/MessagePopup'
->
+
 const store = createStore(reducers)
->
+
 function App() {
   return (
     <Provider store={store}>
@@ -103,7 +99,7 @@ function App() {
     </Provider>
   );
 }
->
+
 export default App;
 ```
 

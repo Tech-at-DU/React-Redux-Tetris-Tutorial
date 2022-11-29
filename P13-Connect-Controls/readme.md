@@ -1,7 +1,3 @@
----
-title: "Connect Controls"
-slug: connect-controls
----
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
@@ -44,13 +40,13 @@ To dispatch actions from a component use `useDipatch`. The controls component wi
 > [action]
 >
 > Import the `moveDown, moveLeft, moveRight, rotate` actions (as well as `connect`) into `/src/components/Controls.js`
->
+
 ```js
 ...
 ...
 import { useSelector, useDispatch } from 'react-redux'
 import { moveDown, moveLeft, moveRight, rotate } from '../actions'
->
+
 export default function Controls(props) {
 	const dispatch = useDispatch()
 	const isRunning = useSelector((state) => state.isRunning)
@@ -67,7 +63,7 @@ Currently the buttons in this component just call actions from props with no par
 > [action]
 >
 > Edit the `render` method in `/src/components/controls.js` to actually call actions. Remember that actions should only be sent if the `isRunning` is true:
->
+
 ```JS
 ...
 export default function Controls(props) {
@@ -78,22 +74,22 @@ export default function Controls(props) {
 			<button className="control-button" onClick={(e) => {
 				dispatch(moveLeft())
 			}}>Left</button>
->
+
 			{/* right */}
 			<button className="control-button" onClick={(e) => {
 				dispatch(moveRight())
 			}}>Right</button>
->
+
 			{/* rotate */}
 			<button className="control-button" onClick={(e) => {
 				dispatch(rotate())
 			}}>Rotate</button>
->
+
 			{/* down */}
 			<button className="control-button" onClick={(e) => {
 				dispatch(moveDown())
 			}}>Down</button>
->
+
 		</div>
 	)
 }

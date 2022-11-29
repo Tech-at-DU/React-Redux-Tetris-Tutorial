@@ -1,7 +1,3 @@
----
-title: "Default state and Block Shapes"
-slug: default-state-and-block-shapes
----
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
@@ -92,7 +88,7 @@ You need a function that will generate a default empty array. This function need
 > [action]
 >
 > Write a function in `/src/utils/index.js`. Try filling in this function on your own, and then check the solution when you're done:
->
+
 ```JavaScript
 ...
 // Returns the default grid
@@ -100,10 +96,10 @@ export const gridDefault = () => {
   const rows = 18
   const cols = 10
   const array = []
->
+
   // Fill array with 18 arrays each containing
   // 10 zeros (0)
->
+
   return array
 }
 ```
@@ -111,7 +107,7 @@ export const gridDefault = () => {
 <!-- -->
 
 > [solution]
->
+
 ```js
 for (let row = 0; row < rows; row++) {
     array.push([])
@@ -133,7 +129,6 @@ Shapes will be mapped onto the board. There are 7 shapes. Let's represent them h
 - S (has two rotations)
 - O (has one rotation)
 
-
 Some requirements for the shapes:
 
 - Each shape will be mapped to a two dimensional array with a 1 where the shape should draw and 0 every else.
@@ -146,7 +141,7 @@ Some requirements for the shapes:
 > [action]
 >
 > Add the following to `/src/utils/index.js`:
->
+
 ```JavaScript
 // Define block shapes and their rotations as arrays.
 export const shapes = [
@@ -155,103 +150,103 @@ export const shapes = [
     [0,0,0,0],
     [0,0,0,0],
     [0,0,0,0]]],
->
+
   // I
   [[[0,0,0,0],
     [1,1,1,1],
     [0,0,0,0],
     [0,0,0,0]],
->
+
    [[0,1,0,0],
     [0,1,0,0],
     [0,1,0,0],
     [0,1,0,0]]],
->
+
   // T
   [[[0,0,0,0],
     [1,1,1,0],
     [0,1,0,0],
     [0,0,0,0]],
->
+
    [[0,1,0,0],
     [1,1,0,0],
     [0,1,0,0],
     [0,0,0,0]],
->
+
    [[0,1,0,0],
     [1,1,1,0],
     [0,0,0,0],
     [0,0,0,0]],
->
+
    [[0,1,0,0],
     [0,1,1,0],
     [0,1,0,0],
     [0,0,0,0]]],
->
+
   // L
   [[[0,0,0,0],
     [1,1,1,0],
     [1,0,0,0],
     [0,0,0,0]],
->
+
    [[1,1,0,0],
     [0,1,0,0],
     [0,1,0,0],
     [0,0,0,0]],
->
+
    [[0,0,1,0],
     [1,1,1,0],
     [0,0,0,0],
     [0,0,0,0]],
->
+
    [[0,1,0,0],
     [0,1,0,0],
     [0,1,1,0],
     [0,0,0,0]]],
->
+
   // J
   [[[1,0,0,0],
     [1,1,1,0],
     [0,0,0,0],
     [0,0,0,0]],
->
+
    [[0,1,1,0],
     [0,1,0,0],
     [0,1,0,0],
     [0,0,0,0]],
->
+
    [[0,0,0,0],
     [1,1,1,0],
     [0,0,1,0],
     [0,0,0,0]],
->
+
    [[0,1,0,0],
     [0,1,0,0],
     [1,1,0,0],
     [0,0,0,0]]],
->
+
   // Z
   [[[0,0,0,0],
     [1,1,0,0],
     [0,1,1,0],
     [0,0,0,0]],
->
+
    [[0,0,1,0],
     [0,1,1,0],
     [0,1,0,0],
     [0,0,0,0]]],
->
+
   // S
   [[[0,0,0,0],
     [0,1,1,0],
     [1,1,0,0],
     [0,0,0,0]],
->
+
    [[0,1,0,0],
     [0,1,1,0],
     [0,0,1,0],
     [0,0,0,0]]],
->
+
   // O
   [[[0,1,1,0],
     [0,1,1,0],
@@ -267,9 +262,9 @@ The game needs to generate a random shape from the shape array. Add a function t
 > [action]
 >
 > Add the following to `/src/utils/index.js`:
-> 
-> Return the index of a random shape from 1 to the number of items in `shapes`. You don't want the first item, which is an empty shape
 >
+> Return the index of a random shape from 1 to the number of items in `shapes`. You don't want the first item, which is an empty shape
+
 ```JavaScript
 // Random Shape
 export const randomShape = () => {
@@ -286,7 +281,7 @@ We need a function that will return the default object that redux uses with all 
 > [action]
 >
 > Write a function in `/src/utils/index.js` that generates the default state of the game.
->
+
 ```JavaScript
 // Return the default state for the game
 export const defaultState = () => {
@@ -319,7 +314,7 @@ You now have a default state for our game, and we **used Redux/Flux to manage th
 # Now Commit
 
 >[action]
->
+
 ```bash
 $ git add .
 $ git commit -m 'Added state utils'
