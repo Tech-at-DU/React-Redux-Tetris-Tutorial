@@ -1,7 +1,4 @@
----
-title: "Message Popup"
-slug: message-popup
----
+# Message Popup
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
@@ -22,28 +19,24 @@ slug: message-popup
 1. Building a timer system
 1. Implementing Game Over and Restart
 
-The game will need to display messages about the game
-state. Messages will be 'Game Over' and 'Paused' for now but can be expanded to showing score, advancing to a new level, and more.
+The game will need to display messages about the game state. Messages will be 'Game Over' and 'Paused' for now but can be expanded to showing score, advancing to a new level, and more.
 
 ![Modal](assets/Modal.png)
 
 Let's lay out our usual basic requirements:
 
 - The Message Popup will be a component connected to application state.
-- This component will appear above the game board in the center of the screen.
+- This component will appear above the game board in the center of the screen. Like a message popup.
 - The HTML element that holds this component needs to display over the rest of the component elements.
-- It won't be arranged with Grid and instead will use CSS
-absolute position. This allows us to place this anywhere on the screen regardless of the other elements.
+- It won't be arranged with Grid and instead will use CSS absolute position. This allows us to place this anywhere on the screen regardless of the other elements.
 
 # Building the message popup
 
-> [action]
->
-> Add a new file: `/src/components/MessagePopup.js` with the following code:
->
+Add a new file: `/src/components/MessagePopup.js` with the following code:
+
 ```JS
 import React from 'react'
->
+
 // Displays a message
 export default function MessagePopup(props) {
   return (
@@ -59,12 +52,10 @@ export default function MessagePopup(props) {
 
 Use styles to position and display the Message Popup.
 
-> [action]
->
-> Add the following to `/src/index.css`:
->
-> Message Popup - These styles apply to the `MessagePopup` container. With `position:absolute` this element can be placed anywhere on the screen, `left, top, transform:translate` perform this function.
->
+Add the following to `/src/index.css`:
+
+Message Popup - These styles apply to the `MessagePopup` container. With `position:absolute` this element can be placed anywhere on the screen, `left, top, transform:translate` perform this function.
+
 ```CSS
 /* Message Popup Styles */
 .message-popup {
@@ -78,9 +69,9 @@ Use styles to position and display the Message Popup.
   text-align: center;
 }
 ```
->
-> This style is applied only when the message popup container has both `message-popup` class and the `hidden` class. In this case the Message Popup is not displayed
-> 
+
+This style is applied only when the message popup container has both `message-popup` class and the `hidden` class. In this case the Message Popup is not displayed
+
 ```CSS
 .message-popup.hidden {
   display: none;
@@ -91,20 +82,18 @@ Use styles to position and display the Message Popup.
 
 Import and add the message popup component to the _bottom_ of App. **It should be the last component in App.**
 
-> [action]
->
-> Add the following to `/src/App.js`
->
+Add the following to `/src/App.js`
+
 ```js
 import React from 'react';
 import './App.css';
->
+
 import GridBoard from './components/GridBoard'
 import NextBlock from './components/NextBlock'
 import ScoreBoard from './components/ScoreBoard'
 import Controls from './components/Controls'
 import MessagePopup from './components/MessagePopup'
->
+
 function App() {
   return (
     <div className="App">
@@ -119,7 +108,7 @@ function App() {
     </div>
   );
 }
->
+
 export default App;
 ```
 
@@ -133,8 +122,6 @@ Alright, we've got our components in place! Now it's time to make them do someth
 
 # Now Commit
 
->[action]
->
 ```bash
 $ git add .
 $ git commit -m 'Added initial message popup'
