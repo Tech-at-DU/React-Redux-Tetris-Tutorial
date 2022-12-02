@@ -27,19 +27,14 @@ The scoreboard when completed will display on the right side of the game board.
 
 Some requirements for the score board:
 
-- The score board component will display the game score.
-- As blocks are placed when a row is filled with colored squares, the game scores points.
-- The game also needs a button to pause game play and restart the game.
-- As the game progresses you can speed up game play or make it
-more difficult in other ways for the current level.
-- The component added in this chapter will give these previously described elements a place to live.
+- Needs to display the game score
+- Has a Play Button to start the game
+- Has a Pause button to pause game play. This will allow people to get snacks mid game, an important feature! 
 
 # Create the ScoreBoard Component
 
-> [action]
->
-> Make a new file: `/src/components/ScoreBoard.js` with the following code:
->
+Make a new file: `/src/components/ScoreBoard.js` with the following code:
+
 ```js
 import React from 'react'
 >

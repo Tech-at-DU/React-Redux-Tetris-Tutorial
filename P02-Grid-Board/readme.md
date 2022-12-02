@@ -1,4 +1,4 @@
-# Grid Board"
+# Grid Board
 
 1. ~~Implement the overall grid square~~
 1. **Implement the game board**

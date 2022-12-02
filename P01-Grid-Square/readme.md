@@ -1,4 +1,4 @@
-# Tetris Grid"
+# Tetris Grid
 
 1. **Implement the overall grid square**
     1. **Build the grid square component**

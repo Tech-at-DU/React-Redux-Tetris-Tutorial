@@ -1,4 +1,4 @@
-# Next Block"
+# Next Block
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
