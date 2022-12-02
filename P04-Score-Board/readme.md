@@ -1,7 +1,4 @@
----
-title: "Score Board"
-slug: score-board
----
+# Score Board
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
