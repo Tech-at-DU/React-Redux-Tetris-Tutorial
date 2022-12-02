@@ -1,7 +1,4 @@
----
-title: "Controls"
-slug: controls
----
+# Controls
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
@@ -28,46 +25,38 @@ The original game used a joystick and button. This game will use four buttons.
 
 ![controls](assets/controls.png)
 
-The next step is to create a component with four buttons. These buttons will all issue actions.
-
-Redux allows you to make changes to application state from any component by issuing an action.
-
-Without Redux, changes in state would have to be passed up and down the component hierarchy and state would have to be managed by a shared parent component.
-
 # Adding Controls
 
 The first step is to make a new component to hold the buttons.
 
-> [action]
->
-> Make a new file `/src/components/Controls.js` that contains the following stub code for the controls component class (we'll build this out later):
->
+Make a new file `/src/components/Controls.js` that contains the following stub code for the controls component class (we'll build this out later):
+
 ```JS
 import React from 'react'
->
+
 export default function Controls(props) {
 	return (
 		<div className="controls">
 			{/* left */}
 			<button className="control-button" onClick={(e) => {
->
+
 			}}>Left</button>
->
+
 			{/* right */}
 			<button className="control-button" onClick={(e) => {
->
+
 			}}>Right</button>
->
+
 			{/* rotate */}
 			<button className="control-button" onClick={(e) => {
->
+
 			}}>Rotate</button>
->
+
 			{/* down */}
 			<button className="control-button" onClick={(e) => {
->
+
 			}}>Down</button>
->
+
 		</div>
 	)
 }
@@ -77,10 +66,8 @@ export default function Controls(props) {
 
 Add some styles to the controls container. Notice here we are mapping this element to grid area "b".
 
-> [action]
->
-> Add some new styles for the controls in `/src/index.css`
->
+Add some new styles for the controls in `/src/index.css`
+
 ```CSS
 /* controls */
 .controls {
@@ -95,12 +82,10 @@ The controls container will use the [Flex Box](https://developer.mozilla.org/en-
 Flex Box implements is a one dimensional layout. All of the buttons in the controls container are arranged in a horizontal row along a single axis.
 
 
-> [action]
->
-> Define some styles for the control buttons in `/src/index.css`
->
-> We want the buttons to be square with a width of 25% of grid board. The grid is 10 tiles wide, so the size of the buttons should be (2.5 * tile size)
->
+Define some styles for the control buttons in `/src/index.css`
+
+We want the buttons to be square with a width of 25% of grid board. The grid is 10 tiles wide, so the size of the buttons should be (2.5 * tile size)
+
 ```CSS
 /* Control Button */
 .control-button {
@@ -121,19 +106,17 @@ Flex Box implements is a one dimensional layout. All of the buttons in the contr
 
 Let's add our controls into our app!
 
-> [action]
->
-> Add the following to `/src/App.js`:
->
+Add the following to `/src/App.js`:
+
 ```js
 import React from 'react';
 import './App.css';
->
+
 import GridBoard from './components/GridBoard'
 import NextBlock from './components/NextBlock'
 import ScoreBoard from './components/ScoreBoard'
 import Controls from './components/Controls'
->
+
 function App() {
   return (
     <div className="App">
@@ -147,6 +130,8 @@ function App() {
     </div>
   );
 }
+
+export default App;
 ```
 
 # Product So Far
@@ -159,8 +144,6 @@ Obviously these controls don't do anything yet, but we'll build them out in a fu
 
 # Now Commit
 
->[action]
->
 ```bash
 $ git add .
 $ git commit -m 'Added initial controls'
