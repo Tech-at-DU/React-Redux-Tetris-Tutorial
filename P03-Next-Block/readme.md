@@ -1,7 +1,4 @@
----
-title: "Next Block"
-slug: next-block
----
+# Next Block"
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
@@ -23,9 +20,9 @@ slug: next-block
 1. Implementing Game Over and Restart
 
 Tetris shows you the next block that will appear to
-the side of the game grid. This section makes a component for this purpose.
+the side of the game grid. This section makes a component for that purpose.
 
-The **next block** will be displayed in a component that will draw itself as a 4 by 4 grid of grid squares. We will reuse the grid square component here.
+The **next block** will be displayed in a component that will draw itself as a 4 by 4 grid of grid squares. You will reuse the grid square component here.
 
 You might visualize the array that describes the next block like this:
 
@@ -35,17 +32,15 @@ It's just like the Grid Board array only smaller with 4 rows and 4 columns!
 
 # Make the Next Block Component
 
-> [action]
->
-> Make a new component `/src/components/NextBlock.js` and add the following code to it:
->
+Make a new component `/src/components/NextBlock.js` and add the following code to it:
+
 ```js
 import React from 'react'
 import GridSquare from './GridSquare'
->
+
 // Draws the "next" block view showing the next block to drop
 export default function NextBlock(props) {
->
+
 	const box = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]]
 	// Map the block to the grid
 	const grid = box.map((rowArray, row) => {
@@ -53,7 +48,7 @@ export default function NextBlock(props) {
 			return <GridSquare key={`${row}${col}`} color={square} />
 		})
 	})
- >
+ 
 	return (
 		<div className="next-block">
 			{grid}
@@ -62,14 +57,14 @@ export default function NextBlock(props) {
 }
 ```
 
+You won't see this component until it is added to another component that displays it. Which you will do in an upcoming step. 
+
 # Add styles for the Next Block
 
 Add some styles to arrange these into a grid.
 
-> [action]
->
-> Add the following to `/src/index.css`:
->
+Add the following to `/src/index.css`:
+
 ```css
 /* Next Block */
 .next-block {
@@ -87,17 +82,15 @@ Also notice the GridSquares are using the default color 0 in the `Next Block` co
 
 Let's see what we have so far:
 
-> [action]
->
-> Add the following to `/src/App.js`:
->
+Update `/src/App.js` by importing `NextBlock` and displaying it:
+
 ```js
 import React from 'react';
 import './App.css';
->
+
 import GridBoard from './components/GridBoard'
 import NextBlock from './components/NextBlock'
->
+
 function App() {
   return (
     <div className="App">
@@ -109,7 +102,7 @@ function App() {
     </div>
   );
 }
->
+
 export default App;
 ```
 
@@ -123,8 +116,6 @@ Doesn't look amazing right now, but we'll spruce it up in future chapters. For n
 
 # Now Commit
 
->[action]
->
 ```bash
 $ git add .
 $ git commit -m 'Added initial next block'
