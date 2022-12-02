@@ -1,7 +1,4 @@
----
-title: "Arranging the Page"
-slug: arranging-the-page
----
+Arranging the Page
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
@@ -25,27 +22,25 @@ Arranging the large UI elements on the page will make the app easier to understa
 
 ![css-grid](assets/css-grid.png)
 
-CSS Grid is good for arranging the tiles in the grid. CSS Grid can also be used to arrange the larger UI element on the page as a whole.
+CSS Grid was good for arranging the tiles in the grid. CSS Grid can also be used to arrange the larger UI element on the page as a whole!
 
 CSS Grid gives you control to arrange elements on a two dimensional grid. Elements can occupy multiple rows and/or columns. All of this is easily accomplished using a simple declarative approach.
 
-> [info]
->
-> A grid is a two dimensional structure of columns and rows.
-Columns span vertically and rows span horizontally.
-In CSS we define the number of rows and columns, and the
-width of each column and the height of each row.
->
-> The size of a column or row can be defined in any unit
-supported by CSS: `%`, `px`, `em`, `pt`, `mm`, `in`, cm etc.
-Columns and rows can also also be specified as a fraction
-of the available space with special unit: `fr`.
->
-> The CSS grid module provides properties that allow you to define the configuration of the grid many different ways. This discussion will focus on Grid Areas. Grid Areas are named collections of cells on the grid.
+A grid is a two dimensional structure of columns and rows.
+
+**Columns span vertically and rows span horizontally.**
+
+In CSS we define the number of rows and columns, and the width of each column and the height of each row.
+
+The size of a column or row can be defined in any unit supported by CSS: `%`, `px`, `em`, `pt`, `mm`, `in`, cm etc.
+
+Columns and rows can also also be specified as a fraction of the available space with special unit: `fr`.
+
+The CSS grid module provides properties that allow you to define the configuration of the grid many different ways. This discussion will focus on **Grid Areas**. Grid Areas are named collections of cells on the grid.
 
 # Defining a CSS grid with rows and columns
 
-For the Tetris game the grid might have three columns and three rows. This layout includes the Header, NextBlock, GridBoard, ScoreBoard, Buttons components.
+For the Tetris UI the grid might have three columns and three rows. This layout includes the Header, NextBlock, GridBoard, ScoreBoard, Buttons components.
 
 Let's define some requirements for this grid:
 
@@ -93,11 +88,11 @@ The image shows 5 areas defined.
 
 Notice the cells in the lower left and right corner are not being used.
 
-The gap between cells is an option that can be set with CSS Grid. We will make that the same size as one grid square.
+The gap between cells is an option that can be set with CSS Grid. You will make that the same size as one grid square.
 
 # Style The Grid
 
-Now that we have a better sense of how grids work, let's define some styles to declare the main app container as a grid. This will layout it's children as grid items.
+Now that You have a better sense of how grids work, let's define some styles to declare the main app container as a grid. This will layout it's children as grid items.
 
 Currently the app structure looks looks like this:  
 
@@ -107,7 +102,7 @@ Currently the app structure looks looks like this:
   - div.next-block
   - div.score-board
 
-We will declare `.App` as a grid container and define some grid areas. The areas are just strings, and we'll use the following names to represent the areas:
+You will declare `.App` as a grid container and define some grid areas. The areas are just strings, and we'll use the following names to represent the areas:
 
 - h : Header
 - l : Left
@@ -116,27 +111,25 @@ We will declare `.App` as a grid container and define some grid areas. The areas
 - b : Buttons
 - . : Is used to mark an empty cell
 
-> [action]
->
-> Add the following to `/src/index.css`:
->
+Add the following to `/src/index.css`:
+
 ```CSS
 /* App */
 .App {
   --col-side: calc(var(--tile-size) * 4);
   --col-center: calc(var(--tile-size) * 10);
   --grid-height: calc(var(--tile-size) * 18);
->
+
   width: calc(var(--tile-size) * (4 + 1 + 10 + 1 + 4));
   margin: auto;
   display: grid;
->
+
   grid-gap: var(--tile-size) var(--tile-size);
   /* Defines three columns of `--col-side`, `--col-center`, and `--col-side` widths. */
   grid-template-columns: var(--col-side) var(--col-center) var(--col-side);
   /* Defines three rows of `100px`, `--grid-height`, and 100px. */
   grid-template-rows: 100px var(--grid-height) 100px;
->
+
 /* This defines the areas on the grid with names: 'h', 'l', 'c', 'r',
 and 'b'. The '.' represents an empty cell on the grid. */
   grid-template-areas: "h h h"
@@ -145,14 +138,12 @@ and 'b'. The '.' represents an empty cell on the grid. */
 }
 ```
 
-It's starting to look like a grid but things are not where you want them. Following steps map each element to it's location defined in `grid-template-areas`.
+It's starting to look like a grid but things are not where you want them. The following steps map each element to it's location defined in `grid-template-areas`.
 
 Now let's assign child elements to grid areas in the parent.
 
-> [action]
->
-> Assign the header a grid area by adding the following to `/src/index.css`
->
+Assign the header a grid area by adding the following to `/src/index.css`
+
 ```CSS
 /* App-header */
 .App-header {
@@ -160,37 +151,30 @@ Now let's assign child elements to grid areas in the parent.
 }
 ```
 
-Let's edit some of the previous styles we made to include the `grid-area`
+Let's *edit* some of the previous styles we made to include the `grid-area`
 
-> [action]
->
-> Add the last line to the `.next-block` rule in `/src/index.css`:
->
+Add the last line to the `.next-block` rule in `/src/index.css`:
+
 ```CSS
 /* Next Block */
 .next-block {
-  display: grid;
-  grid-template-columns: repeat(4, var(--tile-size));
-  align-self: flex-start;
-[bold]  grid-area: l; /* Grid area l left column */[/bold]
+  ...
+  grid-area: l; /* Grid area l left column */
 }
 ```
->
-> Add the last line to the `.grid-board` rule in `/src/index.css`:
->
+
+Add the last line to the `.grid-board` rule in `/src/index.css`:
+
 ```CSS
 /* Grid Board */
 .grid-board {
-  display: grid;
-  grid-template-columns: repeat(var(--cols), var(--tile-size));
-  grid-gap: 0;
-  align-self: flex-start;
-[bold]  grid-area: c; /* Assign to grid area c */[/bold]
+  ...
+  grid-area: c; /* Assign to grid area c */
 }
 ```
->
-> Finally, add assign a `grid-area` for `.score-board` in `/src/index.css`:
->
+
+Finally, assign a `grid-area` for `.score-board` in `/src/index.css`:
+
 ```CSS
 /* score-board */
 .score-board {
@@ -206,8 +190,6 @@ Check out your browser now, sure looks a lot better than before!
 
 # Now Commit
 
->[action]
->
 ```bash
 $ git add .
 $ git commit -m 'Added grid area styles'
