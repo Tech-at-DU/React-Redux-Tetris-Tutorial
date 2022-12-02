@@ -37,7 +37,7 @@ Make a new file: `/src/components/ScoreBoard.js` with the following code:
 
 ```js
 import React from 'react'
->
+
 export default function ScoreBoard(props) {
 	return (
 		<div className="score-board">
@@ -54,10 +54,8 @@ export default function ScoreBoard(props) {
 
 Now you can define some styles for these elements. No need to worry about the text, you'll just focus on the buttons for now.
 
-> [action]
->
-> Add the following to `/src/index.css`
->
+Add the following to `/src/index.css`
+
 ```css
 /* Score Board */
 .score-board-button {
@@ -71,24 +69,22 @@ Now you can define some styles for these elements. No need to worry about the te
 }
 ```
 
-Notice we used the CSS variables again!
+Notice we used those CSS custom properties (variables) again! Super convenient to have these! 
 
 # Add to App.js
 
 Let's see what we have so far:
 
-> [action]
->
-> Add the following to `/src/App.js`:
->
+Add the following to `/src/App.js`:
+
 ```js
 import React from 'react';
 import './App.css';
->
+
 import GridBoard from './components/GridBoard'
 import NextBlock from './components/NextBlock'
 import ScoreBoard from './components/ScoreBoard'
->
+
 function App() {
   return (
     <div className="App">
@@ -101,7 +97,7 @@ function App() {
     </div>
   );
 }
->
+
 export default App;
 ```
 
@@ -115,8 +111,6 @@ This needs work, but we will take care the details later. For now this is a soli
 
 # Now Commit
 
->[action]
->
 ```bash
 $ git add .
 $ git commit -m 'Added initial score board'
