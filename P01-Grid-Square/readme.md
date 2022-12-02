@@ -1,7 +1,4 @@
----
-title: "Tetris Grid"
-slug: tetris-grid
----
+# Tetris Grid"
 
 1. **Implement the overall grid square**
     1. **Build the grid square component**
@@ -21,7 +18,7 @@ slug: tetris-grid
 1. Building a timer system
 1. Implementing Game Over and Restart
 
-In this section you will make a component that represents a single grid square. The game board is played on a grid made up of grid squares.
+In this section you will make a component that represents a single grid square. The game board is played on a grid made up of many grid squares.
 
 One square will look like this:
 
@@ -42,6 +39,8 @@ Colors will be stored as an index:
 - Color 6: ![square](assets/square-6.png)
 - Color 7: ![square](assets/square-7.png)
 
+The grid square is a component. 
+
 # Why Use Components
 
 React uses a component based architecture. Everything you see rendered in the browser is a component.
@@ -54,26 +53,26 @@ Each component will require CSS styles. The components used in this project will
 
 This component will render as a single square of color.
 
-> [action]
->
-> Make a new file: `src/components/GridSquare.js` with the following code:
->
+Make a new file: `src/components/GridSquare.js` with the following code:
+
 ```js
 import React from 'react'
->
+
 // Represents a grid square with a color
->
-export default function GridSquare(props) {
-  const classes = `grid-square color-${props.color}`
-  return <div className={classes} />
+
+export default function GridSquare({ color }) {
+  const classes = `grid-square color-${color}`
+  return <div className={ classes } />
 }
 ```
 
 The GridSquare is just a `div` with some class names. Below is a breakdown of the class names:
 
-- `GridSquare` : Define default grid square properties shared by all grid squares.
-- `color-${props.color}` : The color of the square will be
-passed via props. The value of `props.color` will be a number e.g. 1, 2, 3.
+- `GridSquare` : A function that defines the `GridSquare` component. All grid squares will use this definition. We pass props to a component to configure it. 
+- Notice on the first line you have deconstructed props into `color` here: `GridSquare({ color })`
+- `color-${color}` : The color of the square will be
+passed via props. The value of `color` will be a number e.g. 1, 2, 3.
+- Note! The classes string will contain something like this: `grid-square color-3`. When used as class name this will be read as two classes: `grid-square` and `color-3`. In this way you will apply styles shared by all grid squares with the `grid-square` class and set the color for each square with the `color-#` class. 
 
 **As a requirement The class name for any grid square will use the following format:** `color-0`, `color-1`, `color-2`, `color-3` etc.
 
@@ -83,19 +82,12 @@ You'll define these color classes later in the tutorial.
 
 This project will store all of it's styles in `index.css`. **The components in the project are not portable, they would find little use outside of this project.**
 
-> [challenge]
->
-> Putting all the styles in one file does not scale well. For more practice, and for cleaner CSS, create a structure of CSS files that best suites this project and reference those instead of putting them all in `index.css`
+First we should edit the `min-height` of `.App-header` in `/src/App.css` so that it's not taking up the whole page anymore:
 
-By keeping all of the styles in one place it will make for a large body of CSS code. To keep this as [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself) as possible, you can use CSS custom properties.
-
-> [action]
-> First we should edit the `min-height` of `.App-header` in `/src/App.css` so that it's not taking up the whole page anymore:
->
 ```css
 .App-header {
   background-color: #282c34;
-[bold]  min-height: 10vh;[/bold]
+  min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,19 +96,19 @@ By keeping all of the styles in one place it will make for a large body of CSS c
   color: white;
 }
 ```
->
-> Now you can edit `/src/index.css` to include the below styles that define some properties for the colors and sizes we'll use:
->
+
+Now you can edit `/src/index.css` to include the below styles that define some properties for the colors and sizes we'll use:
+
 ```css
 :root {
   --bg-color: rgba(150, 150, 150, 1);
->
+
   /* Border Colors are all transparent colors. These will tint or shade the background color of the square. */
   --border-left-color: rgba(255, 255, 255, 0.20);
   --border-top-color: rgba(255, 255, 255, 0.33);
   --border-right-color: rgba(0, 0, 0, 0.15);
   --border-bottom-color: rgba(0, 0, 0, 0.5);
->
+
   /* Square Colors:  background colors for the squares.*/
   --color-0: #eaeaea;
   --color-1: #ff6600;
@@ -126,13 +118,13 @@ By keeping all of the styles in one place it will make for a large body of CSS c
   --color-5: #00ff00;
   --color-6: #66ccff;
   --color-7: #ff0000;
->
+
   /* Button Colors */
   --button-color-t: rgba(200, 200, 200, 1);
   --button-color-r: rgba(150, 150, 150, 1);
   --button-color-b: rgba(120, 120, 120, 1);
   --button-color-l: rgba(222, 222, 222, 1);
->
+
   /* Numbers define values that will be used throughout the CSS.
   --tile-size: 20px for example will set size of the grid squares. */
   --cols: 10;
@@ -146,42 +138,40 @@ By keeping all of the styles in one place it will make for a large body of CSS c
 
 The colors will be assigned to grid squares as classes.
 With class names: `color-0`, `color-1`, `color-2` etc.
-We will define these classes using the color variables we just set.
+You will define these classes using the color variables you set earlier.
 
-> [action]
->
-> Add the following below the code you just added to `/src/index.css`:
->
+Add the following below the code you just added to `/src/index.css`:
+
 ```css
 /* Colors */
 .color-0 {
   background-color: var(--color-0);
 }
->
+
 .color-1 {
   background-color: var(--color-1);
 }
->
+
 .color-2 {
   background-color: var(--color-2);
 }
->
+
 .color-3 {
   background-color: var(--color-3);
 }
->
+
 .color-4 {
   background-color: var(--color-4);
 }
->
+
 .color-5 {
   background-color: var(--color-5);
 }
->
+
 .color-6 {
   background-color: var(--color-6);
 }
->
+
 .color-7 {
   background-color: var(--color-7);
 }
@@ -191,14 +181,14 @@ With this arrangement you can use the colors anywhere in your
 stylesheet. You can also make global changes to colors in
 one location.
 
+These changes won't make much visual change to the project so far. You need to put these in place so things can happen in the future! 
+
 # Grid Square Appearance
 
-Now we need to define the appearance of a grid square. The grid squares all have a border style, and a width and a height. By defining these as variables it will be easier to make changes to the appearance of the grid squares through the variables at the top of the stylesheet.
+Now you need to define the appearance of a grid square. The grid squares all have a border style, and a width and a height. By defining these as variables it will be easier to make changes to the appearance of the grid squares through the variables at the top of the stylesheet.
 
-> [action]
->
-> Add the following to `/src/index.css`:
->
+Add the following to `/src/index.css`:
+
 ```css
 /* Grid Square */
 .grid-square {
@@ -217,18 +207,44 @@ That might seem like a lot of styles but much of what is there will be reused th
 
 Defining these CSS custom properties is well worth the time effort your future self will thank you!
 
+## Note about CSS custom properties
+
+CSS custom properties, if you are not familiar, are variables that you define in CSS. Custom property names must begin with a double hyphen: `--`. For example: 
+
+- `--tile-size`
+- `--color-1`
+- `--border-width`
+- etc. 
+
+You can assign any valid CSS value to a custom property! 
+
+To access the value of a custom property you must use the `var()` function, awkward, I know. But that's how it works for some examples take a look at the code you just added: 
+
+```CSS
+:root {
+  ...
+  --tile-size: 20px; /* Sets the --tile-size */
+  ...
+}
+
+.grid-square {
+  ...
+  width: var(--tile-size); /* Applies the value of --tile-size */
+  ...
+}
+
+```
+
 # Test a Grid Square
 
-> [action]
->
-> Add the folowing bolded parts to `/src/App.js`:
->
+Modify `/src/App.js` as shown below:
+
 ```js
 import React from 'react';
 import './App.css';
->
+
 import GridSquare from './components/GridSquare'
->
+
 function App() {
   return (
     <div className="App">
@@ -239,9 +255,11 @@ function App() {
     </div>
   );
 }
->
+
 export default App;
 ```
+
+Here you added the game title in the header. Then made an instance of the `GridSquare` component. It should show a single square. Since you configured the GridSquare with color=1 it should use the color defined in your stylesheet as `color-1` which is orange. 
 
 Setting the color to 1 should display an orange square:
 
@@ -251,8 +269,6 @@ Try some other values by changing the value of `color`.
 
 # Now Commit
 
->[action]
->
 ```bash
 $ git add .
 $ git commit -m 'Added grid square'
