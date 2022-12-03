@@ -465,6 +465,8 @@ export default gameSlice.reducer
 
 Notice you set `initialState` by calling the `defaultState` function. The value of `initialState` is value returned from `defaultState`.
 
+In the next couple steps you'll be updating this file and adding code to each of the action/reducer functions. 
+
 # Now Commit
 
 ```bash
