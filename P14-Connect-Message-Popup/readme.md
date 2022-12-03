@@ -1,3 +1,4 @@
+# Connect the Message Popup
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
@@ -32,34 +33,150 @@ Currently the popup displays all the time. You can fix this in two steps:
 1. Retrieve the `isRunning` and `gameOver` properties from `state`
 1. Use them to display or hide the popup by adding or removing a CSS class name to the component's parent element!
 
+**Challenge**
+
+In `src/components/MessagePopup.js` import `useSelector`. You'll need this to access state. 
+
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+
+Add this at the top: 
+
+```JS
+import { useSelector } from 'react-redux'
+```
+
+**Challenge**
+
+Still in `MessagePopup.js` get the values for `isRunning` and `gameOver`. Do this by calling `useSelector`, passing a function as an argument, define state as a parameter to this argument, and returning state. You can deconstruct the properties. 
+
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+Add this at the top of the `MessagePopup` function:
+
+```JS
+export default function MessagePopup() {
+  const { isRunning, gameOver } = useSelector(state => state)
+  ...
+
+```
+
+With that in place you control the display of the message popup. 
+
 # Hide and show the MessagePopup
 
 This is an opportunity to see where Redux is really helping you manage your application state. The MessagePopup component is can easily be displayed or hidden based on state without having to do much work or without tightly coupling it to the rest of the application. 
+
+That last point: "...without tightly coupling it to the rest of the application" is really important. Notice here and with all of the components you've written, it doesn't matter where the component is in your application it has access to the application state. You can easily make changes and add new components without having to worry about how they will access the application state. 
 
 Use the following logic to hide and show the message popup.
 
 - If `isRunning` and `gameOver` is `false` the message popup
 should be hidden. Hide it by adding the `hidden` class to
-`className`.
+`className`. You defined this class in `index.css` earlier.
 - If `isRunning` is `false` the message popup should be visible
 and the message text should say 'Paused'.
 - If `gameOver` is `true` the message popup should be visible
 and the message text should say 'Game Over'.
 
-Again, try this on your own, and then check against the solution to see how well you matched up.
+Again, try this on your own, and then check against the solution to see how well you matched up. You can test your work by mocking up the `isRunning` and `gameOver` values in the component or setting them in the default state. 
 
-> [solution]
->
-> Updated `render` method in `/src/components/message-popup.js`:
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+Here is the solution I came up with:
 
 ```js
 import React from 'react'
 import { useSelector } from 'react-redux'
 
 // Displays a message
-export default function MessagePopup(props) {
-  const isRunning = useSelector((state) => state.game.isRunning)
-  const gameOver = useSelector((state) => state.game.gameOver)
+export default function MessagePopup() {
+  const { isRunning, gameOver } = useSelector(state => state)
 
   let message = ''
   let isHidden = 'hidden'
@@ -88,8 +205,6 @@ Refresh the browser to see the popup should now be hidden! Our Message Popup now
 
 # Now Commit
 
->[action]
->
 ```bash
 $ git add .
 $ git commit -m 'Added connection for message popup'
