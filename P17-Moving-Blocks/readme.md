@@ -1,7 +1,4 @@
----
-title: "Moving Blocks"
-slug: moving-blocks
----
+# Moving Blocks
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
@@ -28,41 +25,96 @@ Make sure you can move the blocks left and right. Down is going to involve a bit
 
 # Left button
 
-In the `game-reducer`, the move left action should _subtract 1 from the x and check if this new position is possible by calling `canMoveTo()`_
+In `src/features/gameSlice.js` find the `moveLeft` action and it's reducer. Should look like this: 
 
-> [action]
->
-> Edit the MOVE_LEFT case in `/src/reducers/game-reducer.js` to be the following:
->
-```js
-case MOVE_LEFT:
-    // subtract 1 from the x and check if this new position is possible by calling `canMoveTo()
-    if (canMoveTo(shape, grid, x - 1, y, rotation)) {
-        return { ...state, x: x - 1 }
-    }
-    return state
+```JS
+...
+moveLeft: () => {},
+...
 ```
+
+Edit this to look like this: 
+
+```JS
+moveLeft: (state) => {
+  const { shape, grid, x, y, rotation } = state
+  if (canMoveTo(shape, grid, x - 1, y, rotation)) {
+    state.x = x - 1
+  }
+  return state
+},
+```
+
+Again, got state in a parameter variable then deconstructed to get the properties that you needed. You used the `conMoveTo` function to see if you can move to this new position. 
+
+Note: subtracting 1 from x moves the block to the left. So this is the value that you test here. 
+
+If you can move to the left you modify state.
+
+Last you returned state. 
+
+**Challenge**
+
+Test your work!
 
 # Right button
 
-_Adding 1 to `x` should move the block to the right._
+The move right action does the same thing as the move left function with the exception that it will add 1 to x instead of subtracting. 
 
-> [action]
->
-> Edit the MOVE_RIGHT case in `/src/reducers/game-reducer.js` to be the following:
->
-```js
-case MOVE_RIGHT:
-    if (canMoveTo(shape, grid, x + 1, y, rotation)) {
-      return { ...state, x: x + 1 }
-    }
-    return state
+Sounds like a...
+
+**Challenge**
+
+Find the move right action, and write the reducer yourself! 
+
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+```JS
+moveRight: (state) => {
+  const { shape, grid, x, y, rotation } = state
+  if (canMoveTo(shape, grid, x + 1, y, rotation)) {
+    state.x = x + 1
+}
+  return state
+},
 ```
+
+**Challenge**
+
+Test your work! 
 
 # Now Commit
 
->[action]
->
 ```bash
 $ git add .
 $ git commit -m 'move left and right'
