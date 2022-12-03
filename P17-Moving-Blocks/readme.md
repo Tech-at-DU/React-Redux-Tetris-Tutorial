@@ -13,11 +13,8 @@
 1. ~~Connect each component up to state and reducers~~
 1. ~~Implement block rotation~~
 1. **Implement moving blocks**
-    1. **Build out the MOVE_LEFT case in the `game-reducer`**
-    1. **Build out the MOVE_RIGHT case in the `game-reducer`**
-    1. **Implement a method that adds a given block to the game grid for a given x, y, position and rotation**
-    1. **Implement a method that looks at the grid and determines if any rows are filled.**
-    1. **Build out the MOVE_DOWN case in the `game-reducer`**
+    1. **Build out the moveLeft action and reducer**
+    1. **Build out the moveRight action and reducer**
 1. Building a timer system
 1. Implementing Game Over and Restart
 
