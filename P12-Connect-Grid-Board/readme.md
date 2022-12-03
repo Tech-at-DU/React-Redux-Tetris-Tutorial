@@ -1,3 +1,4 @@
+# Connect GridBoard
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
@@ -21,7 +22,7 @@
 1. Building a timer system
 1. Implementing Game Over and Restart
 
-You want to display the grid board from state. This is the core rendering feature of the game.
+Here your goal is to display the grid board from state. This is the core rendering feature of the game.
 
 The `GridBoard` component displays an array of `GridSquare`s. It will also map the current shape block at it's rotation into this grid at the x, and y.
 
@@ -52,11 +53,9 @@ shows shape 2, rotation 0 at x = 3 and y = 7.
 # Get the grid with useSelector
 
 You need to connect the `GridBoard` component to Redux to do this you
-need `connect` from `React-Redux`.
+need `useSelector` from `React-Redux`.
 
-> [action]
->
-> Import `connect` from 'react-redux' at the top of `/src/components/GridBoard.js`:
+Import `useSelector` from 'react-redux' at the top of `/src/components/GridBoard.js`:
 
 ```js
 import { useSelector } from 'react-redux'
@@ -66,13 +65,12 @@ import { useSelector } from 'react-redux'
 
 Get the game object and deconstruct it into each of it's properties.
 
-> [action]
->
 ```js
 ...
-export default function GridBoard(props) {
+export default function GridBoard() {
 	const game = useSelector((state) => state.game)
 	const { grid, shape, rotation, x, y, isRunning, speed } = game
+
   ...
 }
 ```
@@ -87,9 +85,16 @@ The `makeGrid()` method is responsible for this. `Array.map` is a good tool here
 
 You'll need to map the row arrays then map each row to get the value at each column. These values are used to generate grid squares.
 
-> [action]
->
-> Import `shapes` from utils.js. Add the following at the top of `GridBoard.js`
+```JS
+// Start with this:
+[[0,0,1,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0] ,,,]
+// Map to: 
+[0,0,1,0,0,0,0,0,0,0]
+// Then map to: 
+0, 0, 1, ...
+```
+
+Import `shapes` from utils.js. Add the following at the top of `GridBoard.js`
 
 ```JS
 ...
@@ -99,9 +104,7 @@ import { shapes } from '../utils'
 
 Next map the current block shape into the grid.
 
-> [info]
->
-> How do we _really_ do this? The source Grid is two dimensional, but the output Grid will just be one dimensional. You can use `Array.map()` to map across all rows, and then use `Array.map()` again to map across each column. Inside this second map function is where you'll generate Grid Squares.
+How do we _really_ do this? The source Grid is two dimensional, but the output Grid will just be one dimensional. You can use `Array.map()` to map across all rows, and then use `Array.map()` again to map across each column. Inside this second map function is where you'll generate Grid Squares.
 
 Remember that the value assigned to each location on the grid is an _integer representing the color of each square_.
 
@@ -111,9 +114,7 @@ When Grid Squares are created, find the color for the square by looking at the s
 
 But enough talking, let's crank this out!
 
-> [action]
->
-> Rewrite the `makeGrid` method in `/src/components/grid-board.js` that follows the description as outlined above:
+Rewrite the `makeGrid` method in `/src/components/gridBoard.js` that follows the description as outlined above:
 
 ```JavaScript
 import React from 'react'
@@ -122,8 +123,7 @@ import GridSquare from './GridSquare'
 import { shapes } from '../utils'
 
 export default function GridBoard(props) {
-	const game = useSelector((state) => state.game)
-	const { grid, shape, rotation, x, y, isRunning, speed } = game
+	const { grid, shape, rotation, x, y, isRunning, speed } = useSelector(state => state)
 
 	const block = shapes[shape][rotation]
   const blockColor = shape
@@ -160,11 +160,104 @@ export default function GridBoard(props) {
 
 At this point the grid should display with the gray squares. This is the empty color.
 
+But where's the block that you mapped on to the grid? Shouldn't there be a block shape? 
+
+**Challenge** 
+
+Where's the block shape? Think about this and figure out where it is...
+
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+It's off the top egde! Remmeber that the starting y value (in the initial state) is -4! 
+
+**Challenge**
+
+Can you figure out a way to display the shape block as a test to see if you've mapped the block onto the grid correctly? 
+
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+Here are two ideas:
+
+- Change the value used for y in this file to a number between 0 and 18. Change this line `const blockY = row - y` to something like: `const blockY = row - 10`
+- Change the initial state for y to something positive between 0 and 18 like 6 or 10. 
+
+Try that, then change your code back before continuing. If you refresh you should see a random shape each time. 
+
 No visual changes quite yet, but make sure everything still loads correctly in the browser! Our Grid Board now **uses Redux/Flux to manage application state!** We also covered working with **systems that manage and merge complex arrays** in a lot more detail with the board, and have gotten _even more_ practice with **using functional programming methods like `map`!**
 
 # Now Commit
-
->[action]
 
 ```bash
 $ git add .
