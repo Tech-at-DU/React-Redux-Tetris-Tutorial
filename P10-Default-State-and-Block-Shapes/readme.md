@@ -293,15 +293,88 @@ export const shapes = [
 
 **Challenge**
 
+Identify each of the shapes above. The can be identified by their letter shape: I, T, L, J, Z, S, and O. 
+
+These letter shapes are abstractions of the actual shapes for example O shape is a 2x2 square. 
+
+**Challenge** 
+
+Each of the letter shapes can be rotated. Different shapes may have a different number of rotations! 
+
+For example, the O shape is same at each rotation! So it has only one rotation array!
+
+In your head imagine each of the "letter" shapes rotated and find each shape and it's rotations. 
+
+**Challenge**
+
+Which element in the array is the empty shape? How many rotations does it have? 
+
 # Generate Random Shapes
 
 The game needs to generate a random shape from the shape array. Add a function to handle this.
 
-> [action]
->
-> Add the following to `/src/utils/index.js`:
->
-> Return the index of a random shape from 1 to the number of items in `shapes`. You don't want the first item, which is an empty shape
+**Challenge**
+
+Return the index of a random shape from 1 to the number of items in `shapes`. You don't want the first item, which is the empty shape
+
+Add this to `src/utils.js` and export it.
+
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+-
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+-
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+-
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+-
+
+Does your solution look simialar to this? Notice I used the random function written earlier. 
 
 ```JavaScript
 // Random Shape
@@ -316,9 +389,7 @@ The game will use the returned index to get the shape.
 
 We need a function that will return the default object that redux uses with all of the properties reflecting a default game state.
 
-> [action]
->
-> Write a function in `/src/utils/index.js` that generates the default state of the game.
+Write a function in `/src/utils/index.js` that generates the default state of the game.
 
 ```JavaScript
 // Return the default state for the game
@@ -347,11 +418,9 @@ export const defaultState = () => {
 }
 ```
 
-You now have a default state for our game, and we **used Redux/Flux to manage the application state!** We also covered the beginnings of **building systems that manage and merge complex arrays!**
+You now have a default state for our game, and we **used Redux to manage the application state!** We also covered the beginnings of **building systems that manage and merge complex arrays!**
 
 # Now Commit
-
->[action]
 
 ```bash
 $ git add .
