@@ -37,11 +37,70 @@ The game needs to generate random numbers. The `Math.random()` works but we will
 
 Add a new file `/src/utils/index.js` with the following function in it:
 
+**Challenge**
+
+Write a function that takes in a min and max value and returns a number in this range inclusive. 
+
+- 
+-
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+-
+- 
+-
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+-
+- 
+-
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+-
+- 
+-
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+-
+- 
+-
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+-
+
+Does your solution look simial to this? 
+
 ```JavaScript
 export const random = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 ```
+
+The function above taks in a min value and max value, two numbers, and returns a random number in that range. 
 
 As the project progresses any time we need more general purpose code we can add it to this file, export, and import as needed.
 

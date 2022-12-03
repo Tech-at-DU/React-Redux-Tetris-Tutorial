@@ -1,3 +1,4 @@
+# Default State and block shapes
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
@@ -72,24 +73,29 @@ An example game board array might look like this:
 
 ```JavaScript
 [[0,0,0,0,0,0,0,0,0,0],
- [0,0,0,3,3,3,0,0,0,0],
- [0,0,0,0,3,0,0,0,0,0],
- ... 14 more rows ...
- [0,0,0,0,0,0,0,0,0,0]
+  [0,0,0,2,2,2,0,0,0,0],
+  [0,0,0,0,2,0,0,0,0,0],
+ ... 13 more rows ...
+  [0,0,0,0,0,1,1,3,0,0]
+  [3,3,0,3,4,1,1,3,3,3]
 ]
 ```
 
-The grid above shows the game board with a "T" shaped block in color 3  near the top.
+**Challenge** In the code snippet above answer these questions:
+
+- Spot the T shaped block in color 2? 
+- Find the 2 by 2 square block in color 1. 
+- Where would be the best place to place the T shaped block? 
 
 # Empty Array
 
 You need a function that will generate a default empty array. This function needs to return an array containing 18 arrays, each of the nested arrays should contain ten 0s. This represents an empty game board.
 
-> [action]
->
-> Write a function in `/src/utils/index.js`. Try filling in this function on your own, and then check the solution when you're done:
+**Challenge**
 
-```JavaScript
+Write a function in `/src/utils/index.js`. Try filling in this function on your own, and then check the solution when you're done:
+
+```JS
 ...
 // Returns the default grid
 export const gridDefault = () => {
@@ -104,9 +110,41 @@ export const gridDefault = () => {
 }
 ```
 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+-
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+
 <!-- -->
 
-> [solution]
+Solution!
 
 ```js
 for (let row = 0; row < rows; row++) {
@@ -131,16 +169,14 @@ Shapes will be mapped onto the board. There are 7 shapes. Let's represent them h
 
 Some requirements for the shapes:
 
-- Each shape will be mapped to a two dimensional array with a 1 where the shape should draw and 0 every else.
+- Each shape will be mapped to a two dimensional array with a 1 where the shape should draw and 0 everywhere else.
 - Each shape can be rotated and it's rotations will be grouped together into an array.
 - All of the rotation arrays will be grouped into a master shape array.
 - There will be an extra empty shape at the 0 index.
 - The color of each shape corresponds to it's _index_ in the top level of the shape Array.
     - For example, given the order above, the "T" shape is color 2, and the I shape is color 1.
 
-> [action]
->
-> Add the following to `/src/utils/index.js`:
+Add the following to `/src/utils/index.js`:
 
 ```JavaScript
 // Define block shapes and their rotations as arrays.
@@ -254,6 +290,8 @@ export const shapes = [
     [0,0,0,0]]]
 ]
 ```
+
+**Challenge**
 
 # Generate Random Shapes
 

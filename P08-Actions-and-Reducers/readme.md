@@ -241,10 +241,7 @@ export const gameSlice = createSlice({
 		resume: () => {},
 		moveLeft: () => {},
 		moveRight: () => {},
-		moveDown: () => {},
-		rotate: () => {},
-		gameOver: () => {},
-		restart: () => {}
+		moveDown: () => {}
   },
 })
 ```
@@ -255,7 +252,69 @@ The functions to right of each action are reducers.
 
 There is a lot of work to do here. Each of these functions is responsible for handling changes to state and you will be adding code to each of these functions in the coming steps. 
 
-For now you need to connect this clice to your store. Edit `src/app/store.js`: 
+**Challenge**
+
+Add actions and reducer functions for the following actions: 
+
+- `rotate`
+- `gameOver`
+- `restart`
+
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+- 
+
+Does your solution look like this: 
+
+```JS
+export const gameSlice = createSlice({
+  name: 'game',
+  initialState: {},
+  reducers: {
+    pause: () => {},
+		resume: () => {},
+		moveLeft: () => {},
+		moveRight: () => {},
+		moveDown: () => {},
+    rotate: () => {},
+		gameOver: () => {},
+		restart: () => {}
+  },
+})
+```
+
+## Connecting the slice to the store
+
+Now you need to connect this clice to your store. Edit `src/app/store.js`: 
 
 ```JS
 import { configureStore } from '@reduxjs/toolkit'
