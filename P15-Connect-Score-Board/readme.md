@@ -1,3 +1,4 @@
+# Connect the Score Board
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
@@ -15,8 +16,8 @@
     1. ~~Controls~~
     1. ~~Message-Popup~~
     1. **ScoreBoard**
-        1. **Implement the `mapStateToProps` function**
-        1. **Implement the `mapDispatchToProps` function**
+        1. **Implement the `useDispatch`**
+        1. **Implement the `UseSelector`**
         1. **Connect the `score-board` component and add the actions that it needs**
         1. **Implement the logic for the play/resume buttons**
 1. Implement block rotation
@@ -24,20 +25,134 @@
 1. Building a timer system
 1. Implementing Game Over and Restart
 
-The score board component shows the current score. It also has a play/pause and restart button. The play button should toggle it's text from 'Play' to 'Pause' as the game changes state.
+The score board component shows the current score. It also has a play/pause and restart button. 
 
-The value displayed for score will come from the game's `state`. The buttons will call actions that play/pause and restart the game.
+The play button should toggle it's text from 'Play' to 'Pause' as the game changes state.
+
+The value displayed for score will come from the score property of your application `state`. 
+
+The buttons will call actions that play/pause and restart the game.
 
 # Update the ScoreBaord
 
-- Import `connect` from 'react-redux'.
-- Import the `pause`, `resume`, `restart` actions.
-- Map the `score`, `isRunning`, `gameOver` from state to props.
-- Map the `pause`, `resume`, and `restart` actions to the dispatcher.
+You need to import both `useDispatch` and `useSelecvtor` from `react-redux` at the top of this component. You need these to dispatch messages and access your application state. Sounds like a...
 
-> [action]
->
-> Updated `/src/components/score-board.js`:
+**Challenge**
+
+Edit `src/components/ScoreBaord.js` and a import `useSelector` and `useDispatch`.
+
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+You should add this at the top: 
+
+```JS
+import { useSelector, useDispatch } from 'react-redux'
+```
+
+**Challenge**
+
+Next, import the `pause`, `resume`, and `restart` actions from your `gameSlice` at the top. 
+
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+Add this at the top: 
+
+```JS
+import { pause, resume, restart } from '../features/gameSlice'
+```
+
+**Challenge**
+
+Get the dispatcher in your `ScoreBoard` function at the top. 
+
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+
+
+
 
 ```js
 import React from 'react'
