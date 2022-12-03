@@ -96,7 +96,7 @@ The `useDispatch` function returns the dispatcher. Call it at the top of your Co
 
 **Challenge**
 
-You'll use the `isRunning` from state to disable the buttons when the game is paused. Get the `isRunning` property by calling `useSelector` passing a function as anrgument, the argument function should define state as a paramter and return state. Get `iRunning` from state. 
+You'll use the `isRunning` from state to disable the buttons when the game is paused. Get the `isRunning` property by calling `useSelector` passing a function as anrgument, the argument function should define state as a paramter and return state. Get `isRunning` from state. 
 
 -
 -
@@ -142,7 +142,7 @@ You'll use the `isRunning` from state to disable the buttons when the game is pa
 
 export default function Controls(props) {
 	...
-	const isRunning = useSelector((state) => state.isRunning)
+	const { isRunning } = useSelector(state => state)
 	...
 }
 ```
@@ -151,41 +151,122 @@ With this in place you can get to work making the buttons to their job!
 
 # Call Actions
 
-Edit the `return` block in `/src/components/controls.js`. Find the "Move Left" button. 
-
-```JS
-
-```
-
-
-
-
-
+In the `return` block in `/src/components/controls.js`. Find the "Move Left" button. Edit the "Move Left" button: 
 
 ```JS
 ...
+<button 
+	disabled={!isRunning}
+	className="control-button" 
+	onClick={(e) => {
+		dispatch(moveLeft())
+}}>Left</button>
+...
+```
+
+Notice here you've set the `disabled` prop to `isRunning`. This means the button will be disabled when `isRunning` is true. I put the `!` in front the `isRunning` boolean to invert it! This way when `isRunning` is true disabled will be false!
+
+Next, inside the `onClick` function you called `moveLeft()` and passed it's return value to dispatch when you called `dispatch()`. Doing both of these things looks like this: 
+
+```JS
+dispatch(moveLeft())
+```
+
+You could write this in a longer form like this, and it would do the same thing: 
+
+```JS
+const moveLeftAction = moveLeft()
+dispatch(moveLeftAction)
+```
+
+Either way would work the same! 
+
+**Challenge**
+
+The "Move Right", "rotate", and "moveDown" buttons all need to call their eponymous actions, they should also be disabled when the game is not running. Your job is to complete these buttons!
+
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+Here is the code I had for the whole `Control` component: 
+
+```JS
+import React from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { moveDown, moveLeft, moveRight, rotate } from '../features/gameSlice'
+
 export default function Controls(props) {
-	...
+	const dispatch = useDispatch()
+	const { isRunning } = useSelector(state => state)
+
 	return (
 		<div className="controls">
 			{/* left */}
-			<button className="control-button" onClick={(e) => {
-				dispatch(moveLeft())
+			<button 
+				disabled={!isRunning}
+				className="control-button" 
+				onClick={(e) => {
+					dispatch(moveLeft())
 			}}>Left</button>
 
 			{/* right */}
-			<button className="control-button" onClick={(e) => {
-				dispatch(moveRight())
+			<button 
+				disabled={!isRunning}
+				className="control-button" 
+				onClick={(e) => {
+					dispatch(moveRight())
 			}}>Right</button>
 
 			{/* rotate */}
-			<button className="control-button" onClick={(e) => {
-				dispatch(rotate())
+			<button 
+				disabled={!isRunning}
+				className="control-button" 
+				onClick={(e) => {
+					dispatch(rotate())
 			}}>Rotate</button>
 
 			{/* down */}
-			<button className="control-button" onClick={(e) => {
-				dispatch(moveDown())
+			<button 
+				disabled={!isRunning}
+				className="control-button" 
+				onClick={(e) => {
+					dispatch(moveDown())
 			}}>Down</button>
 
 		</div>
@@ -193,12 +274,11 @@ export default function Controls(props) {
 }
 ```
 
+
 Still no visual changes yet, we still have a couple more components to connect up. Make sure everything still loads correctly in the browser! Our Controls now **uses Redux/Flux to manage application state!**
 
 # Now Commit
 
->[action]
->
 ```bash
 $ git add .
 $ git commit -m 'Added connection for controls'
