@@ -312,6 +312,29 @@ export const gameSlice = createSlice({
 })
 ```
 
+The last step here is to export youir actions. 
+
+At the bottom of the page find: 
+
+```JS
+export const {  } = gameSlice.actions
+```
+
+Add all of your actions here: 
+
+```JS
+// Action creators are generated for each case reducer function
+export const { 
+  moveLeft, 
+  moveRight, 
+  moveDown, 
+  rotate, 
+  pause, 
+  resume, 
+  gameOver, 
+  restart } = gameSlice.actions
+```
+
 ## Connecting the slice to the store
 
 Now you need to connect this clice to your store. Edit `src/app/store.js`: 

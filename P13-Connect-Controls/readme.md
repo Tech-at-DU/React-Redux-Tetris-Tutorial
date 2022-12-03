@@ -1,3 +1,4 @@
+# Connect Controls
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
@@ -23,46 +24,143 @@
 1. Building a timer system
 1. Implementing Game Over and Restart
 
-Now you'll connect the controls to actions so that you can play the game! Tapping the left, right, and down buttons move the block. Tapping the rotate button changes the rotation of the block.
+Now it's time issue actions from the buttons. 
 
-Controls need to issue actions to control the game. You'll need to connect this component to `state` so it can issue actions that move the block.
-
-This works by sending actions that change `state`, updating the `x`, `y`, and `rotation` values. _Changing these updates the components that use these values as props!_
-
-You can also use `isRunning` to control the display of the buttons. Imagine the case where the game is paused. In this case you might want the buttons to display as disabled. It might be a good idea to map `isRunning` to props on this component.
+Issuing actions will trigger your reducers which will update state. You'll need to add code to the reducers.
 
 # Dispatch actions from a component with useDispatch
 
-To dispatch actions from a component use `useDipatch`. The controls component will want access to values on state also so it will also import `useSelector`.
+To dispatch actions from a component you need the dispatcher. You can get the dispatcher with `useDipatch` which returns it. 
 
-`useDispatch` sends actions from your action creator functions. You'll need to import these also.
+The controls component will want access to values on state also so it will also import `useSelector`.
 
-> [action]
->
-> Import the `moveDown, moveLeft, moveRight, rotate` actions (as well as `connect`) into `/src/components/Controls.js`
+At the top of `src/controls.js` import `useDispatch` from `react-redux`:
 
-```js
-...
+```JS
 ...
 import { useSelector, useDispatch } from 'react-redux'
-import { moveDown, moveLeft, moveRight, rotate } from '../actions'
+...
+```
+
+To send an action you'll call the action and pass the value returned as an argument to the dispatcher.  
+
+**Challenge**
+
+Import `moveDown`, `moveLeft`, `moveRight`, `rotate` actions from `src/features/gameSlice.js`.
+
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+Import the `moveDown, moveLeft, moveRight, rotate` actions (as well as `connect`) into `/src/components/Controls.js`
+
+```JS
+...
+import { moveDown, moveLeft, moveRight, rotate } from '../features/gameSlice'
+...
+```
+
+The `useDispatch` function returns the dispatcher. Call it at the top of your Controls component and save the dispatcher in a variable. 
+
+**Challenge**
+
+You'll use the `isRunning` from state to disable the buttons when the game is paused. Get the `isRunning` property by calling `useSelector` passing a function as anrgument, the argument function should define state as a paramter and return state. Get `iRunning` from state. 
+
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+```js
+...
 
 export default function Controls(props) {
-	const dispatch = useDispatch()
+	...
 	const isRunning = useSelector((state) => state.isRunning)
-...
+	...
 }
 ```
 
-Your controls need to know if the game is running or not. You don't want the buttons function if the game is paused right?
+With this in place you can get to work making the buttons to their job!
 
 # Call Actions
 
-Currently the buttons in this component just call actions from props with no params. Let's set that up properly now:
+Edit the `return` block in `/src/components/controls.js`. Find the "Move Left" button. 
 
-> [action]
->
-> Edit the `render` method in `/src/components/controls.js` to actually call actions. Remember that actions should only be sent if the `isRunning` is true:
+```JS
+
+```
+
+
+
+
+
 
 ```JS
 ...
