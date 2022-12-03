@@ -418,7 +418,52 @@ export const defaultState = () => {
 }
 ```
 
+**Challenge** 
+
+Find the following properties in the default state:
+
+- `grid` - Notice you called the `gridDefault()` function here to get the value for this property. 
+- `shape` - Notice you called the `randomShape()` to get the value for this property
+- `rotation` - 0 starting rotation is 0. By default all shapes will show the shape at the first rotation in the array. 
+- `x` and `y` - Notice the starting location for the shape will be 5 and -4. The negative y value will place the shape off the top edge of the grid board. 
+- `nextShape` - What is the value here? 
+- `speed` - sets the speed of the game in milliseconds
+- `gameOver` - The value of `false` means the game is not over when it begins. 
+
 You now have a default state for our game, and we **used Redux to manage the application state!** We also covered the beginnings of **building systems that manage and merge complex arrays!**
+
+Notice you exported this `defaultState` function so you can use it else where in your code. 
+
+## Set the initial state
+
+Edit `src/features/gameSlice.js`. Import the `defaultState` function and use it to define the default state in your store. 
+
+```JS
+import { createSlice } from '@reduxjs/toolkit'
+import { defaultState } from '../utils'
+
+export const gameSlice = createSlice({
+  name: 'game',
+  initialState: defaultState(),
+  reducers: {
+    pause: () => {},
+		resume: () => {},
+		moveLeft: () => {},
+		moveRight: () => {},
+		moveDown: () => {},
+		rotate: () => {},
+		gameOver: () => {},
+		restart: () => {}
+  },
+})
+
+// Action creators are generated for each case reducer function
+export const { increment, decrement, incrementByAmount } = gameSlice.actions
+
+export default gameSlice.reducer
+```
+
+Notice you set `initialState` by calling the `defaultState` function. The value of `initialState` is value returned from `defaultState`.
 
 # Now Commit
 
