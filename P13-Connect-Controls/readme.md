@@ -274,8 +274,40 @@ export default function Controls(props) {
 }
 ```
 
-
 Still no visual changes yet, we still have a couple more components to connect up. Make sure everything still loads correctly in the browser! Our Controls now **uses Redux/Flux to manage application state!**
+
+**Challenge**
+
+Right now the buttons are all enabled (because `isRunning` is true.) Can you think of a way to disable the buttons? 
+
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+Go to `src/utils.js` and set `isRunning` in `defaultState` to `false`. This should disable all of the buttons. Set it back to true when you're done. 
 
 # Now Commit
 
