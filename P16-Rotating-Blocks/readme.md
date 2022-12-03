@@ -1,7 +1,4 @@
----
-title: "Rotating Blocks"
-slug: rotating-blocks
----
+# Rotating Blocks
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
@@ -40,9 +37,11 @@ of the same shape. For example, in abstract.
 
 `[ [x], [I, –], [T, ...], ... ]`
 
-We see that after the empty shape `x`, the bar array (`I`) is in it's two rotations, vertical and horizontal.
+We see that after the empty shape `x`, the bar array (`I`) is in it hastwo rotations, vertical and horizontal.
 
-Some shapes have a single rotation, such as the `O` shape, which is a square. Others have four for example `J`, and `L`.
+Some shapes have a single rotation, such as the `O` shape, which is a square. 
+
+Others have four rotations, for example `J`, and `L`.
 
 From the shapes array, the actual shape is accessed from the shape and rotation index. As we've seen previously:
 
@@ -56,9 +55,7 @@ Secondly, more specific to the rotation action, you need to be able to easily fi
 
 Both of these functions can be accomplished by making new utilities!
 
-> [action]
->
-> In `/src/utils/index.js`, add the following functions to handle the above scenarios:
+In `/src/utils/index.js`, add the following functions to handle the above scenarios:
 >
 ```js
 // Returns the next rotation for a shape
@@ -66,7 +63,7 @@ Both of these functions can be accomplished by making new utilities!
 export const nextRotation = (shape, rotation) => {
     return (rotation + 1) % shapes[shape].length
 }
->
+
 export const canMoveTo = (shape, grid, x, y, rotation) => {
     const currentShape = shapes[shape][rotation]
     // Loop through all rows and cols of the **shape**
@@ -102,40 +99,86 @@ export const canMoveTo = (shape, grid, x, y, rotation) => {
 
 # Handle 'ROTATE'
 
+**Challenge**
+
+In `/src/features/gameSlice`, import the new functions `canMoveTo` and `nextRotation` at the top. 
+
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+```JS
+import { defaultState, nextRotation, canMoveTo } from '../utils'
+```
+
 Let's get our rotation going:
 
-> [action]
->
-> In `/src/reducers/game-reducer.js`, include the new imports, set the props, and update the ROTATE switch case to the following:
->
-```js
-import {
-  defaultState,
-  nextRotation,
-  canMoveTo } from '../utils'
->
-const gameReducer = (state = defaultState(), action) => {
-  const { shape, grid, x, y, rotation, nextShape, score, isRunning } = state
->
-  switch(action.type) {
-    case ROTATE:
-      const newRotation = nextRotation(shape, rotation)
-      if (canMoveTo(shape, grid, x, y, newRotation)) {
-          return { ...state, rotation: newRotation }
-      }
-      return state
->
-    ...
-  }
-}
+Find the rotate action. It looks like this: 
+
+```JS
+...
+rotate: () => {},
+...
 ```
+
+Edit this function to the left of the `:`. This is function is a reducer function. It takes in state and an action. It modifies state then returns it. 
+
+In this case you are going to check if the piece can be rotated by getting the next rotation with `nextRotatation` and then checking if it's possible for the block to move to this new position with `canMoveTo`. 
+
+```JS
+...
+rotate: (state) => {
+    const { shape, grid, x, y, rotation } = state
+    const newRotation = nextRotation(shape, rotation)
+    if (canMoveTo(shape, grid, x, y, newRotation)) {
+        state.rotation = newRotation
+    }
+    return state
+},
+...
+```
+
+Notice that `state` is passed to the to the reducer function and you are getting the properties you need (`x`, `y`, `shape`, `grid`, and `rotation`) from it. 
+
+Notice you are either returning `state` or you are setting `state.rotation` and then returning state. 
+
+A reducer function will always return state. 
 
 Since no blocks are falling on the screen yet, we can't test this out quite yet, but we will soon! We also further covered working with **systems that manage and merge complex arrays!**
 
+**Challenge**
+
+You can test your work by placing the block in the middle of the grid by setting the y property in the default state. 
+
 # Now Commit
 
->[action]
->
 ```bash
 $ git add .
 $ git commit -m 'rotate reducer'
