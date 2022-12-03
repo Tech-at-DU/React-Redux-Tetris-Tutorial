@@ -9,9 +9,8 @@
 1. ~~Implement the message popup~~
 1. **Implement the actions and reducers**
     1. **Build out the actions needed to run the game, including movement, rotation, and game state**
-    1. **For each action, build out action creators**
     1. **Create a stub reducer for the game to be filled in later**
-    1. **Call `combineReducers` to define state**
+    1. **Add a store and provider for reducers and state**
 1. Do some code organizing and cleanup
 1. Implement state and shapes
 1. Connect each component up to state and reducers
