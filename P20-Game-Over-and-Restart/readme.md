@@ -446,7 +446,9 @@ There are a lot of extra challenges listed below. You can pick and choose to do 
 
 This is a React project so it needs a little bit more work than just pushing to GitHub.com. 
 
-Follow the guide here: https://github.com/gitname/react-gh-pages
+Follow the guide here: https://github.com/gitname/react-gh-pages#3-install-the-gh-pages-npm-package
+
+You can start at step 3 since you've already created the React project and pushed it to GitHub. 
 
 ## Change the styles 
 
