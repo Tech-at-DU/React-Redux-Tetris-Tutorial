@@ -15,7 +15,7 @@
 1. **Implement moving blocks**
     1. **Implement a method that adds a given block to the game grid for a given x, y, position and rotation**
     1. **Implement a method that looks at the grid and determines if any rows are filled.**
-    1. **Build out the MOVE_DOWN case in the `game-reducer`**
+    1. **Build out the moveDown action and reducer**
 1. Building a timer system
 1. Implementing Game Over and Restart
 
@@ -32,18 +32,14 @@ This is a lot more to think about than with left and right! Let's break down som
 - If a grid square is empty, the value is 0.
 - After placing new squares on the grid we can score points.
 
-We will need a function that checks for complete rows on the grid, remove them, and moves all the rows above down by one.
+You need a function that adds blocks to the grid. 
 
 # Implement an Add block to grid function
 
-This function takes in the `shape` (index), `grid` (array), `rotation`, `x`, and `y`. The values in the new shape should be written into the grid.
+This function takes in the `shape` (index), `grid` (array), `rotation`, `x`, and `y`. The values in the new shape that will be written into the grid.
 
-It's important that this method create a _copy_ of grid before making any changes!
+In `/src/utils/index.js`, write the `addBlocktoGrid` function as described above:
 
-> [action]
->
-> In `/src/utils/index.js`, write the `addBlocktoGrid` function as described above:
->
 ```JavaScript
 // Adds current shape to grid
 export const addBlockToGrid = (shape, grid, x, y, rotation) => {
@@ -69,11 +65,9 @@ Teris awards points when a row is completely filled with squares. The number is 
 
 Once a block is placed, it's possible that one or more rows will be filled.
 
-> [action]
->
-> In `/src/utils/index.js`, implement a method that looks at the grid and
+In `/src/utils/index.js`, implement a method that looks at the grid and
 determines if any rows are filled.
->
+
 ```JavaScript
 // Checks for completed rows and scores points
 export const checkRows = (grid) => {
@@ -96,78 +90,117 @@ export const checkRows = (grid) => {
 
 # Implement MOVE_DOWN in game reducer
 
-The `MOVE_DOWN` action is likely the most complicated
-block of code in the game, a lot happens here. Here is
-the logic we need to implement.
+The `moveDown` action is likely the most complicated
+block of code in the game, a lot happens here. Here is what needs to happen:
 
-- Check if we can move the block down
+- Check if block can move the block down
   - if so we're done
 - If block can't move down we need to place it by doing the following.
-  - make a new copy of grid
   - add the block to the grid (`addBlockToGrid`)
-  - Properties to start a new block
+  - Start a new block
     - set `shape` to `nextShape`
     - set `nextShape` to a new random shape
   - Check if the next shape can be displayed
     - If not, then game over
-  - Call `checkRows` to score some points
-  and remove completed rows
+  - Call `checkRows` to score some points 
+  - and remove completed rows
 
-> [action]
->
-> In `/src/reducers/game-reducer.js`, implement the case for `MOVE_DOWN` based on the above logic. Remember to also import your necessary functions from `utils`, and update what props you're extracting from `state`:
->
-```JavaScript
-...
-import {
-  defaultState,
-  nextRotation,
-  canMoveTo,
-  addBlockToGrid,
-  checkRows,
+In `/src/features/gameSlice.js`, implement the reducer for `moveDown` based on the above logic. Remember to also import your necessary functions from `utils`, and update what props you're extracting from `state`:
+
+**Challenge**
+
+Import the `addBlockToGrid`, `checkRows`, and `randomShape` from `src/utils` at the top.
+
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+```JS
+import { 
+	defaultState, 
+	nextRotation, 
+	canMoveTo,
+	addBlockToGrid,
+	checkRows,
   randomShape
 } from '../utils'
->
+```
+
+Find the `moveDown` action and reducer. It should look like this: 
+
+```JS
+moveDown: () => {},
+```
+
+Replace the empty function with this: 
+
+```JS
 ...
->
-const gameReducer = (state = defaultState(), action) => {
-  const { shape, grid, x, y, rotation, nextShape, score, isRunning } = state
->
-...
->
-case MOVE_DOWN:
+moveDown: (state) => {
+  const { x, y, shape, grid, rotation, nextShape, isRunning, score } = state
   // Get the next potential Y position
   const maybeY = y + 1
   // Check if the current block can move here
   if (canMoveTo(shape, grid, x, maybeY, rotation)) {
       // If so move the block
-      return { ...state, y: maybeY }
+      state.y = maybeY
+      return state
   }
   // If not place the block
   const newGrid = addBlockToGrid(shape, grid, x, y, rotation)
   // reset some things to start a new shape/block
-  const newState = defaultState()
-  newState.grid = newGrid
-  newState.shape = nextShape
-  newState.nextShape = randomShape()
-  newState.score = score
-  newState.isRunning = isRunning
->
+  state.x = 3
+  state.y = -4
+  state.grid = newGrid
+  state.shape = nextShape
+  state.nextShape = randomShape()
+
   if (!canMoveTo(nextShape, newGrid, 0, 4, 0)) {
     // Game Over
     console.log("Game Should be over...")
-    newState.shape = 0
-    return { ...state, gameOver: true }
+    state.shape = 0
+    state.gameOver = true
+    return state
   }
+
   // Update the score based on if rows were completed or not
-  newState.score = score + checkRows(newGrid)
->
-  return newState
->
+  state.score += checkRows(newGrid)
+  return state
+},
 ...
->
-}
 ```
+
+At this stage you should be able to move blocks around with the control buttons. They should move left, right, down, and rotate. When a block hits the bottom it should get written into the grid while next block will be added odd the top of the grid.
 
 # Product So Far
 
@@ -179,8 +212,6 @@ This is great! But we have to manually move the blocks down by clicking the down
 
 # Now Commit
 
->[action]
->
 ```bash
 $ git add .
 $ git commit -m 'move down'
