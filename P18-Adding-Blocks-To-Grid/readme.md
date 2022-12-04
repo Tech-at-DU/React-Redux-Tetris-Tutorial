@@ -181,6 +181,7 @@ moveDown: (state) => {
   // reset some things to start a new shape/block
   state.x = 3
   state.y = -4
+  state.rotation = 0
   state.grid = newGrid
   state.shape = nextShape
   state.nextShape = randomShape()
