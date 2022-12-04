@@ -308,43 +308,49 @@ Remember with these changes you have broken the `moveDown` reducer. Which will r
 
 Modify the MOVE_DOWN case for `/src/features/gameSlice.js`:
 
-```JavaScript
-case MOVE_DOWN:
+```JS
+...
+moveDown: (state) => {
+  const { x, y, shape, grid, rotation, nextShape } = state
   // Get the next potential Y position
   const maybeY = y + 1
->
   // Check if the current block can move here
   if (canMoveTo(shape, grid, x, maybeY, rotation)) {
-      // If so move down don't place the block
-      return { ...state, y: maybeY }
+      // If so move the block
+      state.y = maybeY
+      return state
   }
->
+
+  // ==============EDIT BEGIN================
   // If not place the block
-  // (this returns an object with a grid and gameover bool)
-  const obj = addBlockToGrid(shape, grid, x, y, rotation)
-  const newGrid = obj.grid
-  const gameOver = obj.gameOver
->
+  const { newGrid, gameOver } = addBlockToGrid(shape, grid, x, y, rotation)
   if (gameOver) {
-    // Game Over
-    const newState = { ...state }
-    newState.shape = 0
-    newState.grid = newGrid
-    return { ...state, gameOver: true }
+    state.gameOver = true
+    return state
   }
->
-  // reset somethings to start a new shape/block
-  const newState = defaultState()
-  newState.grid = newGrid
-  newState.shape = nextShape
-  newState.score = score
-  newState.isRunning = isRunning
->
-  // TODO: Check and Set level
-  // Score increases decrease interval
-  newState.score = score + checkRows(newGrid)
->
-  return newState
+  // ==============EDIT END=================
+  
+  // reset some things to start a new shape/block
+  state.x = 3
+  state.y = -4
+  state.rotation = 0
+  state.grid = newGrid
+  state.shape = nextShape
+  state.nextShape = randomShape()
+
+  if (!canMoveTo(nextShape, newGrid, 0, 4, 0)) {
+    // Game Over
+    console.log("Game Should be over...")
+    state.shape = 0
+    state.gameOver = true
+    return state
+  }
+
+  // Update the score based on if rows were completed or not
+  state.score += checkRows(newGrid)
+  return state
+},
+...
 ```
 
 Try to force a game over and make sure you see the popup:
@@ -369,21 +375,59 @@ Now that the game knows when it's ended, we need a way to restart it!
 
 Restarting the game will only require setting the game `state` in redux back to default, and there already is a function for this!
 
-> [action]
->
-> Return default state with a call to `defaultState()` in the `RESTART` case in `/src/reducers/game-reducer.js`:
->
-```js
-case RESTART:
-    return defaultState()
+**Challenge**
+
+Find the `restart` action and fill in it's reducer function. You want to return the default state of the game by calling the `defaultState` function from utils. 
+
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+In `src/features/gameSlice.js` find:
+
+```JS
+restart: () => {}
 ```
 
-Try pressing the restart button and make sure it starts the game from a clean slate.
+Change it to this: 
+
+```JS
+restart: () => defaultState()
+```
+
+Yepm it can be that simple. Here you called `defaultState()` it returned the state object and you returned that from your reducer. Since this is an arrow function and the code block is on one line you can omit the `{}` and `return` keyword. 
 
 # Now Commit
 
->[action]
->
 ```bash
 $ git add .
 $ git commit -m 'restart implemented'
@@ -392,9 +436,9 @@ $ git push
 
 **You have now implemented an advanced single page application with React — a fully functioning Tetris game! Congrats!**
 
-As you go through this FEW course, try to tie the concepts you learned here into the course material. The foundational work here on building React apps will be used to make bigger and bolder apps down the road!
+# Further Challenges
 
-# Challenges
+Now that you have your game working why not spend some time making more interesting and along the way you can review what you learned and reinforce force the concepts by trying these challenges! 
 
 ## Change the styles 
 
@@ -501,7 +545,7 @@ You can customize the colors by adjusting the color variables at the top of the 
 
 ## JS Challenges 
 
-Looks liek the next block displays the color of the shape as color 0. It would be nice to display the shape color. Colors are mapped to an index and the index matches the index of the shape. 
+Looks like the next block displays the color of the shape as color 0. It would be nice to display the shape color. Colors are mapped to an index and the index matches the index of the shape. 
 
 The problem is the square value is 0 or 1. It's the shape index `nextShape` that should be index of the color. 
 
@@ -509,7 +553,7 @@ The problem is the square value is 0 or 1. It's the shape index `nextShape` that
 export default function NextBlock(props) {
 	...
 	const box = shapes[nextShape][0]
->
+
 	const grid = box.map((rowArray, row) => {
 		return rowArray.map((square, col) => {
       // make the changes here: 
@@ -524,7 +568,7 @@ Note the change here sets the color to 0 if the `square` value is 0 or the `next
 
 ## Counting Completed Rows 
 
-Besides scoring points you also remove rows of squares. Teacking the number of rows removed can be used to track score.
+Besides scoring points you also remove rows of squares. Tracking the number of rows removed can be used to track score.
 
 In some versions of the game the goal is to complete a number of rows within a given time alotment. You could use the completion of rows to decrease the speed property on state increasing the speed of the game and making play more difficult over time. 
 
@@ -587,13 +631,3 @@ using the keyboard you could intrduce a positive and negative rotation. Currentl
 ## Saving High Scores 
 
 If you did the other React + Redux trutorials you worked with Local storage you could put these ideas to use here to save the game state and save the high score. 
-
-# Feedback and Review - 2 minutes
-
-**We promise this won't take longer than 2 minutes!**
-
-Please take a moment to rate your understanding of learning outcomes from this tutorial, and how we can improve it via our [tutorial feedback form](https://goo.gl/forms/ErwFsZjnYNPHOo342)
-
-This allows us to get feedback on how well the students are grasping the learning outcomes, and tells us where we can improve the tutorial experience.
-
-
