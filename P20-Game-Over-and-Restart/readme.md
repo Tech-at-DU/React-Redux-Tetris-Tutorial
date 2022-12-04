@@ -52,133 +52,177 @@ when the game is over.
 
 Here you need to disable the controls when the `gameOver` property on `state` is false.
 
-> [action]
->
-> Use the `useSelector` hook in `/src/components/Controls.js`:
->
-> Import useSelector and then get the isRunning and gameOver values from state. 
-> 
+Use the `useSelector` hook in `/src/components/Controls.js`:
+
+Import useSelector and then get the isRunning and gameOver values from state. 
+
+**Challenge**
+
+Get the `gameOver` property from state. 
+
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+
+ 
 ```js
-...
-import { useSelector, useDispatch } from 'react-redux'
-...
-export default function Controls(props) {
+export default function Controls() {
 	const dispatch = useDispatch()
-	const isRunning = useSelector((state) => state.game.isRunning)
-	const gameOver = useSelector((state) => state.game.gameOver) 
->
-  return (
-    ...
-  )
-}
+	const { isRunning, speed, gameOver } = useSelector(state => state)
+  ...
 ```
+
+**Challenge**
 
 The `onClick` handler for each function should check
 `isRunning` and `gameOver`. If `isRunning` is `false`
 or `gameOver` is `true` the buttons should not send actions.
 
-> [action]
->
-> Update all of the `button` elements in the `return` block of `/src/components/controls.js` to check `isRunning` and `gameOver` before dispatching their actions. 
->
+Update all of the `button` elements in the `return` block of `/src/components/controls.js` to check `isRunning` and `gameOver` before dispatching their actions.
+
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+Here's the "Move Left" button: 
+
+```JS
+<button 
+  disabled={!isRunning || gameOver}
+  className="control-button" 
+  onClick={(e) => {
+    dispatch(moveLeft())
+}}>Left</button>
+```
+
+**Challenge**
+
+Disable the other buttons when `isRunning` is false or `gameOver` is true. 
+
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
 ```js
-...
->
-export default function Controls(props) {
-	...
->
-	return (
-		<div className="controls">
-			{/* left */}
-			<button className="control-button" onClick={(e) => {
-				if (!isRunning || gameOver) { return } 
-				dispatch(moveLeft())
-			}}>Left</button>
->
-			{/* right */}
-			<button className="control-button" onClick={(e) => {
-				if (!isRunning || gameOver) { return } 
-				dispatch(moveRight())
-			}}>Right</button>
->
-			{/* rotate */}
-			<button className="control-button" onClick={(e) => {
-				if (!isRunning || gameOver) { return } 
-				dispatch(rotate())
-			}}>Rotate</button>
->
-			{/* down */}
-			<button className="control-button" onClick={(e) => {
-				if (!isRunning || gameOver) { return } 
-				dispatch(moveDown())
-			}}>Down</button>
->
-		</div>
-	)
-}
+{/* left */}
+<button 
+  disabled={!isRunning || gameOver}
+  className="control-button" 
+  onClick={(e) => {
+    dispatch(moveLeft())
+}}>Left</button>
+
+{/* right */}
+<button 
+  disabled={!isRunning || gameOver}
+  className="control-button" 
+  onClick={(e) => {
+    dispatch(moveRight())
+}}>Right</button>
+
+{/* rotate */}
+<button 
+  disabled={!isRunning || gameOver}
+  className="control-button" 
+  onClick={(e) => {
+    dispatch(rotate())
+}}>Rotate</button>
+
+{/* down */}
+<button 
+  disabled={!isRunning || gameOver}
+  className="control-button" 
+  onClick={(e) => {
+    dispatch(moveDown())
+}}>Down</button>
 ```
 
 With these changes the controls will not work when the game is paused or over. You haven't solved the game over situation yet, soon! For now when game is paused the blocks should not move or rotate when the controls are used. 
-
-There is a small problem. When the game is paused the buttons look like they should work. Visually they look the same as when the game is not paused.
-
-Button has an attribute: disabled that disables a button when true. 
-
-> [action]
->
-> Update `/src/components/controls.js` to check `isRunning` and `gameOver` and set the disabled attribute.
->
-```js
-...
->
-export default function Controls(props) {
-  ...
->
-	return (
-		<div className={`controls`}>
-			{/* left */}
-			<button 
-				disabled={!isRunning || gameOver}
-				className="control-button" 
-				onClick={(e) => {
-					if (!isRunning || gameOver) { return } 
-					dispatch(moveLeft())
-				}}>Left</button>
->
-			{/* right */}
-			<button 
-				disabled={!isRunning || gameOver}
-				className="control-button" 
-				onClick={(e) => {
-					if (!isRunning || gameOver) { return } 
-					dispatch(moveRight())
-				}}>Right</button>
->
-			{/* rotate */}
-			<button 
-				disabled={!isRunning || gameOver}
-				className="control-button" 
-				onClick={(e) => {
-					if (!isRunning || gameOver) { return } 
-					dispatch(rotate())
-				}}>Rotate</button>
->
-			{/* down */}
-			<button 
-				disabled={!isRunning || gameOver}
-				className="control-button" 
-				onClick={(e) => {
-					if (!isRunning || gameOver) { return } 
-					dispatch(moveDown())
-				}}>Down</button>
->
-		</div>
-	)
-}
-```
->
-
-With this change in place the buttons should disable as disbaled when the game is paused, `isRunning === false`, or over, `gameOver === false`. 
 
 # Detecting a game over
 
@@ -189,15 +233,54 @@ The `addBlockToGrid()` function adds a block to the grid. If part of the block e
 
 The goal is to have the function return the new grid and a bool that says the game is over (true) or the game is not over (false). Since we can only return one value from a function, the return type will have to change to an object with two properties: `grid` and `gameOver`.
 
-> [action]
->
-> In `/src/utils/index.js`, update `addBlockToGrid` to the following:
->
+**Optional Challenge**
+
+This is a tough one. Give it a try! You need to modify `addBlockToGrid` so when placing a block if part of that block is off the top of the grid. If so the game is over. 
+
+The function needs to returns both the new updated grid and a boolean desiganiting the game over status. 
+
+Note: This change will break the `moveDown` reducer! You'll need to fix that also, which is handled in the next step of this tutorial. 
+
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+In `/src/utils/index.js`, update `addBlockToGrid` to the following:
+
 ```JavaScript
 // Adds current shape to grid
 export const addBlockToGrid = (shape, grid, x, y, rotation) => {
   // At this point the game is not over
-  let blockOffGrid = false
+  let gameOver = false
   const block = shapes[shape][rotation]
   const newGrid = [ ...grid ]
   for (let row = 0; row < block.length; row++) {
@@ -207,7 +290,7 @@ export const addBlockToGrid = (shape, grid, x, y, rotation) => {
         // If the yIndex is less than 0 part of the block
         // is off the top of the screen and the game is over
         if (yIndex < 0) {
-          blockOffGrid = true
+          gameOver = true
         } else {
           newGrid[row + y][col + x] = shape
         }
@@ -215,19 +298,16 @@ export const addBlockToGrid = (shape, grid, x, y, rotation) => {
     }
   }
   // Return both the newGrid and the gameOver bool                                                
-  return { grid: newGrid, gameOver: blockOffGrid }
+  return { newGrid, gameOver }
 }
 ```
 
-Changing this will mean changes to the reducer and the
-MOVE_DOWN case where this method is called.
+Remember with these changes you have broken the `moveDown` reducer. Which will require an update. 
 
 # Modify the game-reducer
 
-> [action]
->
-> Modify the MOVE_DOWN case for `/src/reducers/game-reducer.js`:
->
+Modify the MOVE_DOWN case for `/src/features/gameSlice.js`:
+
 ```JavaScript
 case MOVE_DOWN:
   // Get the next potential Y position

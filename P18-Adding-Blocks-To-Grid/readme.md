@@ -167,7 +167,7 @@ Replace the empty function with this:
 ```JS
 ...
 moveDown: (state) => {
-  const { x, y, shape, grid, rotation, nextShape, isRunning, score } = state
+  const { x, y, shape, grid, rotation, nextShape } = state
   // Get the next potential Y position
   const maybeY = y + 1
   // Check if the current block can move here
