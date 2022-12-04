@@ -440,6 +440,14 @@ $ git push
 
 Now that you have your game working why not spend some time making more interesting and along the way you can review what you learned and reinforce force the concepts by trying these challenges! 
 
+There are a lot of extra challenges listed below. You can pick and choose to do anything from the list you don't have to do them in order. Tackle whatever interests you! 
+
+## Publish your game to GitHub pages
+
+This is a React project so it needs a little bit more work than just pushing to GitHub.com. 
+
+Follow the guide here: https://github.com/gitname/react-gh-pages
+
 ## Change the styles 
 
 The square and the buttons use a beveled/chiseled looks which doesn't look that great. This was chosen originally because it looks like the original game. But you can add a more modern and updated look with a few styles. 
