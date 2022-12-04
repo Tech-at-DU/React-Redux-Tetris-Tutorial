@@ -88,7 +88,7 @@ export const checkRows = (grid) => {
 }
 ```
 
-# Implement MOVE_DOWN in game reducer
+# Implement `moveDown` in gameSlice
 
 The `moveDown` action is likely the most complicated
 block of code in the game, a lot happens here. Here is what needs to happen:

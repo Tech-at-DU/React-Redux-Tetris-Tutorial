@@ -69,7 +69,7 @@ Get the game object and deconstruct it into each of it's properties.
 ...
 export default function GridBoard() {
 	const game = useSelector((state) => state.game)
-	const { grid, shape, rotation, x, y, isRunning, speed } = game
+	const { grid, shape, rotation, x, y } = game
 
   ...
 }
