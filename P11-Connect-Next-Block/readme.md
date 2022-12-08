@@ -11,10 +11,10 @@
 1. ~~Do some code organizing and cleanup~~
 1. ~~Implement state and shapes~~
 1. **Connect each component up to state and reducers**
-    1. **NextBlock**
-        1. **Connect the `next-block` component**
-        1. **Implement the `mapStateToProps` function**
-        1. **Build out the next block grid to show shapes**
+  1. **NextBlock**
+  1. **Connect the `next-block` component**
+  1. **Implement the `mapStateToProps` function**
+  1. **Build out the next block grid to show shapes**
 1. Implement block rotation
 1. Implement moving blocks
 1. Building a timer system
@@ -24,9 +24,9 @@ Tetris displays the next block in the upper left corner. This is a component tha
 
 ![next-block](assets/next-block.png)
 
-With the default game state defined it's time to connect game state to components.
+With the default game state defined it's time to connect the game state to the components.
 
-The goal for this chapter is to display the next block in the NextBlock component. To do this you need to get the _index_ of the next block from game state and _map_ this to an array of squares in the component.
+The goal of this chapter is to display the next block in the `NextBlock` component. To do this you need to get the _index_ of the next block from the game state and _map_ this to an array of squares in the component.
 
 The index of the next block is stored at `game.nextShape` on `state`. Use this to find the array that represents this shape, at the first rotation, and map it to the grid.
 
@@ -44,7 +44,7 @@ To get state from Redux into this Component you'll need to connect the component
 
 # React-Redux Hooks: useSelector
 
-The useSelector hook give your components access to the redux store. 
+The useSelector hook gives your components access to the redux store. 
 
 Add the following import near the top of `/src/components/NextBlock.js`:
 
@@ -55,9 +55,9 @@ import { shapes } from '../utils'
 
 # Get a piece of state
 
-When using `useSelector` you'll provide a callback that recieves state from Redux and returns the `piece' of state that you're interested in. 
+When using `useSelector` you'll provide a callback that receives the state from Redux and returns the `piece' of the state that you're interested in. 
 
-For the NextBlock component you need the `nextShape` piece of state. This is an integer that is the index of a shape in your array of shapes. 
+For the `NextBlock` component, you need the `nextShape` piece of state. This is an integer that is the index of a shape in your array of shapes. 
 
 In our case the store looks like this: 
 
@@ -66,19 +66,19 @@ state = {
   nextShape: 1,
   rotation: 1,
   grid: [..bunch of values...],
-  ... more properrties ...
+    ... more properties...
 }
 ```
 
 To get `nextShape` the syntax might look like: `state.nextShape`
 
-Use the `useSelector` hook to get the `nextShape` from state. 
+Use the `useSelector` hook to get the `nextShape` from the state. 
 
 ```JavaScript
 ...
 export default function NextBlock() {
-	const nextShape = useSelector((state) => state.nextShape)
-	...
+  const nextShape = useSelector((state) => state.nextShape)
+  ...
 }
 ```
 
@@ -162,7 +162,7 @@ const nextShape = useSelector(state => {
 })
 ```
 
-The inspector should looks something like: 
+The inspector should look something like this: 
 
 ```
 [Log] Object (bundle.js, line 547)
@@ -189,7 +189,7 @@ We don't want to have log statements everywhere in our code!
 
 # Display the next shape
 
-Shapes are stored in an array of arrays of arrays. Seriously, the data is nested pretty deep! At the top level the shape array each index is an array of each shape at each rotation. This means that `shapes[1]` would give be the array of all rotations for shape 1, `shapes[1][0]` would be the two dimensional array representing shape 1's first rotation. 
+Shapes are stored in an array of arrays of arrays. Seriously, the data is nested pretty deep! At the top level, the shape array of each index is an array of each shape at each rotation. This means that `shapes[1]` would give be the array of all rotations for shape 1, `shapes[1][0]` would be the two-dimensional array representing shape 1's first rotation. 
 
 Add the following to the NextBlock component in `/src/components/NextBlock.js`:
 
@@ -197,8 +197,8 @@ Add the following to the NextBlock component in `/src/components/NextBlock.js`:
 ...
 
 export default function NextBlock() {
-	const nextShape = useSelector(state => state.nextShape)
-	const block = shapes[nextShape][0] // Get the first rotation
+  const nextShape = useSelector(state => state.nextShape)
+  const block = shapes[nextShape][0] // Get the first rotation
   ...
 }
 ```
@@ -207,7 +207,7 @@ _Now you can use data mapped to props_. The `shape` key on props now holds the i
 
 # Product So Far
 
-Refresh the browser to see a different shape/orientation appear in the Next Block area! Our Next Block now **uses Redux/Flux to manage application state!** We also covered working with **systems that manage and merge complex arrays,** and have gotten some more practice with **using functional programming methods like `map`!**
+Refresh the browser to see a different shape/orientation appear in the Next Block area! Our Next Block now **uses Redux/Flux to manage the application state!** We also covered working with **systems that manage and merge complex arrays,** and have gotten some more practice with **using functional programming methods like `map`!**
 
 ![random-next-block](assets/random-next-block.png)
 
@@ -223,9 +223,9 @@ If you do this:
 <GridSquare key={`${row}${col}`} color={nextShape} />
 ```
 
-You'll see all of the squares change to the color of the shape. Refresh the page a couple times and you should see color chnage because `nextShape` is random in the intial state! 
+You'll see all of the squares change color the shape. Refresh the page a couple of times and you should see a color change because `nextShape` is random in the initial state! 
 
-The challenge, is to set the color prop to 0 when value of `sqaure` is 0 and set the color prop to `nextShape` when square is 1. 
+The challenge is to set the color prop to 0 when the value of `sqaure` is 0 and set the color prop to `nextShape` when a square is 1. 
 
 - 
 - 
@@ -296,7 +296,7 @@ Did you solve the challenge? Compare your solution to mine. There is more than o
 ```JS
 const grid = block.map((rowArray, row) => {
   return rowArray.map((square, col) => {
-    const color = square ? nextShape : 0
+  const color = square ? nextShape : 0
     return <GridSquare key={`${row}${col}`} color={color} />
   })
 })
@@ -311,3 +311,4 @@ $ git add .
 $ git commit -m 'Added connection for next block'
 $ git push
 ```
+

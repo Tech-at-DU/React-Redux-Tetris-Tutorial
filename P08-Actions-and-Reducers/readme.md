@@ -8,9 +8,9 @@
 1. ~~Implement the controls~~
 1. ~~Implement the message popup~~
 1. **Implement the actions and reducers**
-    1. **Build out the actions needed to run the game, including movement, rotation, and game state**
-    1. **Create a stub reducer for the game to be filled in later**
-    1. **Add a store and provider for reducers and state**
+  1. **Build out the actions needed to run the game, including movement, rotation, and game state**
+  1. **Create a stub reducer for the game to be filled in later**
+  1. **Add a store and provider for reducers and state**
 1. Do some code organizing and cleanup
 1. Implement state and shapes
 1. Connect each component up to state and reducers
@@ -25,7 +25,7 @@ The game will respond to a range of actions that you need to define. Actions wil
 
 Reducers handle the actions to update the application state.
 
-Application state determines what is actually displayed. When application is updated all of the components will redraw themselves.
+The application state determines what is displayed. When the application is updated all of the components will redraw themselves.
 
 # Overview of Game Actions
 
@@ -45,7 +45,7 @@ These actions work with the player controls to move the block.
 - **Rotate** : Rotates the current block
 
 ## Game Automation
-These actions are issued by the game periodically as play
+These actions are issued by the game periodically as the play
 progresses.
 
 **Note:** "Move Down" can be issued by the player or
@@ -69,7 +69,7 @@ Import react-Redux. This is the glue that connects Redux with React.
 npm install react-redux
 ```
 
-Redux is a state management library and can be used with any package React-redux provides the utility to get React and Redux working together. Redux-Toolkit makes it easier to use Redux.
+Redux is a state management library and can be used with any package React-redux provides the utility to get React and Redux working together. Redux Toolkit makes it easier to use Redux.
 
 ## Create the Store
 
@@ -79,7 +79,7 @@ Make a new folder: `src/app`.
 
 Then add a new file: `src/app/store.js`:
 
-Add the following code this new file: 
+Add the following code to this new file: 
 
 ```JS
 import { configureStore } from '@reduxjs/toolkit'
@@ -91,11 +91,11 @@ export const store = configureStore({
 
 You'll be coming back here to add some code in the future. At the moment you are just setting up the "plumbing" that will make the whole thing work. 
 
-Notice that you created the store with `configureStore()` and exported the store to share it with other parts of your app.  
+Notice that you created the store with `configureStore()` and exported the store to share it with other parts of your app. 
 
 ## Set up the Provider
 
-The provider is a component that passes application state to it's child components. You'll wrap your whole App in the Provider so that applcation state can be shared with all the other components in the app! 
+The provider is a component that passes the application state to its child components. You'll wrap your whole App in the Provider so that the application state can be shared with all the other components in the app! 
 
 Edit `src/index.js`:
 
@@ -137,14 +137,14 @@ export const store = configureStore({
 })
 ```
 
-This error will be resolved when when you define the reducers in the future! 
+This error will be resolved when you define the reducers in the future! 
 
 
 ## Adding a Slice
 
-A slice is a piece of application state. In more detail the code block for the slice determines what this piece of named, and we need the name to access this piece of state. 
+A slice is a piece of application state. In more detail, the code block for the slice determines what this piece of named, and we need the name to access this piece of state. 
 
-The slice also determines what the initial value is for this piece of state. State will be an object with properties. Something like: 
+The slice also determines what the initial value is for this piece of state. State is a JS object with properties. Something like: 
 
 ```JS
 {
@@ -156,18 +156,18 @@ The slice also determines what the initial value is for this piece of state. Sta
 }
 ```
 
-The slice defines actions that can trigger changes to this slice of state. Actions are things that can happen in your app that make changes to state. For example actions might things like: 
+The slice defines actions that can trigger changes to this slice of state. Actions are things that can happen in your app that make changes to state. For example, actions might be things like: 
 
 - `play` - sets `isRunning` to `true`
 - `pause` - sets `isRunning` to `false`
 - `moveLeft` - Adds 1 to `x`
 - `moveRight` - subtracts 1 from `x`
 
-And last, the slice defines reducers that are triggered by actions and make actual changes to state returning updated state in the process. 
+And last, the slice defines reducers that are triggered by actions and makes actual changes to state returning the updated state in the process. 
 
-Reducers are functions that receive the state object, make changes to that object and return updated state. 
+Reducers are functions that receive the state object, make changes to that object and return the updated state. 
 
-Let's implement the ideas above in code. Create a new folder: `src/features`.
+Let's implement the ideas above in the code. Create a new folder: `src/features`.
 
 Create a new file: `src/features/gameSlice.js`.
 
@@ -177,18 +177,18 @@ Add the following:
 import { createSlice } from '@reduxjs/toolkit'
 
 export const gameSlice = createSlice({
-  
+ 
 })
 
 // Action creators are generated for each case reducer function
-export const {  } = gameSlice.actions
+export const { } = gameSlice.actions
 
 export default gameSlice.reducer
 ```
 
 Here `createSlice` takes an object and returns a "slice". 
 
-The slice has some actions stored on it's `actions` property and a `reducer` stored on it's reducer property. This file exports these. 
+The slice has some actions stored on its `actions` property and a `reducer` stored on its reducer property. This file exports these. 
 
 Give your slice a name: 
 
@@ -198,7 +198,7 @@ export const gameSlice = createSlice({
 })
 ```
 
-Now add initial state: 
+Now add the initial state: 
 
 ```JS
 export const gameSlice = createSlice({
@@ -207,7 +207,7 @@ export const gameSlice = createSlice({
 })
 ```
 
-Notice that state is an object. You'rr going to add some starting values in an upcoming step!
+Notice that state is an object. You're going to add some starting values in an upcoming step!
 
 Now add your reducers: 
 
@@ -219,7 +219,7 @@ export const gameSlice = createSlice({
 })
 ```
 
-reducers is also an object. This object will contain the actions and functions that handle changes to state. Before we add those here is a list of the actions we need to make the game work: 
+reducers is also an object. This object will contain the actions and functions that handle state changes. Before we add those here is a list of the actions we need to make the game work: 
 
 - `pause` Pause the game
 - `resume` Resume a paused game
@@ -237,18 +237,18 @@ export const gameSlice = createSlice({
   name: 'game',
   initialState: {},
   reducers: {
-    pause: () => {},
-		resume: () => {},
-		moveLeft: () => {},
-		moveRight: () => {},
-		moveDown: () => {}
+  pause: () => {},
+  resume: () => {},
+  moveLeft: () => {},
+  moveRight: () => {},
+  moveDown: () => {}
   },
 })
 ```
 
 The actions are the property names to the left of the colon. 
 
-The functions to right of each action are reducers. 
+The functions to the right of each action are reducers. 
 
 There is a lot of work to do here. Each of these functions is responsible for handling changes to state and you will be adding code to each of these functions in the coming steps. 
 
@@ -301,23 +301,23 @@ export const gameSlice = createSlice({
   initialState: {},
   reducers: {
     pause: () => {},
-		resume: () => {},
-		moveLeft: () => {},
-		moveRight: () => {},
-		moveDown: () => {},
+    resume: () => {},
+    moveLeft: () => {},
+    moveRight: () => {},
+    moveDown: () => {},
     rotate: () => {},
-		gameOver: () => {},
-		restart: () => {}
+    gameOver: () => {},
+    restart: () => {}
   },
 })
 ```
 
-The last step here is to export youir actions. 
+The last step here is to export your actions. 
 
 At the bottom of the page find: 
 
 ```JS
-export const {  } = gameSlice.actions
+export const { } = gameSlice.actions
 ```
 
 Add all of your actions here: 
@@ -337,7 +337,7 @@ export const {
 
 ## Connecting the slice to the store
 
-Now you need to connect this clice to your store. Edit `src/app/store.js`: 
+Now you need to connect this slice to your store. Edit `src/app/store.js`: 
 
 ```JS
 import { configureStore } from '@reduxjs/toolkit'
@@ -353,11 +353,11 @@ Here you imported the `gameSlice.reducer` which was exported from `src/features/
 
 Then you named this piece of state `game` and set the value to the `gameReducer`. 
 
-With that in place your app should run without error.
+With that in place, your app should run without error.
 
-I know this might seem pretty mysterious, especially if you haven't used Redux before. But stick with it! This is a profesional library which is programmed at a high level! With practice you will start to understand everything that is going on here! 
+I know this might seem pretty mysterious, especially if you haven't used Redux before. But stick with it! This is a professional library that is programmed at a high level! With practice, you will start to understand everything that is going on here! 
 
-What you have done in this step is put all of the boilerplate Redux and Redux Toolkit code into place. All that's left is fill in the reducers! 
+What you have done in this step is put all of the boilerplate Redux and Redux Toolkit code into place. All that's left is to fill in the reducers! 
 
 # Now Commit
 
@@ -366,3 +366,4 @@ $ git add .
 $ git commit -m 'Added initial actions and reducer'
 $ git push
 ```
+

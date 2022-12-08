@@ -9,7 +9,7 @@
 1. ~~Implement the message popup~~
 1. ~~Implement the actions and reducers~~
 1. **Do some code organizing and cleanup**
-    1. **Create utils to cover ancillary functions**
+  1. **Create utils to cover ancillary functions**
 1. Implement state and shapes
 1. Connect each component up to state and reducers
 1. Implement block rotation
@@ -100,9 +100,9 @@ export const random = (min, max) => {
 }
 ```
 
-The function above taks in a min value and max value, two numbers, and returns a random number in that range. 
+The function above takes in a min value and max value, two numbers, and returns a random number in that range. 
 
-As the project progresses any time we need more general purpose code we can add it to this file, export, and import as needed.
+As the project progresses any time we need more general-purpose code we can add it to this file, export, and import it as needed.
 
 # Now Commit
 
@@ -111,3 +111,4 @@ $ git add .
 $ git commit -m 'Added utils'
 $ git push
 ```
+

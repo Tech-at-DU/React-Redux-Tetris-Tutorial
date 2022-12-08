@@ -11,22 +11,22 @@
 1. ~~Do some code organizing and cleanup~~
 1. ~~Implement state and shapes~~
 1. **Connect each component up to state and reducers**
-    1. ~~NextBlock~~
-    1. **GridBoard**
-        1. **Connect the `grid-board` component**
-        1. **Implement the `mapStateToProps` function**
-        1. **Implement the `mapDispatchToProps` function**
-        1. **Build out the board to show shapes and calculate their position**
+  1. ~~NextBlock~~
+  1. **GridBoard**
+    1. **Connect the `grid-board` component**
+    1. **Implement the `mapStateToProps` function**
+    1. **Implement the `mapDispatchToProps` function**
+    1. **Build out the board to show shapes and calculate their position**
 1. Implement block rotation
 1. Implement moving blocks
 1. Building a timer system
 1. Implementing Game Over and Restart
 
-Here your goal is to display the grid board from state. This is the core rendering feature of the game.
+Here your goal is to display the grid board from the state. This is the core rendering feature of the game.
 
-The `GridBoard` component displays an array of `GridSquare`s. It will also map the current shape block at it's rotation into this grid at the x, and y.
+The `GridBoard` component displays an array of `GridSquare`. It will also map the current shape block at its rotation into this grid at the x, and y.
 
-Tapping the left, right, rotate, down buttons update game state which in turn triggers this component to update. Updates are also generated as the timer triggers move down actions.
+Tapping the left, right, rotate, and down buttons update the game state which in turn triggers this component to update. Updates are also generated as the timer triggers move-down actions.
 
 Remember that colors are represented as integer values:
 
@@ -43,7 +43,7 @@ These colors would map to the grid like this:
 
 ![Grid-with-Colors](assets/Grid-with-Colors.png)
 
-The grid also needs to map the current block onto the grid. The current block is one of the shape arrays at it's rotation. This is a 4 by 4 grid.
+The grid also needs to map the current block onto the grid. The current block is one of the shape arrays at its rotation. This is a 4 by 4 grid.
 
 ![map-shape-to-grid](assets/map-shape-to-grid.png)
 
@@ -61,15 +61,15 @@ Import `useSelector` from 'react-redux' at the top of `/src/components/GridBoard
 import { useSelector } from 'react-redux'
 ```
 
-# Get game data from state
+# Get game data from the state
 
-Get the game object and deconstruct it into each of it's properties.
+Get the game object and deconstruct it into each of its properties.
 
 ```js
 ...
 export default function GridBoard() {
-	const game = useSelector((state) => state.game)
-	const { grid, shape, rotation, x, y } = game
+  const game = useSelector((state) => state.game)
+  const { grid, shape, rotation, x, y } = game
 
   ...
 }
@@ -79,15 +79,20 @@ Note! at this step you'll have an error since `grid` will be declared twice! You
 
 # Mapping the Grid to GridSquares
 
-Previously the grid was mocked up. Now it's time replace this code with code that generates a grid from game state and maps the current shape block on to the grid.
+Previously the grid was mocked up. Now it's time to replace this code with code that generates a grid from the game state and maps the current shape block onto the grid.
 
 The `makeGrid()` method is responsible for this. `Array.map` is a good tool here since we want to transform the integer values into Grid Squares with color.
 
-You'll need to map the row arrays then map each row to get the value at each column. These values are used to generate grid squares.
+You'll need to map the row arrays and then map each row to get the value at each column. These values are used to generate grid squares.
 
 ```JS
 // Start with this:
-[[0,0,1,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0], [0,0,0,0,0,0,0,0,0,0] ,,,]
+[
+  [0,0,1,0,0,0,0,0,0,0], 
+  [0,0,0,0,0,0,0,0,0,0], 
+  [0,0,0,0,0,0,0,0,0,0] 
+  ,,,
+]
 // Map to: 
 [0,0,1,0,0,0,0,0,0,0]
 // Then map to: 
@@ -104,11 +109,11 @@ import { shapes } from '../utils'
 
 Next map the current block shape into the grid.
 
-How do we _really_ do this? The source Grid is two dimensional, but the output Grid will just be one dimensional. You can use `Array.map()` to map across all rows, and then use `Array.map()` again to map across each column. Inside this second map function is where you'll generate Grid Squares.
+How do we do this? The source Grid is two-dimensional, but the output Grid will just be one-dimensional. You can use `Array.map()` to map across all rows, and then use `Array.map()` again to map across each column. Inside this second map function is where you'll generate Grid Squares.
 
 Remember that the value assigned to each location on the grid is an _integer representing the color of each square_.
 
-Next map the shape on to the grid. The shape is also represented by an integer value.
+Next map the shape onto the grid. The shape is also represented by an integer value.
 
 When Grid Squares are created, find the color for the square by looking at the shape array. If there is a 1 in the shape array, use the shape index as the color.
 
@@ -123,44 +128,44 @@ import GridSquare from './GridSquare'
 import { shapes } from '../utils'
 
 export default function GridBoard(props) {
-	const { grid, shape, rotation, x, y, isRunning, speed } = useSelector(state => state)
+  const { grid, shape, rotation, x, y, isRunning, speed } = useSelector(state => state)
 
-	const block = shapes[shape][rotation]
+  const block = shapes[shape][rotation]
   const blockColor = shape
   // map rows
   const gridSquares = grid.map((rowArray, row) => {
-    // map columns
-    return rowArray.map((square, col) => {
-      // Find the block x and y on the shape grid
-      // By subtracting the x and y from the col and the row we get the position of the upper left corner of the block array as if it was superimposed over the main grid
-      const blockX = col - x
-      const blockY = row - y
-      let color = square
-      // Map current falling block to grid.
-      // For any squares that fall on the grid we need to look at the block array and see if there is a 1 in this case we use the block color.
-      if (blockX >= 0 && blockX < block.length && blockY >= 0 && blockY < block.length) {
-        color = block[blockY][blockX] === 0 ? color : blockColor
-      }
-      // Generate a unique key for every block
-      const k = row * grid[0].length + col;
-      // Generate a grid square
-      return <GridSquare
-              key={k}
-              color={color} />
+  // map columns
+  return rowArray.map((square, col) => {
+    // Find the block x and y on the shape grid
+    // By subtracting the x and y from the col and the row we get the position of the upper left corner of the block array as if it was superimposed over the main grid
+    const blockX = col - x
+    const blockY = row - y
+    let color = square
+    // Map the current falling block to the grid.
+    // For any squares that fall on the grid we need to look at the block array and see if there is a 1 in this case we use the block color.
+    if (blockX >= 0 && blockX < block.length && blockY >= 0 && blockY < block.length) {
+      color = block[blockY][blockX] === 0 ? color : blockColor
+    }
+    // Generate a unique key for every block
+    const k = row * grid[0].length + col;
+    // Generate a grid square
+    return <GridSquare
+      key={k}
+      color={color} />
     })
   })
 
-	return (
-		<div className='grid-board'>
-			{gridSquares}
-		</div>
-	)
+  return (
+    <div className='grid-board'>
+      {gridSquares}
+    </div>
+  )
 }
 ```
 
-At this point the grid should display with the gray squares. This is the empty color.
+At this point, the grid should display the gray squares. This is the empty color.
 
-But where's the block that you mapped on to the grid? Shouldn't there be a block shape? 
+But where's the block that you mapped onto the grid? Shouldn't there be a block shape? 
 
 **Challenge** 
 
@@ -204,7 +209,7 @@ Where's the block shape? Think about this and figure out where it is...
 -
 -
 
-It's off the top egde! Remmeber that the starting y value (in the initial state) is -4! 
+It's off the top edge! Remember that the starting y value (in the initial state) is -4! 
 
 **Challenge**
 
@@ -264,3 +269,4 @@ $ git add .
 $ git commit -m 'Added connection for grid board'
 $ git push
 ```
+

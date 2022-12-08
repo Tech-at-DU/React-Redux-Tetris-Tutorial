@@ -1,4 +1,4 @@
-# Connect the Score Board
+# Connect the ScoreBoard
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
@@ -11,35 +11,35 @@
 1. ~~Do some code organizing and cleanup~~
 1. ~~Implement state and shapes~~
 1. **Connect each component up to state and reducers**
-    1. ~~NextBlock~~
-    1. ~~GridBoard~~
-    1. ~~Controls~~
-    1. ~~Message-Popup~~
-    1. **ScoreBoard**
-        1. **Implement the `useDispatch`**
-        1. **Implement the `UseSelector`**
-        1. **Connect the `score-board` component and add the actions that it needs**
-        1. **Implement the logic for the play/resume buttons**
+	1. ~~NextBlock~~
+	1. ~~GridBoard~~
+	1. ~~Controls~~
+	1. ~~Message-Popup~~
+	1. **ScoreBoard**
+		1. **Implement the `useDispatch`**
+		1. **Implement the `UseSelector`**
+		1. **Connect the `score-board` component and add the actions that it needs**
+		1. **Implement the logic for the play/resume buttons**
 1. Implement block rotation
 1. Implement moving blocks
 1. Building a timer system
 1. Implementing Game Over and Restart
 
-The score board component shows the current score. It also has a play/pause and restart button. 
+The scoreboard component shows the current score. It also has a play/pause and restarts button. 
 
-The play button should toggle it's text from 'Play' to 'Pause' as the game changes state.
+The play button should toggle its text from 'Play' to 'Pause' as the game changes state.
 
-The value displayed for score will come from the score property of your application `state`. 
+The value displayed for the score will come from the score property of your application `state`. 
 
 The buttons will call actions that play/pause and restart the game.
 
-# Update the ScoreBaord
+# Update the scoreboard
 
 You need to import both `useDispatch` and `useSelecvtor` from `react-redux` at the top of this component. You need these to dispatch messages and access your application state. Sounds like a...
 
 **Challenge**
 
-Edit `src/components/ScoreBaord.js` and a import `useSelector` and `useDispatch`.
+Edit `src/components/ScoreBaord.js` and import `useSelector` and `useDispatch`.
 
 -
 -
@@ -280,10 +280,11 @@ The restart button should dispatch the restart action when you click it.
 
 ```JS
 <button 
-	className="score-board-button" 
-	onClick={(e) => {
-		dispatch(restart())
-	}}>Restart</button>
+  className="score-board-button" 
+  onClick={(e) => {
+    dispatch(restart())
+  }
+}>Restart</button>
 ```
 
 **Challenge**
@@ -323,10 +324,11 @@ The Pause/Play button should display "Pause" if the `isRunning` is `true` and "P
 
 ```JS
 <button 
-	className="score-board-button" 
-	onClick={(e) => {
-		
-	}}>{isRunning ? 'Pause' : 'Play'}</button>
+  className="score-board-button" 
+  onClick={(e) => {
+    // ...
+  }
+}>{isRunning ? 'Pause' : 'Play'}</button>
 ```
 
 **Challenge**
@@ -370,18 +372,19 @@ Clicking the Play/Pause button should do something different depending on the st
 
 ```JS
 <button className="score-board-button" onClick={(e) => {
-	if (gameOver) { return }
-	if (isRunning) {
-		dispatch(pause())
-	} else {
-		dispatch(resume())
-	}
-}}>{isRunning ? 'Pause' : 'Play'}</button>
+  if (gameOver) { return }
+    if (isRunning) {
+      dispatch(pause())
+    } else {
+      dispatch(resume())
+    }
+  }
+}>{isRunning ? 'Pause' : 'Play'}</button>
 ```
 
-So far clicking the buttons is not going to change applicatio state, to make that work you need to handle the actions with your reducers. You'll do that soon! 
+So far clicking the buttons is not going to change the application state, to make that work you need to handle the actions with your reducers. You'll do that soon! 
 
-For now it would be good if you could think of a way to test your work...
+For now, it would be good if you could think of a way to test your work...
 
 **Challenge** 
 
@@ -399,7 +402,7 @@ When:
 - isRunning = false
 - gameOver = false
 
-The score is 560000, the game is not running, and the not over. The play button show "Play".
+The score is 560000, the game is not running, and the game is not over. The play button show "Play".
 
 When: 
 - score = 420
@@ -410,7 +413,7 @@ The game is over, the score is 420, and the play button should be disabled.
 
 Note! If you mock up the variables in the component the Message Popup will not display. If you set the values in the default state it will. 
 
-In the last few chapters you will get the game working. In these chapters you've built all of the pieces that make up the game. 
+In the last few chapters, you will get the game working. In these chapters, you've built all of the pieces that make up the game. 
 
 # Now Commit
 
@@ -419,3 +422,4 @@ $ git add .
 $ git commit -m 'Added connection for score board'
 $ git push
 ```
+

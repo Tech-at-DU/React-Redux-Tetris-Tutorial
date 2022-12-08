@@ -3,10 +3,10 @@
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
 1. ~~Implement the "next block" area~~
-1. **Implement the score board**
-    1. **Create the score board component with restart and play/resume buttons**
-    1. **Style the component**
-    1. **Add to `App.js`**
+1. **Implement the scoreboard**
+  1. **Create the scoreboard component with restart and play/resume buttons**
+  1. **Style the component**
+  1. **Add to `App.js`**
 1. Arrange the layout of the game
 1. Implement the controls
 1. Implement the message popup
@@ -19,17 +19,17 @@
 1. Building a timer system
 1. Implementing Game Over and Restart
 
-You need a score board to show the game score and provide a place for the Play and Pause buttons to live.
+You need a scoreboard to show the game score and provide a place for the Play and Pause buttons to live.
 
 The scoreboard when completed will display on the right side of the game board.
 
 ![score-board](assets/score-board.png)
 
-Some requirements for the score board:
+Some requirements for the scoreboard:
 
 - Needs to display the game score
 - Has a Play Button to start the game
-- Has a Pause button to pause game play. This will allow people to get snacks mid game, an important feature! 
+- Has a Pause button to pause gameplay. This will allow people to get snacks mid-game, an important feature! 
 
 # Create the ScoreBoard Component
 
@@ -39,16 +39,18 @@ Make a new file: `/src/components/ScoreBoard.js` with the following code:
 import React from 'react'
 
 export default function ScoreBoard() {
-	return (
-		<div className="score-board">
-			<div>Score: 0</div>
-			<div>Level: 1</div>
-			<button className="score-board-button" onClick={(e) => {
-			}}>Play</button>
-			<button className="score-board-button" onClick={(e) => {
-			}}>Restart</button>
-		</div>
-	)
+  return (
+    <div className="score-board">
+      <div>Score: 0</div>
+      <div>Level: 1</div>
+      <button className="score-board-button" onClick={(e) => {
+        // ...
+      }}>Play</button>
+      <button className="score-board-button" onClick={(e) => {
+        // ...
+      }}>Restart</button>
+    </div>
+  )
 }
 ```
 
@@ -56,7 +58,7 @@ Now you can define some styles for these elements. No need to worry about the te
 
 Add the following to `/src/index.css`
 
-```css
+```CSS
 /* Score Board */
 .score-board-button {
   display: block;
@@ -107,7 +109,7 @@ You should see the following in your browser:
 
 ![initial-scoreboard](assets/initial-scoreboard.png)
 
-This needs work, but we will take care the details later. For now this is a solid start, and we got more practice **working with CSS variables!**
+This needs work, but we will take care of the details later. For now, this is a solid start, and we got more practice **working with CSS variables!**
 
 # Now Commit
 

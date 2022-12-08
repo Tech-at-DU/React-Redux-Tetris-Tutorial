@@ -6,9 +6,9 @@
 1. ~~Implement the score board~~
 1. ~~Arrange the layout of the game~~
 1. **Implement the controls**
-    1. **Build out the Left, Right, Rotate, and Down controls**
-    1. **Style the controls**
-    1. **Add the controls to `App.js`**
+  1. **Build out the Left, Right, Rotate, and Down controls**
+  1. **Style the controls**
+  1. **Add the controls to `App.js`**
 1. Implement the message popup
 1. Implement the actions and reducers
 1. Do some code organizing and cleanup
@@ -19,7 +19,7 @@
 1. Building a timer system
 1. Implementing Game Over and Restart
 
-Tetris has a couple controls. Blocks can be moved left, right, and down. They can also be rotated.
+Tetris has a couple of controls. Blocks can be moved left, right, and down. They can also be rotated.
 
 The original game used a joystick and button. This game will use four buttons.
 
@@ -35,30 +35,30 @@ Make a new file `/src/components/Controls.js` that contains the following stub c
 import React from 'react'
 
 export default function Controls(props) {
-	return (
-		<div className="controls">
-			{/* left */}
-			<button className="control-button" onClick={(e) => {
+  return (
+  <div className="controls">
+    {/* left */}
+    <button className="control-button" onClick={(e) => {
+      // ...
+    }}>Left</button>
 
-			}}>Left</button>
+    {/* right */}
+    <button className="control-button" onClick={(e) => {
+      // ...
+    }}>Right</button>
 
-			{/* right */}
-			<button className="control-button" onClick={(e) => {
+    {/* rotate */}
+    <button className="control-button" onClick={(e) => {
+      // ...
+    }}>Rotate</button>
 
-			}}>Right</button>
+    {/* down */}
+    <button className="control-button" onClick={(e) => {
+      // ...
+    }}>Down</button>
 
-			{/* rotate */}
-			<button className="control-button" onClick={(e) => {
-
-			}}>Rotate</button>
-
-			{/* down */}
-			<button className="control-button" onClick={(e) => {
-
-			}}>Down</button>
-
-		</div>
-	)
+  </div>
+  )
 }
 ```
 
@@ -79,12 +79,12 @@ Add some new styles for the controls in `/src/index.css`
 
 The controls container will use the [Flex Box](https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox) for layout.
 
-Flex Box implements is a one dimensional layout. All of the buttons in the controls container are arranged in a horizontal row along a single axis.
+Flex Box implements a one-dimensional layout. All of the buttons in the control container are arranged in a horizontal row along a single axis.
 
 
 Define some styles for the control buttons in `/src/index.css`
 
-We want the buttons to be square with a width of 25% of grid board. The grid is 10 tiles wide, so the size of the buttons should be (2.5 * tile size)
+We want the buttons to be square with a width of 25% of the grid board. The grid is 10 tiles wide, so the size of the buttons should be (2.5 * tile size)
 
 ```CSS
 /* Control Button */
@@ -104,7 +104,7 @@ We want the buttons to be square with a width of 25% of grid board. The grid is 
 
 # Add to App.js
 
-Let's add our controls into our app!
+Let's add our controls to our app!
 
 Add the following to `/src/App.js`:
 
@@ -140,7 +140,7 @@ You should see the following in your browser:
 
 ![initial-controls](assets/initial-controls.png)
 
-Obviously these controls don't do anything yet, but we'll build them out in a future chapter
+Obviously, these controls don't do anything yet, but we'll build them out in a future chapter
 
 # Now Commit
 
@@ -149,3 +149,4 @@ $ git add .
 $ git commit -m 'Added initial controls'
 $ git push
 ```
+

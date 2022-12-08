@@ -14,21 +14,21 @@
 1. ~~Implement block rotation~~
 1. ~~Implement moving blocks~~
 1. **Building a timer system**
-    1. **Overview of timing and how to use `requestAnimationFrame`**
-    1. **Track delta time in the GridBoard**
-    1. **Build out an `update` function to update the GridBoard as blocks fall down**
-    1. **Implement the logic in the Pause/Resume button**
+	1. **Overview of timing and how to use `requestAnimationFrame`**
+	1. **Track delta time in the GridBoard**
+	1. **Build out an `update` function to update the GridBoard as blocks fall**
+	1. **Implement the logic in the Pause/Resume button**
 1. Implementing Game Over and Restart
 
 With what we have so far, the game is almost finished. One important step is needed to make turn this into a playable game: the blocks need to move down on their own!
 
-To make this work the game needs to issue `moveDown` actions on it's own. The time between each of these actions will determine the difficulty.
+To make this work the game needs to issue `moveDown` actions on its own. The time between each of these actions will determine the difficulty.
 
-You're going to use `requestAnimationFrame` to implement this feature. It may seem a little strange, but it has a couple advantages over using something like `setInterval`, and is a great way to practice some new ideas.
+You're going to use `requestAnimationFrame` to implement this feature. It may seem a little strange, but it has a couple of advantages over using something like `setInterval`, and is a great way to practice some new ideas.
 
 # Dispatching a periodic MOVE_DOWN action
 
-The goal here is issue a `moveDown` action every time period, where the time period might start at once per second and decrease over time as the game is played to increase difficulty.
+The goal here is to issue a `moveDown` action every time interval, where the time interval might start at once per second and decrease over time as the game is played to increase difficulty.
 
 You're going to be referring to **Delta time** a lot in this chapter. Delta time represents the difference between now and the last time the browser redrew the window.
 
@@ -36,10 +36,10 @@ As usual, let's go over some basic requirements:
 
 - The game needs to handle time and issue `moveDown`
 actions at intervals.
-- The interval will be the speed set on state.
+- The interval will be the speed set on the state.
 - Timing should be handled in the `GameBoard` component
 
-You could place the timing code in the App or Controls or other Component as well.
+You could place the timing code in the App or Controls or other Components as well.
 
 # Request Animation Frame Overview
 
@@ -51,26 +51,26 @@ JavaScript provides a method to notify our applications when the browser is abou
 
 # useRef()
 
-In React projects each time a component is rendered all of the variables in the component function are defined. That means all of the values from the last render are lost and new values are generated on a new render. 
+In React projects each time a component is rendered all of the variables in the component function is defined. That means all of the values from the last render are lost and new values are generated on a new render. 
 
-This is a feature of Reacts virtual DOM. You can think about it like this. Imagine each component is a function, not hard to do, components are written as function! Component functions return the HTML that they are responsible for rendering. That means that the function is run each time React needs to draw the component and all of the HTML is generated new at that time. It also means that variables defined locally each time the function is run. That last idea is standard JS. 
+This is a feature of Reacts virtual DOM. You can think about it like this. Imagine each component is a function, not hard to do, components are written as functions! Component functions return the HTML that they are responsible for rendering. That means that the function is run each time React needs to draw the component and all of the HTML is generated new at that time. It also means that variables are defined locally each time the function is run. That last idea is standard JS. 
 
-There are times when you need a component to "remember" a value it used the last time it rendered. 
+There are times when you need a component to "remember" a value it used the last time it was rendered. 
 
 React provides two hooks for this purpose. 
 
 - `useState`
 - `useRef`
 
-The `useState` hook let's you define values that when changed will cause the component to render again. 
+The `useState` hook lets you define values that when changed will cause the component to render again. 
 
-The `useRef` hook will hold on to a value value and changing this value won't automatically render the component. 
+The `useRef` hook will hold on to a value and changing this value won't automatically render the component. 
 
 # useEffect
 
 The `useEffect` hook is used to handle lifecycle events for a component. 
 
-A component is a function as such each time the component is rendered all of the code in the function is run. In some cases you may have code that should only be run the first a component is added to the DOM, or code that is run when a component removed from the DOM. These are lifecycle events, and `useEffect` covers these. 
+A component is a function as such each time the component is rendered all of the code in the function is run. In some cases, you may have code that should only be run the first a component is added to the DOM, or code that is run when a component is removed from the DOM. These are lifecycle events, and `useEffect` covers these. 
 
 # Making things move
 
@@ -78,7 +78,7 @@ To make things move in the game you'll combine `useRef`, `useEffect`, and `reque
 
 The idea is to calculate the time between calls to `requestAnimationFrame`. When the time is greater than the speed of the game dispatch a `moveDown` action. 
 
-This means that you'll be getting `requestAnimationFrame` updates often but changing state and rendering components less often (only when delatime is greater than the speed of the game.) 
+This means that you'll be getting `requestAnimationFrame` updates often but changing state and rendering components less often (only when delta time is greater than the speed of the game.) 
 
 Add the following within the `Controls` class in `/src/components/Controls.js`:
 
@@ -91,7 +91,7 @@ import { moveDown, moveLeft, moveRight, rotate } from '../features/gameSlice'
 ...
 ```
 
-Next define some refs. You'll three. 
+Next, define some refs. You'll three. 
 
 - `requestRef` - Holds a referece to requestAnimationFrame
 - `lastUpdateTimeRef` - tracks the time of the last update
@@ -111,7 +111,7 @@ export default function Controls() {
 	const requestRef = useRef()
 	const lastUpdateTimeRef = useRef(0)
 	const progressTimeRef = useRef(0)
-  ...
+	...
 }
 ```
 
@@ -124,33 +124,33 @@ export default function Controls() {
 	...
 	// Handle game updates to move blocks down the screen
 	const update = (time) => {
-		requestRef.current = requestAnimationFrame(update)
-		if (!isRunning) {
-			return 
-		}
-		if (!lastUpdateTimeRef.current) {
-			lastUpdateTimeRef.current = time
-		}
-		const deltaTime = time - lastUpdateTimeRef.current
-		progressTimeRef.current += deltaTime
-		if (progressTimeRef.current > speed) {
-			dispatch(moveDown())
-			progressTimeRef.current = 0
-		}
-		lastUpdateTimeRef.current = time
-  }
+    requestRef.current = requestAnimationFrame(update)
+    if (!isRunning) {
+      return 
+    }
+    if (!lastUpdateTimeRef.current) {
+      lastUpdateTimeRef.current = time
+    }
+    const deltaTime = time - lastUpdateTimeRef.current
+    progressTimeRef.current += deltaTime
+    if (progressTimeRef.current > speed) {
+      dispatch(moveDown())
+      progressTimeRef.current = 0
+    }
+    lastUpdateTimeRef.current = time
+	}
 	... 
 ```
 
-The function `update` takes `time` as a parameter. It calls `requestAnimationFrame` with anb argument of `update` itself! Is this recusrion? Could be! 
+The function `update` takes `time` as a parameter. It calls `requestAnimationFrame` with an argument of `update` itself! Is this recursion? Could be! 
 
-It checks `isRunning`, exiting ealry if false. You don't want things moving if the game is not running? 
+It checks `isRunning`, exiting early if false. You don't want things moving if the game is not running? 
 
-Next it checks the `lastUpdateTime` if it hasn't been set it sets to the `time`. Time in this case is the last time since `requestAnimationFrame` was called. 
+Next, it checks the `lastUpdateTime` if it hasn't been set it sets it to the `time`. Time in this case is the last time since `requestAnimationFrame` was called. 
 
-Next it calculates the `deltaTime`. The delta time is difference between now and the last time this function was called. We add the delta time to the current time to track it. When the current time is greater than the `speed` of the game `dispatch` a `moveDown` action and set current time to 0. 
+Next, it calculates the `deltaTime`. The delta time is the difference between now and the last time this function was called. We add the delta time to the current time to track it. When the current time is greater than the `speed` of the game `dispatch` a `moveDown` action and sets the current time to 0. 
 
-Note! The code above is still not active yet. You need to call the `update` function, that will happen in the next step. 
+Note! The code above is still not active yet. You need to call the `update` function, which will happen in the next step. 
 
 **Challenge**
 
@@ -158,9 +158,9 @@ That's a lot! This would be simpler if not for the way React handles components.
 
 # Start listening for updates with useEffect
 
-With the code above in place nothing is happening until you call `update`. The trick is that you don't want to call `update` each time the component renders. Instead you want to call it only the first time the component renders, and only when `isRunning` changes. 
+With the code above in place, nothing is happening until you call `update`. The trick is that you don't want to call it `update` each time the component renders. Instead, you want to call it only the first time the component renders, and only when `isRunning` changes. 
 
-Crazy I know. But think about it. You want to start `requestAnimationFrame` once and have it call itself after that, remember the recusion mentioned above. Otherwise you would be adding a new request animation frame each time the component updated.
+Crazy I know. But think about it. You want to start `requestAnimationFrame` once and have it call itself after that, remember the recursion mentioned above. Otherwise, you would be adding a new request animation frame each time the component is updated.
 
 When `isRunning` changes you want to cancel the `requestionAnimationFrame` or add start it again. 
 
@@ -169,17 +169,17 @@ Add the following after the last block of code.
 ```JS 
 export default function Controls() {
   ...
-	// Initialize request anmation frame and remove it when isRunning changes
+  // Initialize request animation frame and remove it when isRunning changes
   useEffect(() => {
-		requestRef.current = requestAnimationFrame(update)
-		return () => cancelAnimationFrame(requestRef.current)
-	}, [isRunning])
+    requestRef.current = requestAnimationFrame(update)
+    return () => cancelAnimationFrame(requestRef.current)
+  }, [isRunning])
 
-	...
+  ...
 }
 ```
 
-At this point the game should run on it's own moving blocks down the screen one step per second. Blocks should stack up as they reach the bottom. And, the game should display "Game Over" when the stack reaches the top.
+At this point, the game should run on its moving blocks down the screen one step per second. Blocks should stack up as they reach the bottom. And, the game should display "Game Over" when the stack reaches the top.
 
 The game is almost complete! 
 
@@ -193,13 +193,13 @@ $ git push
 
 # Implement the Pause Resume button
 
-What if you need to use the bathroom, or get a snack, or both? With the timer now running, you might need to pause the game and resume it later.
+What if you need to use the bathroom, get a snack, or both? With the timer now running, you might need to pause the game and resume it later.
 
-You've already built the Pause and Resume buttons, but at this point they don't do anything. Luckily the game state has an `isRunning` property for this purpose!
+You've already built the Pause and Resume buttons, but at this point, they don't do anything. Luckily the game state has an `isRunning` property for this purpose!
 
 The button already calls the action, you just need to add some code to the reducer that handles this action. 
 
-Implement the `resume` and `pause` action in `/src/featuers/gameSlice.js`. 
+Implement the `resume` and `pause` actions in `/src/featuers/gameSlice.js`. 
 
 **Challenge**
 
@@ -207,7 +207,7 @@ Find the pause action. Define the function with `state` as a parameter. In the b
 
 **Challenge**
 
-Find the `resume` action. The reducer function should take `state` as a parameter, set `isRunning` on state to `true` and return `state`.
+Find the `resume` action. The reducer function should take `state` as a parameter, set `isRunning` on the state to `true` and return `state`.
 
 -
 -
@@ -255,8 +255,8 @@ Update to look like this:
 ```js
 ...
 pause: (state) => {
-	state.isRunning = false
-	return state
+  state.isRunning = false
+  return state
 },
 ...
 ```
@@ -277,7 +277,7 @@ resume: () => {},
 ...
 ```
 
-With these changes in place the Play/Pause button in the upper right should pause and resume the game. Nice work! 
+With these changes in place, the Play/Pause button in the upper right should pause and resume the game. Nice work! 
 
 # Product So Far
 

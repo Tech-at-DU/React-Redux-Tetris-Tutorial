@@ -1,4 +1,4 @@
-# Moving Down and adding blocks to the grid
+# Creating a Timer
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
@@ -12,209 +12,283 @@
 1. ~~Implement state and shapes~~
 1. ~~Connect each component up to state and reducers~~
 1. ~~Implement block rotation~~
-1. **Implement moving blocks**
-    1. **Implement a method that adds a given block to the game grid for a given x, y, position and rotation**
-    1. **Implement a method that looks at the grid and determines if any rows are filled.**
-    1. **Build out the moveDown action and reducer**
-1. Building a timer system
+1. ~~Implement moving blocks~~
+1. **Building a timer system**
+  1. **Overview of timing and how to use `requestAnimationFrame`**
+  1. **Track delta time in the GridBoard**
+  1. **Build out an `update` function to update the GridBoard as blocks fall**
+  1. **Implement the logic in the Pause/Resume button**
 1. Implementing Game Over and Restart
 
-Moving blocks down serves a few purposes:
+With what we have so far, the game is almost finished. One important step is needed to make turn this into a playable game: the blocks need to move down on their own!
 
-1. It moves them down (surprising, right?)
-1. It serves as the point where blocks are placed at the bottom of the grid and a new block is added and starts from the top
-1. It serves as the point where a block hits an already placed block, and a new block is added and starts from the top
-1. If you can't move down without blocks extending off of the top of the grid, it can signal a game over
+To make this work the game needs to issue `moveDown` actions on its own. The time between each of these actions will determine the difficulty.
 
-This is a lot more to think about than with left and right! Let's break down some of the mechanics:
+You're going to use `requestAnimationFrame` to implement this feature. It may seem a little strange, but it has a couple of advantages over using something like `setInterval`, and is a great way to practice some new ideas.
 
-- If a block can't move down it should be added to the grid board array. - This will happen by writing the shape number into grid array at the position of the block.
-- If a grid square is empty, the value is 0.
-- After placing new squares on the grid we can score points.
+# Dispatching a periodic MOVE_DOWN action
 
-You need a function that adds blocks to the grid. 
+The goal here is to issue a `moveDown` action every time interval, where the time interval might start at once per second and decrease over time as the game is played to increase difficulty.
 
-# Implement an Add block to grid function
+You're going to be referring to **Delta time** a lot in this chapter. Delta time represents the difference between now and the last time the browser redrew the window.
 
-This function takes in the `shape` (index), `grid` (array), `rotation`, `x`, and `y`. The values in the new shape that will be written into the grid.
+As usual, let's go over some basic requirements:
 
-In `/src/utils/index.js`, write the `addBlocktoGrid` function as described above:
+- The game needs to handle time and issue `moveDown`
+actions at intervals.
+- The interval will be the speed set on the state.
+- Timing should be handled in the `GameBoard` component
 
-```JavaScript
-// Adds current shape to grid
-export const addBlockToGrid = (shape, grid, x, y, rotation) => {
-    // Get the block array
-    const block = shapes[shape][rotation];
-    // Copy the grid
-    const newGrid = [...grid];            
-    // Map the Block onto the grid                                                           
-    for (let row = 0; row < block.length; row++) {
-        for (let col = 0; col < block[row].length; col++) {
-            if (block[row][col]) {
-                newGrid[row + y][col + x] = shape;
-            }
-        }
-    }
-    return newGrid;
+You could place the timing code in the App or Controls or other Components as well.
+
+# Request Animation Frame Overview
+
+The browser draws the contents of the window at regular intervals, about every 16.7 milliseconds. It's advantageous to our application to update our views on the same clock.
+
+JavaScript provides a method to notify our applications when the browser is about to redraw the screen.
+
+[requestAnimationFrame()](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame) is a method that takes a callback that is executed just before the browser redraws the window.
+
+# useRef()
+
+In React projects each time a component is rendered all of the variables in the component function is defined. That means all of the values from the last render are lost and new values are generated on a new render. 
+
+This is a feature of Reacts virtual DOM. You can think about it like this. Imagine each component is a function, not hard to do, components are written as functions! Component functions return the HTML that they are responsible for rendering. That means that the function is run each time React needs to draw the component and all of the HTML is generated new at that time. It also means that variables are defined locally each time the function is run. That last idea is standard JS. 
+
+There are times when you need a component to "remember" a value it used the last time it was rendered. 
+
+React provides two hooks for this purpose. 
+
+- `useState`
+- `useRef`
+
+The `useState` hook lets you define values that when changed will cause the component to render again. 
+
+The `useRef` hook will hold on to a value and changing this value won't automatically render the component. 
+
+# useEffect
+
+The `useEffect` hook is used to handle lifecycle events for a component. 
+
+A component is a function as such each time the component is rendered all of the code in the function is run. In some cases, you may have code that should only be run the first a component is added to the DOM, or code that is run when a component is removed from the DOM. These are lifecycle events, and `useEffect` covers these. 
+
+# Making things move
+
+To make things move in the game you'll combine `useRef`, `useEffect`, and `requestAnimationFrame`. 
+
+The idea is to calculate the time between calls to `requestAnimationFrame`. When the time is greater than the speed of the game dispatch a `moveDown` action. 
+
+This means that you'll be getting `requestAnimationFrame` updates often but changing state and rendering components less often (only when delta time is greater than the speed of the game.) 
+
+Add the following within the `Controls` class in `/src/components/Controls.js`:
+
+Edit your import statement at the top of the file. 
+
+```JS 
+import React, { useEffect, useRef } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { moveDown, moveLeft, moveRight, rotate } from '../features/gameSlice'
+...
+```
+
+Next, define some refs. You'll three. 
+
+- `requestRef` - Holds a referece to requestAnimationFrame
+- `lastUpdateTimeRef` - tracks the time of the last update
+- `progressTimeRef` - tracks the total time between updates
+
+These are variables that will persist outside of calls to this component function. 
+
+Add the following within the `Controls` function in `/src/components/Controls.js`:
+
+```JS 
+export default function Controls() {
+  const dispatch = useDispatch()
+  // Added speed here! 
+  const { isRunning, speed } = useSelector(state => state)
+
+  // Set up the game timer
+  const requestRef = useRef()
+  const lastUpdateTimeRef = useRef(0)
+  const progressTimeRef = useRef(0)
+  ...
 }
 ```
 
-# Scoring points
+# Adding an update function
 
-Teris awards points when a row is completely filled with squares. The number is greater if multiple rows are filled.
+Write a function that will handle updates from requestAnimationFrame. This function will be defined inside the `Controls` function, after the variables above, and before the return statement. 
 
-Once a block is placed, it's possible that one or more rows will be filled.
-
-In `/src/utils/index.js`, implement a method that looks at the grid and
-determines if any rows are filled.
-
-```JavaScript
-// Checks for completed rows and scores points
-export const checkRows = (grid) => {
-  // Points increase for each row completed
-  // i.e. 40 points for completing one row, 100 points for two rows
-  const points = [0, 40, 100, 300, 1200]
-  let completedRows = 0
-  for (let row = 0; row < grid.length; row++) {
-    // No empty cells means it can't find a 0, so the row must be complete!
-    if (grid[row].indexOf(0) === -1) {
-      completedRows += 1
-      // Remove the row and add a new empty one at the top
-      grid.splice(row, 1)
-      grid.unshift(Array(10).fill(0))
+```JS 
+export default function Controls() {
+  ...
+  // Handle game updates to move blocks down the screen
+  const update = (time) => {
+    requestRef.current = requestAnimationFrame(update)
+    if (!isRunning) {
+      return 
     }
+    if (!lastUpdateTimeRef.current) {
+      lastUpdateTimeRef.current = time
+    }
+    const deltaTime = time - lastUpdateTimeRef.current
+    progressTimeRef.current += deltaTime
+    if (progressTimeRef.current > speed) {
+      dispatch(moveDown())
+      progressTimeRef.current = 0
+    }
+    lastUpdateTimeRef.current = time
   }
-  return points[completedRows]
-}
+  ... 
 ```
 
-# Implement `moveDown` in gameSlice
+The function `update` takes `time` as a parameter. It calls `requestAnimationFrame` with an argument of `update` itself! Is this recursion? Could be! 
 
-The `moveDown` action is likely the most complicated
-block of code in the game, a lot happens here. Here is what needs to happen:
+It checks `isRunning`, exiting early if false. You don't want things moving if the game is not running? 
 
-- Check if block can move the block down
-  - if so we're done
-- If block can't move down we need to place it by doing the following.
-  - add the block to the grid (`addBlockToGrid`)
-  - Start a new block
-    - set `shape` to `nextShape`
-    - set `nextShape` to a new random shape
-  - Check if the next shape can be displayed
-    - If not, then game over
-  - Call `checkRows` to score some points 
-  - and remove completed rows
+Next, it checks the `lastUpdateTime` if it hasn't been set it sets it to the `time`. Time in this case is the last time since `requestAnimationFrame` was called. 
 
-In `/src/features/gameSlice.js`, implement the reducer for `moveDown` based on the above logic. Remember to also import your necessary functions from `utils`, and update what props you're extracting from `state`:
+Next, it calculates the `deltaTime`. The delta time is the difference between now and the last time this function was called. We add the delta time to the current time to track it. When the current time is greater than the `speed` of the game `dispatch` a `moveDown` action and sets the current time to 0. 
+
+Note! The code above is still not active yet. You need to call the `update` function, which will happen in the next step. 
 
 **Challenge**
 
-Import the `addBlockToGrid`, `checkRows`, and `randomShape` from `src/utils` at the top.
+That's a lot! This would be simpler if not for the way React handles components. Read the code description again and identify the points mentioned in the actual code!
 
--
--
--
--
--
--
--
--
--
--
--
--
--
--
--
--
--
--
--
--
--
--
--
--
--
--
--
--
--
--
--
--
--
+# Start listening for updates with useEffect
 
-```JS
-import { 
-	defaultState, 
-	nextRotation, 
-	canMoveTo,
-	addBlockToGrid,
-	checkRows,
-  randomShape
-} from '../utils'
+With the code above in place, nothing is happening until you call `update`. The trick is that you don't want to call it `update` each time the component renders. Instead, you want to call it only the first time the component renders, and only when `isRunning` changes. 
+
+Crazy I know. But think about it. You want to start `requestAnimationFrame` once and have it call itself after that, remember the recursion mentioned above. Otherwise, you would be adding a new request animation frame each time the component is updated.
+
+When `isRunning` changes you want to cancel the `requestionAnimationFrame` or add start it again. 
+
+Add the following after the last block of code. 
+
+```JS 
+export default function Controls() {
+  ...
+  // Initialize request animation frame and remove it when isRunning changes
+  useEffect(() => {
+    requestRef.current = requestAnimationFrame(update)
+    return () => cancelAnimationFrame(requestRef.current)
+  }, [isRunning])
+
+  ...
+}
 ```
 
-Find the `moveDown` action and reducer. It should look like this: 
+At this point, the game should run on its moving blocks down the screen one step per second. Blocks should stack up as they reach the bottom. And, the game should display "Game Over" when the stack reaches the top.
 
-```JS
-moveDown: () => {},
-```
-
-Replace the empty function with this: 
-
-```JS
-...
-moveDown: (state) => {
-  const { x, y, shape, grid, rotation, nextShape } = state
-  // Get the next potential Y position
-  const maybeY = y + 1
-  // Check if the current block can move here
-  if (canMoveTo(shape, grid, x, maybeY, rotation)) {
-      // If so move the block
-      state.y = maybeY
-      return state
-  }
-  // If not place the block
-  const newGrid = addBlockToGrid(shape, grid, x, y, rotation)
-  // reset some things to start a new shape/block
-  state.x = 3
-  state.y = -4
-  state.rotation = 0
-  state.grid = newGrid
-  state.shape = nextShape
-  state.nextShape = randomShape()
-
-  if (!canMoveTo(nextShape, newGrid, 0, 4, 0)) {
-    // Game Over
-    console.log("Game Should be over...")
-    state.shape = 0
-    state.gameOver = true
-    return state
-  }
-
-  // Update the score based on if rows were completed or not
-  state.score += checkRows(newGrid)
-  return state
-},
-...
-```
-
-At this stage you should be able to move blocks around with the control buttons. They should move left, right, down, and rotate. When a block hits the bottom it should get written into the grid while next block will be added odd the top of the grid.
-
-# Product So Far
-
-Now we can move blocks down in the game, and when they get placed, we can move the next block down as well!
-
-![down-block](assets/down-block.png)
-
-This is great! But we have to manually move the blocks down by clicking the down button. We need the blocks to be able to move down on their own, so let's make that now! We also further covered working with **systems that manage and merge complex arrays!**
+The game is almost complete! 
 
 # Now Commit
 
 ```bash
 $ git add .
-$ git commit -m 'move down'
+$ git commit -m 'timer created'
+$ git push
+```
+
+# Implement the Pause Resume button
+
+What if you need to use the bathroom, get a snack, or both? With the timer now running, you might need to pause the game and resume it later.
+
+You've already built the Pause and Resume buttons, but at this point, they don't do anything. Luckily the game state has an `isRunning` property for this purpose!
+
+The button already calls the action, you just need to add some code to the reducer that handles this action. 
+
+Implement the `resume` and `pause` actions in `/src/featuers/gameSlice.js`. 
+
+**Challenge**
+
+Find the pause action. Define the function with `state` as a parameter. In the body of the function set the `isRunning` property on `state` to `false`. Then return `state`. 
+
+**Challenge**
+
+Find the `resume` action. The reducer function should take `state` as a parameter, set `isRunning` on the state to `true` and return `state`.
+
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+-
+
+Find: 
+
+```JS
+...
+pause: () => {},
+...
+```
+
+Update to look like this: 
+
+```js
+...
+pause: (state) => {
+  state.isRunning = false
+  return state
+},
+...
+```
+
+Now find: 
+
+```JS
+...
+resume: () => {},
+...
+```
+
+Update to: 
+
+```JS
+...
+resume: () => {},
+...
+```
+
+With these changes in place, the Play/Pause button in the upper right should pause and resume the game. Nice work! 
+
+# Product So Far
+
+You should now be able to pause/resume the game!
+
+![paused](assets/paused.png)
+
+# Now Commit
+
+```bash
+$ git add .
+$ git commit -m 'Resume and pause implemented'
 $ git push
 ```

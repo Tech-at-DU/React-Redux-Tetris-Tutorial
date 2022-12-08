@@ -10,18 +10,18 @@
 1. ~~Implement the actions and reducers~~
 1. ~~Do some code organizing and cleanup~~
 1. **Implement state and shapes**
-    1. **Provide a definition for the default state of the game**
-    1. **Build out a nested array to access all shapes in their array representation**
-    1. **Write a function to grab a random shape**
+  1. **Define the default state of the game**
+  1. **Build out a nested array to access all shapes in their array representation**
+  1. **Write a function to grab a random shape**
 1. Connect each component up to state and reducers
 1. Implement block rotation
 1. Implement moving blocks
 1. Building a timer system
 1. Implementing Game Over and Restart
 
-The game will work by managing it's state in a series of arrays managed by the Redux store. Manipulating and comparing these arrays will determine what the game shows and how the game plays.
+The game will work by managing its state in a series of arrays managed by the Redux store. Manipulating and comparing these arrays will determine what the game shows and how the game plays.
 
-Nested arrays represent a two dimensional data structure. This reflects the two dimensional grid the game is played on.
+Nested arrays represent a two-dimensional data structure. This reflects the two-dimensional grid the game is played on.
 
 # Representation via Array
 
@@ -29,7 +29,7 @@ The game board is an 18 x 10 grid:
 
 ![Two-Dimension-grid-with-Arrays](assets/Two-Dimension-grid-with-Arrays.png)
 
-Each shape will be stored as a 4 x 4 grid. These arrays are stored as arrays of rows where the value represents a column. The values are either **0 (empty)** or **1 (draw a block)**. For example the "T" shaped block could be visualized like this:
+Each shape will be stored as a 4 x 4 grid. These arrays are stored as arrays of rows where the value represents a column. The values are either **0 (empty)** or **1 (draw a block)**. For example, the "T" shaped block could be visualized like this:
 
 ![Shape-Array-T](assets/Shape-Array-T.png)
 
@@ -41,7 +41,7 @@ To access the array containing the shape data, you'll use the _index of the shap
 
 `shapes[shapeIndex][rotationIndex]`
 
-This would return the 4 x 4 two dimensional array containing the 0s and 1s describing one of the shapes e.g. `shapes[2][0]` would give the "T" shape in the above diagram.
+This would return the 4 x 4 two-dimensional array containing the 0s and 1s describing one of the shapes e.g. `shapes[2][0]` would give the "T" shape in the above diagram.
 
 # Game State
 
@@ -53,10 +53,10 @@ Game state is an object stored in Redux. This object will have all of the proper
 - **x** : (Int) horizontal position of the current shape block on the game board
 - **y** : (Int) vertical position of the current shape block
 - **nextShape** : (Int) **index** of the next shape to play
-- **isRunning** : (Bool) true when game is running, false when paused
+- **isRunning** : (Bool) true when the game is running, false when paused
 - **score** : (Int) number of points scored
 - **speed** : (Int) speed of falling blocks
-- **gameOver** : (Bool) true when game is over
+- **gameOver** : (Bool) true when the game is over
 
 # Game Board
 
@@ -72,10 +72,11 @@ All of the color values have a corresponding CSS class name in the stylesheet.
 An example game board array might look like this:
 
 ```JavaScript
-[[0,0,0,0,0,0,0,0,0,0],
+[
+  [0,0,0,0,0,0,0,0,0,0],
   [0,0,0,2,2,2,0,0,0,0],
   [0,0,0,0,2,0,0,0,0,0],
- ... 13 more rows ...
+  ... 13 more rows ...
   [0,0,0,0,0,1,1,3,0,0]
   [3,3,0,3,4,1,1,3,3,3]
 ]
@@ -83,9 +84,9 @@ An example game board array might look like this:
 
 **Challenge** In the code snippet above answer these questions:
 
-- Spot the T shaped block in color 2? 
+- Spot the T-shaped block in color 2? 
 - Find the 2 by 2 square block in color 1. 
-- Where would be the best place to place the T shaped block? 
+- Where would be the best place to place the T-shaped block? 
 
 # Empty Array
 
@@ -103,7 +104,7 @@ export const gridDefault = () => {
   const cols = 10
   const array = []
 
-  // Fill array with 18 arrays each containing
+  // Fill the array with 18 arrays each containing
   // 10 zeros (0)
 
   return array
@@ -148,10 +149,10 @@ Solution!
 
 ```js
 for (let row = 0; row < rows; row++) {
-    array.push([])
-    for (let col = 0; col < cols; col++) {
-      array[row].push(0)
-    }
+  array.push([])
+  for (let col = 0; col < cols; col++) {
+    array[row].push(0)
+  }
 }
 ```
 
@@ -169,12 +170,12 @@ Shapes will be mapped onto the board. There are 7 shapes. Let's represent them h
 
 Some requirements for the shapes:
 
-- Each shape will be mapped to a two dimensional array with a 1 where the shape should draw and 0 everywhere else.
-- Each shape can be rotated and it's rotations will be grouped together into an array.
+- Each shape will be mapped to a two-dimensional array with a 1 where the shape should draw and 0 everywhere else.
+- Each shape can be rotated and its rotations will be grouped into an array.
 - All of the rotation arrays will be grouped into a master shape array.
-- There will be an extra empty shape at the 0 index.
-- The color of each shape corresponds to it's _index_ in the top level of the shape Array.
-    - For example, given the order above, the "T" shape is color 2, and the I shape is color 1.
+- There will be an extra empty shape at the 0 indexes.
+- The color of each shape corresponds to its _index_ in the top level of the shape Array.
+ - For example, given the order above, the "T" shape is color 2, and then I shape is color 1.
 
 Add the following to `/src/utils/index.js`:
 
@@ -182,118 +183,146 @@ Add the following to `/src/utils/index.js`:
 // Define block shapes and their rotations as arrays.
 export const shapes = [
   // none
-  [[[0,0,0,0],
-    [0,0,0,0],
-    [0,0,0,0],
-    [0,0,0,0]]],
+  [
+    [
+      [0,0,0,0],
+      [0,0,0,0],
+      [0,0,0,0],
+      [0,0,0,0]]],
 
   // I
-  [[[0,0,0,0],
-    [1,1,1,1],
-    [0,0,0,0],
-    [0,0,0,0]],
+  [
+    [
+      [0,0,0,0],
+      [1,1,1,1],
+      [0,0,0,0],
+      [0,0,0,0]],
 
-   [[0,1,0,0],
-    [0,1,0,0],
-    [0,1,0,0],
-    [0,1,0,0]]],
+    [
+      [0,1,0,0],
+      [0,1,0,0],
+      [0,1,0,0],
+      [0,1,0,0]]],
 
   // T
-  [[[0,0,0,0],
+  [
+    [
+      [0,0,0,0],
     [1,1,1,0],
     [0,1,0,0],
     [0,0,0,0]],
 
-   [[0,1,0,0],
-    [1,1,0,0],
-    [0,1,0,0],
-    [0,0,0,0]],
+    [
+      [0,1,0,0],
+      [1,1,0,0],
+      [0,1,0,0],
+      [0,0,0,0]],
 
-   [[0,1,0,0],
-    [1,1,1,0],
-    [0,0,0,0],
-    [0,0,0,0]],
+    [
+      [0,1,0,0],
+      [1,1,1,0],
+      [0,0,0,0],
+      [0,0,0,0]],
 
-   [[0,1,0,0],
-    [0,1,1,0],
-    [0,1,0,0],
-    [0,0,0,0]]],
+    [
+      [0,1,0,0],
+      [0,1,1,0],
+      [0,1,0,0],
+      [0,0,0,0]]],
 
   // L
-  [[[0,0,0,0],
-    [1,1,1,0],
-    [1,0,0,0],
-    [0,0,0,0]],
+  [
+    [
+      [0,0,0,0],
+      [1,1,1,0],
+      [1,0,0,0],
+      [0,0,0,0]],
 
-   [[1,1,0,0],
-    [0,1,0,0],
-    [0,1,0,0],
-    [0,0,0,0]],
+    [
+      [1,1,0,0],
+      [0,1,0,0],
+      [0,1,0,0],
+      [0,0,0,0]],
 
-   [[0,0,1,0],
-    [1,1,1,0],
-    [0,0,0,0],
-    [0,0,0,0]],
+    [
+      [0,0,1,0],
+      [1,1,1,0],
+      [0,0,0,0],
+      [0,0,0,0]],
 
-   [[0,1,0,0],
-    [0,1,0,0],
-    [0,1,1,0],
-    [0,0,0,0]]],
+    [
+      [0,1,0,0],
+      [0,1,0,0],
+      [0,1,1,0],
+      [0,0,0,0]]],
 
   // J
-  [[[1,0,0,0],
-    [1,1,1,0],
-    [0,0,0,0],
-    [0,0,0,0]],
+  [
+    [
+      [1,0,0,0],
+      [1,1,1,0],
+      [0,0,0,0],
+      [0,0,0,0]],
 
-   [[0,1,1,0],
-    [0,1,0,0],
-    [0,1,0,0],
-    [0,0,0,0]],
+    [
+      [0,1,1,0],
+      [0,1,0,0],
+      [0,1,0,0],
+      [0,0,0,0]],
 
-   [[0,0,0,0],
-    [1,1,1,0],
-    [0,0,1,0],
-    [0,0,0,0]],
+    [
+      [0,0,0,0],
+      [1,1,1,0],
+      [0,0,1,0],
+      [0,0,0,0]],
 
-   [[0,1,0,0],
-    [0,1,0,0],
-    [1,1,0,0],
-    [0,0,0,0]]],
+    [
+      [0,1,0,0],
+      [0,1,0,0],
+      [1,1,0,0],
+      [0,0,0,0]]],
 
   // Z
-  [[[0,0,0,0],
-    [1,1,0,0],
-    [0,1,1,0],
-    [0,0,0,0]],
+  [
+    [
+      [0,0,0,0],
+      [1,1,0,0],
+      [0,1,1,0],
+      [0,0,0,0]],
 
-   [[0,0,1,0],
-    [0,1,1,0],
-    [0,1,0,0],
-    [0,0,0,0]]],
+    [
+      [0,0,1,0],
+      [0,1,1,0],
+      [0,1,0,0],
+      [0,0,0,0]]],
 
   // S
-  [[[0,0,0,0],
-    [0,1,1,0],
-    [1,1,0,0],
-    [0,0,0,0]],
+  [
+    [
+      [0,0,0,0],
+      [0,1,1,0],
+      [1,1,0,0],
+      [0,0,0,0]],
 
-   [[0,1,0,0],
-    [0,1,1,0],
-    [0,0,1,0],
-    [0,0,0,0]]],
+    [
+      [0,1,0,0],
+      [0,1,1,0],
+      [0,0,1,0],
+      [0,0,0,0]]],
 
   // O
-  [[[0,1,1,0],
-    [0,1,1,0],
-    [0,0,0,0],
-    [0,0,0,0]]]
+  [
+    [
+      [0,1,1,0],
+      [0,1,1,0],
+      [0,0,0,0],
+      [0,0,0,0]]]
 ]
 ```
 
 **Challenge**
 
-Identify each of the shapes above. The can be identified by their letter shape: I, T, L, J, Z, S, and O. 
+Identify each of the shapes above. They can be identified by their letter shape: I, T, L, J, Z, S, and O. 
 
 These letter shapes are abstractions of the actual shapes for example O shape is a 2x2 square. 
 
@@ -301,9 +330,9 @@ These letter shapes are abstractions of the actual shapes for example O shape is
 
 Each of the letter shapes can be rotated. Different shapes may have a different number of rotations! 
 
-For example, the O shape is same at each rotation! So it has only one rotation array!
+For example, the O shape is the same at each rotation! So it has only one rotation array!
 
-In your head imagine each of the "letter" shapes rotated and find each shape and it's rotations. 
+In your head imagine each of the "letter" shapes rotated and find each shape and its rotations. 
 
 **Challenge**
 
@@ -374,7 +403,7 @@ Add this to `src/utils.js` and export it.
 - 
 -
 
-Does your solution look simialar to this? Notice I used the random function written earlier. 
+Does your solution look similar to this? Notice I used the random function written earlier. 
 
 ```JavaScript
 // Random Shape
@@ -424,7 +453,7 @@ Find the following properties in the default state:
 
 - `grid` - Notice you called the `gridDefault()` function here to get the value for this property. 
 - `shape` - Notice you called the `randomShape()` to get the value for this property
-- `rotation` - 0 starting rotation is 0. By default all shapes will show the shape at the first rotation in the array. 
+- `rotation` - 0 starting rotation is 0. By default, all shapes will show the shape at the first rotation in the array. 
 - `x` and `y` - Notice the starting location for the shape will be 5 and -4. The negative y value will place the shape off the top edge of the grid board. 
 - `nextShape` - What is the value here? 
 - `speed` - sets the speed of the game in milliseconds
@@ -432,7 +461,7 @@ Find the following properties in the default state:
 
 You now have a default state for our game, and we **used Redux to manage the application state!** We also covered the beginnings of **building systems that manage and merge complex arrays!**
 
-Notice you exported this `defaultState` function so you can use it else where in your code. 
+Notice you exported this `defaultState` function so you can use it elsewhere in your code. 
 
 ## Set the initial state
 
@@ -447,25 +476,25 @@ export const gameSlice = createSlice({
   initialState: defaultState(),
   reducers: {
     pause: () => {},
-		resume: () => {},
-		moveLeft: () => {},
-		moveRight: () => {},
-		moveDown: () => {},
-		rotate: () => {},
-		gameOver: () => {},
-		restart: () => {}
+    resume: () => {},
+    moveLeft: () => {},
+    moveRight: () => {},
+    moveDown: () => {},
+    rotate: () => {},
+    gameOver: () => {},
+    restart: () => {}
   },
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = gameSlice.actions
+export const { pause, resume, moveLeft, moveRight, moveDown, rotate, gameOver, restart } = gameSlice.actions
 
 export default gameSlice.reducer
 ```
 
-Notice you set `initialState` by calling the `defaultState` function. The value of `initialState` is value returned from `defaultState`.
+Notice you set `initialState` by calling the `defaultState` function. The value of `initialState` is the value returned from `defaultState`.
 
-In the next couple steps you'll be updating this file and adding code to each of the action/reducer functions. 
+In the next couple of steps you'll be updating this file and adding code to each of the action/reducer functions. 
 
 # Now Commit
 
@@ -474,3 +503,4 @@ $ git add .
 $ git commit -m 'Added state utils'
 $ git push
 ```
+

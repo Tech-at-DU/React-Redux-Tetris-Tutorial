@@ -1,24 +1,24 @@
 # Tetris Grid
 
 1. **Implement the overall grid square**
-    1. **Build the grid square component**
-    1. **Add styling**
+  1. **Build the grid square component**
+  1. **Add styling**
 1. Implement the game board
 1. Implement the "next block" area
-1. Implement the score board
+1. Implement the scoreboard
 1. Arrange the layout of the game
 1. Implement the controls
 1. Implement the message popup
 1. Implement the actions and reducers
 1. Do some code organizing and cleanup
 1. Implement state and shapes
-1. Connect each component up to state and reducers
+1. Connect each component up to the state and reducers
 1. Implement block rotation
 1. Implement moving blocks
 1. Building a timer system
 1. Implementing Game Over and Restart
 
-In this section you will make a component that represents a single grid square. The game board is played on a grid made up of many grid squares.
+In this section, you will make a component that represents a single grid square. The game board is played on a grid made up of many grid squares.
 
 One square will look like this:
 
@@ -43,7 +43,7 @@ The grid square is a component.
 
 # Why Use Components
 
-React uses a component based architecture. Everything you see rendered in the browser is a component.
+React uses a component-based architecture. Everything you see rendered in the browser is a component.
 
 Breaking components down into smaller and more granular components is usually the best strategy with React. While you could make the game from a single Game Component. A better strategy would be to make a game from many components that all fit together like Lego brocks to form the final game.
 
@@ -72,7 +72,7 @@ The GridSquare is just a `div` with some class names. Below is a breakdown of th
 - Notice on the first line you have deconstructed props into `color` here: `GridSquare({ color })`
 - `color-${color}` : The color of the square will be
 passed via props. The value of `color` will be a number e.g. 1, 2, 3.
-- Note! The classes string will contain something like this: `grid-square color-3`. When used as class name this will be read as two classes: `grid-square` and `color-3`. In this way you will apply styles shared by all grid squares with the `grid-square` class and set the color for each square with the `color-#` class. 
+- Note! The `classes` string will contain something like this: `grid-square color-3`. When used as a class name this will be read as two classes: `grid-square` and `color-3`. In this way, you will apply styles shared by all grid squares with the `grid-square` class and set the color for each square with the `color-#` class. 
 
 **As a requirement The class name for any grid square will use the following format:** `color-0`, `color-1`, `color-2`, `color-3` etc.
 
@@ -80,11 +80,11 @@ You'll define these color classes later in the tutorial.
 
 # Define some CSS
 
-This project will store all of it's styles in `index.css`. **The components in the project are not portable, they would find little use outside of this project.**
+This project will store all of its styles in `index.css`. **The components in the project are not portable, they would find little use outside of this project.**
 
-First we should edit the `min-height` of `.App-header` in `/src/App.css` so that it's not taking up the whole page anymore:
+First, we should edit the `min-height` of `.App-header` in `/src/App.css` so that it's not taking up the whole page anymore:
 
-```css
+```CSS
 .App-header {
   background-color: #282c34;
   min-height: 10vh;
@@ -99,7 +99,7 @@ First we should edit the `min-height` of `.App-header` in `/src/App.css` so that
 
 Now you can edit `/src/index.css` to include the below styles that define some properties for the colors and sizes we'll use:
 
-```css
+```CSS
 :root {
   --bg-color: rgba(150, 150, 150, 1);
 
@@ -109,7 +109,7 @@ Now you can edit `/src/index.css` to include the below styles that define some p
   --border-right-color: rgba(0, 0, 0, 0.15);
   --border-bottom-color: rgba(0, 0, 0, 0.5);
 
-  /* Square Colors:  background colors for the squares.*/
+  /* Square Colors: background colors for the squares.*/
   --color-0: #eaeaea;
   --color-1: #ff6600;
   --color-2: #eec900;
@@ -126,7 +126,7 @@ Now you can edit `/src/index.css` to include the below styles that define some p
   --button-color-l: rgba(222, 222, 222, 1);
 
   /* Numbers define values that will be used throughout the CSS.
-  --tile-size: 20px for example will set size of the grid squares. */
+  --tile-size: 20px for example will set the size of the grid squares. */
   --cols: 10;
   --rows: 18;
   --tile-size: 20px;
@@ -142,7 +142,7 @@ You will define these classes using the color variables you set earlier.
 
 Add the following below the code you just added to `/src/index.css`:
 
-```css
+```CSS
 /* Colors */
 .color-0 {
   background-color: var(--color-0);
@@ -177,7 +177,7 @@ Add the following below the code you just added to `/src/index.css`:
 }
 ```
 
-With this arrangement you can use the colors anywhere in your
+With this arrangement, you can use the colors anywhere in your
 stylesheet. You can also make global changes to colors in
 one location.
 
@@ -185,11 +185,11 @@ These changes won't make much visual change to the project so far. You need to p
 
 # Grid Square Appearance
 
-Now you need to define the appearance of a grid square. The grid squares all have a border style, and a width and a height. By defining these as variables it will be easier to make changes to the appearance of the grid squares through the variables at the top of the stylesheet.
+Now you need to define the appearance of a grid square. The grid squares all have a border style, a width, and a height. By defining these as variables it will be easier to make changes to the appearance of the grid squares through the variables at the top of the stylesheet.
 
 Add the following to `/src/index.css`:
 
-```css
+```CSS
 /* Grid Square */
 .grid-square {
   border-style: solid;
@@ -203,9 +203,9 @@ Add the following to `/src/index.css`:
 }
 ```
 
-That might seem like a lot of styles but much of what is there will be reused throughout this tutorial. With this arrangement you can easily make changes to the size and border in a single place, at the top of the style sheet.
+That might seem like a lot of styles but much of what is there will be reused throughout this tutorial. With this arrangement, you can easily make changes to the size and border in a single place, at the top of the style sheet.
 
-Defining these CSS custom properties is well worth the time effort your future self will thank you!
+Defining these CSS custom properties is well worth the time and effort your future self will thank you!
 
 ## Note about CSS custom properties
 
@@ -281,3 +281,4 @@ We got some great practice with starting to **use CSS variables!** We'll be usin
 
 - https://developer.mozilla.org/en-US/docs/Web/CSS/
 - https://www.quackit.com/css/css_color_codes.cfm
+

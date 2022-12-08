@@ -1,12 +1,12 @@
-Arranging the Page
+# Arranging the Page
 
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
 1. ~~Implement the "next block" area~~
 1. ~~Implement the score board~~
 1. **Arrange the layout of the game**
-    1. **Defining a CSS grid with rows and columns**
-    1. **Style the grid**
+  1. **Defining a CSS grid with rows and columns**
+  1. **Style the grid**
 1. Implement the controls
 1. Implement the message popup
 1. Implement the actions and reducers
@@ -24,23 +24,23 @@ Arranging the large UI elements on the page will make the app easier to understa
 
 CSS Grid was good for arranging the tiles in the grid. CSS Grid can also be used to arrange the larger UI element on the page as a whole!
 
-CSS Grid gives you control to arrange elements on a two dimensional grid. Elements can occupy multiple rows and/or columns. All of this is easily accomplished using a simple declarative approach.
+CSS Grid gives you control to arrange elements on a two-dimensional grid. Elements can occupy multiple rows and/or columns. All of this is easily accomplished using a simple declarative approach.
 
-A grid is a two dimensional structure of columns and rows.
+A grid is a two-dimensional structure of columns and rows.
 
 **Columns span vertically and rows span horizontally.**
 
-In CSS we define the number of rows and columns, and the width of each column and the height of each row.
+In CSS we define the number of rows and columns, the width of each column, and the height of each row.
 
-The size of a column or row can be defined in any unit supported by CSS: `%`, `px`, `em`, `pt`, `mm`, `in`, cm etc.
+The size of a column or row can be defined in any unit supported by CSS: `%`, `px`, `em`, `pt`, `mm`, `in`, cm, etc.
 
-Columns and rows can also also be specified as a fraction of the available space with special unit: `fr`.
+Columns and rows can also also be specified as a fraction of the available space with a special unit: `fr`.
 
-The CSS grid module provides properties that allow you to define the configuration of the grid many different ways. This discussion will focus on **Grid Areas**. Grid Areas are named collections of cells on the grid.
+The CSS grid module provides properties that allow you to define the configuration of the grid in many different ways. This discussion will focus on **Grid Areas**. Grid Areas are named collections of cells on the grid.
 
 # Defining a CSS grid with rows and columns
 
-For the Tetris UI the grid might have three columns and three rows. This layout includes the Header, NextBlock, GridBoard, ScoreBoard, Buttons components.
+For the Tetris UI, the grid might have three columns and three rows. This layout includes the Header, NextBlock, GridBoard, ScoreBoard, and Buttons components.
 
 Let's define some requirements for this grid:
 
@@ -57,7 +57,7 @@ Let's define some requirements for this grid:
 ## Row Requirements
 
 - There will be three rows.
-The top will 100px this will contain the Header.
+The top will be 100px this will contain the Header.
 - The center row will be sized to fit the game grid 360px (20px * 18) -- The bottom row will hold the buttons (which haven't been made yet) 100px.
 
 ![rows](./assets/tetris-grid-rows.png)
@@ -86,7 +86,7 @@ The image shows 5 areas defined.
 - **Score:** Shows the game score
 - **Buttons:** Shows the game buttons
 
-Notice the cells in the lower left and right corner are not being used.
+Notice the cells in the lower left and right corners are not being used.
 
 The gap between cells is an option that can be set with CSS Grid. You will make that the same size as one grid square.
 
@@ -94,13 +94,13 @@ The gap between cells is an option that can be set with CSS Grid. You will make 
 
 Now that You have a better sense of how grids work, let's define some styles to declare the main app container as a grid. This will layout it's children as grid items.
 
-Currently the app structure looks looks like this:  
+Currently, the app structure looks like this: 
 
 - div.App
-  - header.App-header
-  - div.grid-board
-  - div.next-block
-  - div.score-board
+ - header.App-header
+ - div.grid-board
+ - div.next-block
+ - div.score-board
 
 You will declare `.App` as a grid container and define some grid areas. The areas are just strings, and we'll use the following names to represent the areas:
 
@@ -130,15 +130,15 @@ Add the following to `/src/index.css`:
   /* Defines three rows of `100px`, `--grid-height`, and 100px. */
   grid-template-rows: 100px var(--grid-height) 100px;
 
-/* This defines the areas on the grid with names: 'h', 'l', 'c', 'r',
-and 'b'. The '.' represents an empty cell on the grid. */
+  /* This defines the areas on the grid with names: 'h', 'l', 'c', 'r',
+  and 'b'. The '.' represents an empty cell on the grid. */
   grid-template-areas: "h h h"
                        "l c r"
                        ". b .";
 }
 ```
 
-It's starting to look like a grid but things are not where you want them. The following steps map each element to it's location defined in `grid-template-areas`.
+It's starting to look like a grid but things are not where you want them. The following steps map each element to its location defined in `grid-template-areas`.
 
 Now let's assign child elements to grid areas in the parent.
 
@@ -201,3 +201,4 @@ Great work! From this chapter, we were able to **create complex layouts with CSS
 ## Resources
 
 - https://developer.mozilla.org/en-US/docs/Web/CSS/grid-template-areas
+

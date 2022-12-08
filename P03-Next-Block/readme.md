@@ -3,10 +3,10 @@
 1. ~~Implement the overall grid square~~
 1. ~~Implement the game board~~
 1. **Implement the "next block" area**
-    1. **Build the next block component**
-    1. **Add style to the component**
-    1. **Add the component to `App.js`**
-1. Implement the score board
+  1. **Build the next block component**
+  1. **Add style to the component**
+  1. **Add the component to `App.js`**
+1. Implement the scoreboard
 1. Arrange the layout of the game
 1. Implement the controls
 1. Implement the message popup
@@ -19,7 +19,7 @@
 1. Building a timer system
 1. Implementing Game Over and Restart
 
-Tetris shows you the next block that will appear to
+Tetris shows you the next block that will appear on
 the side of the game grid. This section makes a component for that purpose.
 
 The **next block** will be displayed in a component that will draw itself as a 4 by 4 grid of grid squares. You will reuse the grid square component here.
@@ -41,19 +41,19 @@ import GridSquare from './GridSquare'
 // Draws the "next" block view showing the next block to drop
 export default function NextBlock(props) {
 
-	const block = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]]
-	// Map the block to the grid
-	const grid = block.map((rowArray, row) => {
-		return rowArray.map((square, col) => {
-			return <GridSquare key={`${row}${col}`} color={square} />
-		})
-	})
- 
-	return (
-		<div className="next-block">
-			{grid}
-		</div>
-	)
+  const block = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]]
+  // Map the block to the grid
+  const grid = block.map((rowArray, row) => {
+    return rowArray.map((square, col) => {
+      return <GridSquare key={`${row}${col}`} color={square} />
+    })
+  })
+  
+  return (
+    <div className="next-block">
+      {grid}
+    </div>
+  )
 }
 ```
 
@@ -65,7 +65,7 @@ Add some styles to arrange these into a grid.
 
 Add the following to `/src/index.css`:
 
-```css
+```CSS
 /* Next Block */
 .next-block {
   display: grid;
@@ -74,9 +74,9 @@ Add the following to `/src/index.css`:
 }
 ```
 
-At this point the page is lacking arrangement but the tiles themselves in each component are arranged in a grid.
+At this point, the page is lacking arrangement but the tiles themselves in each component are arranged in a grid.
 
-Also notice the GridSquares are using the default color 0 in the `Next Block` component. We will get the block shape as an array later and use this to set the color of the blocks.
+Also, notice the GridSquares are using the default color 0 in the `Next Block` component. We will get the block shape as an array later and use this to set the color of the blocks.
 
 # Add to App.js
 

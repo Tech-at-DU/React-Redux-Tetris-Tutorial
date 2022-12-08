@@ -11,22 +11,22 @@
 1. ~~Do some code organizing and cleanup~~
 1. ~~Implement state and shapes~~
 1. **Connect each component up to state and reducers**
-    1. ~~NextBlock~~
-    1. ~~GridBoard~~
-    1. **Controls**
-        1. **Add the actions needed for the controls**
-        1. **Implement the `mapStateToProps` function**
-        1. **Implement the `mapDispatchToProps` function**
-        1. **Connect the `controls` component**
-        1. **Call the actions in their appropriate buttons**
+	1. ~~NextBlock~~
+	1. ~~GridBoard~~
+	1. **Controls**
+		1. **Add the actions needed for the controls**
+		1. **Implement the `mapStateToProps` function**
+		1. **Implement the `mapDispatchToProps` function**
+		1. **Connect the `controls` component**
+		1. **Call the actions in their appropriate buttons**
 1. Implement block rotation
 1. Implement moving blocks
 1. Building a timer system
 1. Implementing Game Over and Restart
 
-Now it's time issue actions from the buttons. 
+Now it's time to issue actions from the buttons. 
 
-Issuing actions will trigger your reducers which will update state. You'll need to add code to the reducers.
+Issuing actions will trigger your reducers which will update the state. You'll need to add code to the reducers.
 
 # Dispatch actions from a component with useDispatch
 
@@ -42,7 +42,7 @@ import { useSelector, useDispatch } from 'react-redux'
 ...
 ```
 
-To send an action you'll call the action and pass the value returned as an argument to the dispatcher.  
+To send an action you'll call the action and pass the value returned as an argument to the dispatcher. 
 
 **Challenge**
 
@@ -96,7 +96,7 @@ The `useDispatch` function returns the dispatcher. Call it at the top of your Co
 
 **Challenge**
 
-You'll use the `isRunning` from state to disable the buttons when the game is paused. Get the `isRunning` property by calling `useSelector` passing a function as anrgument, the argument function should define state as a paramter and return state. Get `isRunning` from state. 
+You'll use the `isRunning` from state to disable the buttons when the game is paused. Get the `isRunning` property by calling `useSelector` passing a function as an argument, the argument function should define the state as a parameter and return the state. Get `isRunning` from the state. 
 
 -
 -
@@ -147,7 +147,7 @@ export default function Controls(props) {
 }
 ```
 
-With this in place you can get to work making the buttons to their job!
+With this in place, you can get to work making the buttons for their job!
 
 # Call Actions
 
@@ -160,13 +160,14 @@ In the `return` block in `/src/components/controls.js`. Find the "Move Left" but
 	className="control-button" 
 	onClick={(e) => {
 		dispatch(moveLeft())
-}}>Left</button>
+	}
+}>Left</button>
 ...
 ```
 
-Notice here you've set the `disabled` prop to `isRunning`. This means the button will be disabled when `isRunning` is true. I put the `!` in front the `isRunning` boolean to invert it! This way when `isRunning` is true disabled will be false!
+Notice here you've set the `disabled` prop to `isRunning`. This means the button will be disabled when `isRunning` is true. I put the `!` in front of the `isRunning` boolean to invert it! This way when `isRunning` is `true` then `disabled` will be false!
 
-Next, inside the `onClick` function you called `moveLeft()` and passed it's return value to dispatch when you called `dispatch()`. Doing both of these things looks like this: 
+Next, inside the `onClick` function you called `moveLeft()` and passed its return value to dispatch when you called `dispatch()`. Doing both of these things looks like this: 
 
 ```JS
 dispatch(moveLeft())
@@ -237,44 +238,48 @@ export default function Controls(props) {
 
 	return (
 		<div className="controls">
-			{/* left */}
-			<button 
-				disabled={!isRunning}
-				className="control-button" 
-				onClick={(e) => {
-					dispatch(moveLeft())
-			}}>Left</button>
+      {/* left */}
+      <button 
+        disabled={!isRunning}
+        className="control-button" 
+        onClick={(e) => {
+          dispatch(moveLeft())
+        }
+      }>Left</button>
 
-			{/* right */}
-			<button 
-				disabled={!isRunning}
-				className="control-button" 
-				onClick={(e) => {
-					dispatch(moveRight())
-			}}>Right</button>
+      {/* right */}
+      <button 
+        disabled={!isRunning}
+        className="control-button" 
+        onClick={(e) => {
+          dispatch(moveRight())
+        }
+      }>Right</button>
 
-			{/* rotate */}
-			<button 
-				disabled={!isRunning}
-				className="control-button" 
-				onClick={(e) => {
-					dispatch(rotate())
-			}}>Rotate</button>
+      {/* rotate */}
+      <button 
+        disabled={!isRunning}
+        className="control-button" 
+        onClick={(e) => {
+          dispatch(rotate())
+        }
+      }>Rotate</button>
 
-			{/* down */}
-			<button 
-				disabled={!isRunning}
-				className="control-button" 
-				onClick={(e) => {
-					dispatch(moveDown())
-			}}>Down</button>
+      {/* down */}
+      <button 
+        disabled={!isRunning}
+        className="control-button" 
+        onClick={(e) => {
+          dispatch(moveDown())
+        }
+      }>Down</button>
 
 		</div>
 	)
 }
 ```
 
-Still no visual changes yet, we still have a couple more components to connect up. Make sure everything still loads correctly in the browser! Our Controls now **uses Redux/Flux to manage application state!**
+No visual changes yet, we still have a couple more components to connect up. Make sure everything still loads correctly in the browser! Our Controls now **use Redux/Flux to manage application state!**
 
 **Challenge**
 
@@ -316,3 +321,4 @@ $ git add .
 $ git commit -m 'Added connection for controls'
 $ git push
 ```
+

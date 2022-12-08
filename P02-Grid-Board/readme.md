@@ -2,18 +2,18 @@
 
 1. ~~Implement the overall grid square~~
 1. **Implement the game board**
-    1. **Build the game board component using the grid squares**
-    1. **Import it into `App.js`**
-    1. **Style the board**
+  1. **Build the game board component using the grid squares**
+  1. **Import it into `App.js`**
+  1. **Style the board**
 1. Implement the "next block" area
-1. Implement the score board
+1. Implement the scoreboard
 1. Arrange the layout of the game
 1. Implement the controls
 1. Implement the message popup
 1. Implement the actions and reducers
 1. Do some code organizing and cleanup
 1. Implement state and shapes
-1. Connect each component up to state and reducers
+1. Connect each component up to the state and reducers
 1. Implement block rotation
 1. Implement moving blocks
 1. Building a timer system
@@ -25,13 +25,13 @@ This section takes the grid square created in the last section and displays a gr
 
 Before you build out this grid, let's establish some initial requirements:
 
-- The the main view of the game is made of a 10 x 18 grid.
+- The main view of the game is made of a 10 x 18 grid.
 - Each square on the grid is a single 20px x 20px square rendered from a grid square component.
-- The main game logic has not been implemented yet so we will hard code the grid squares for now.
-- The grid is made up of an array containing 18 arrays. Each of these arrays represent one row on the grid.
-- Each row is an array containing 10 integers. Each integer represents the color displayed at that row and column.
+- The main game logic has not been implemented yet so we will hardcode the grid squares for now.
+- The grid is made up of an array containing 18 arrays. Each of these arrays represents one row on the grid.
+- Each row is an array containing 10 integers. Each integer represents the color displayed in that row and column.
 - This a **two dimensional array**. You might visualize it like this
-if all the squares contained color 0.
+if all the squares contained the color 0.
 
 ![Two-Dimension-grid-with-Arrays](assets/Two-Dimension-grid-with-Arrays.png)
 
@@ -47,20 +47,20 @@ import GridSquare from './GridSquare'
 
 export default function GridBoard() {
   // generates an array of 18 rows, each containing 10 GridSquares.
-	const grid = []
-	for (let row = 0; row < 18; row ++) {
-		grid.push([])
-		for (let col = 0; col < 10; col ++) {
-			grid[row].push(<GridSquare key={`${col}${row}`} color="1" />)
-		}
-	}
+  const grid = []
+  for (let row = 0; row < 18; row ++) {
+    grid.push([])
+    for (let col = 0; col < 10; col ++) {
+      grid[row].push(<GridSquare key={`${col}${row}`} color="1" />)
+    }
+  }
 
-  // The components generated in makeGrid are rendered in div.grid-board
-	return (
-		<div className='grid-board'>
-			{grid}
-		</div>
-	)
+  // The components generated in `makeGrid` are rendered in div.grid-board
+  return (
+    <div className='grid-board'>
+      {grid}
+    </div>
+  )
 }
 ```
 
@@ -98,13 +98,13 @@ To arrange them in a grid we need some more CSS!
 
 # Use CSS Grid to arrange the squares
 
-Now you'll use the CSS Grid to arrange the single row of grid squareas into an actual grid (what a concept!)
+Now you'll use the CSS Grid to arrange the single row of grid squares into an actual grid (what a concept!)
 
 Add the following to `/src/index.css`:
 
-This tells the browser to calculate the size boxes to include the border width rather than adding the border to the width, which is the default behavior.
+This tells the browser to calculate the size of boxes to include the border width rather than adding the border to the width, which is the default behavior.
 
-```css
+```CSS
 * {
   box-sizing: border-box;
 }
@@ -112,7 +112,7 @@ This tells the browser to calculate the size boxes to include the border width r
 
 Now the grid squares should be 20px by 20px. before they were 20px plus the 5px border width on all sides which was a total of 30px! 
 
-The `.grid-board` class defines the `grid-board` to display as `grid`. This causes the children of this element to arrange on a grid. The number of columns is set by `--cols` var and the width of each column is set by `--tile-size`. These two CSS custom properties were defined in `:root` which allow them to be easily changed.
+The `.grid-board` class defines the `grid-board` to display as `grid`. This causes the children of this element to arrange on a grid. The number of columns is set by `--cols` var and the width of each column is set by `--tile-size`. These two CSS custom properties were defined in `:root` which allows them to be easily changed.
 
 ```CSS
 .grid-board {
