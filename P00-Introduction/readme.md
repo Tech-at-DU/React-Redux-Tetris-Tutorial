@@ -4,7 +4,7 @@ This tutorial uses React and Redux to recreate the classic arcade game Tetris.
 
 Tetris is a classic arcade game that was originally designed and programmed by Russian game designer [Alexey Pajitnov](https://en.wikipedia.org/wiki/Alexey_Pajitnov). It was released on June 6, 1984.
 
-The game, or one of its many variants, is available for nearly every video game console and computer operating system, as well as on devices such as graphing calculators, mobile phones, portable media players, PDAs, Network music players and as an Easter egg on non-media products like oscilloscopes.
+The game, or one of its many variants, is available for nearly every video game console and computer operating system, as well as on devices such as graphing calculators, mobile phones, portable media players, PDAs, Network music players, and as an Easter egg on non-media products like oscilloscopes.
 
 Here is what Tetris looked like on an arcade machine in the 80s.
 
@@ -16,7 +16,7 @@ Here is what we will build with this tutorial. This version of Tetris will run i
 
 # Why is this important?
 
-Completing this project will give you a chance to practice creating advanced front end applications with React. It will also give you an opportunity to look at managing complex appication state with Redux. Beyond all of this the tutorial uses complex Objects and Arrays. This should give you new tools to practice your JavaScript skills and learn some new things!
+Completing this project will give you a chance to practice creating advanced front-end applications with React. It will also allow you to look at managing complex application state with Redux. Beyond all of this, the tutorial uses complex Objects and Arrays. This should give you new tools to practice your JavaScript skills and learn some new things!
 
 # Prerequisites
 
@@ -38,8 +38,8 @@ The tutorial will also delve into related topics like CSS, CSS Grid, and Flex Bo
 
 By the end of this tutorial, students should be able to:
 
-1. Implement an advanced single page application with React
-1. Use Redux to manage application state
+1. Implement an advanced single-page application with React
+1. Use Redux to manage the application state
 1. Build systems that manage and merge complex arrays
 1. Use functional programming methods like `map`
 1. Use CSS variables
@@ -52,14 +52,14 @@ We're going to build this game up component by component, then implement our act
 1. Implement the overall grid square
 1. Implement the game board
 1. Implement the "next block" area
-1. Implement the score board
+1. Implement the scoreboard
 1. Arrange the layout of the game
 1. Implement the controls
 1. Implement the message popup
 1. Implement the actions and reducers
 1. Do some code organizing and cleanup
 1. Implement state and shapes
-1. Connect each component up to state and reducers
+1. Connect each component up to the state and reducers
 1. Implement block rotation
 1. Implement moving blocks
 1. Building a timer system
@@ -88,7 +88,7 @@ $ git push origin main -u
 
 # Create a default app
 
-First thing we need to do is get our default React app set up
+The first thing we need to do is get our default React app set up
 
 Create a default app using Create React App. You can follow the instructions [here](https://github.com/facebook/create-react-app).
 
@@ -98,7 +98,7 @@ npx create-react-app react-redux-tetris
 
 Test your app with: `npm start` to make sure everything is working.
 
-You can visit the project in a browser at `http://localhost:3000/`. It should open at the this address automatically. If all went well, you should see the below in your browser:
+You can visit the project in a browser at `http://localhost:3000/`. It should open at this address automatically. If all went well, you should see the below in your browser:
 
 ![react-app](assets/react-app.png)
 
@@ -134,9 +134,9 @@ trigger the server to refresh automatically. You should now see the below in the
 
 ![tetris-redux](assets/tetris-redux.png)
 
-# Adding Dependancies
+# Adding Dependencies
 
-Redux is a library that manages Application state. The React-Redux library acts as bindings between React and Redux. We will need to install both as dependancies.
+Redux is a library that manages the Application state. The React-Redux library acts as a binding between React and Redux. We will need to install both as dependencies.
 
 Add Redux and React-Redux as a dependency to your project.
 
