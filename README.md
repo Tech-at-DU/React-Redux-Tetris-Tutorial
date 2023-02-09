@@ -23,9 +23,8 @@ React and Redux.
 - [Connect Score Board](P15-Connect-Score-Board)
 - [Rotating Blocks](P16-Rotating-Blocks)
 - [Moving Blocks](P17-Moving-Blocks)
-- [Adding Blocks to Grid](P18-Adding-Blocks-To-Grid)
-- [Creating a Timer](P19-Creating-a-Timer)
-- [Game Over and Restart](P20-Game-Over-and-Restart)
+- [Creating a Timer](P18-Creating-a-Timer)
+- [Game Over and Restart](P19-Game-Over-and-Restart)
 
 ## Version 
 
