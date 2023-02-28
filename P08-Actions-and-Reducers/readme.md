@@ -345,7 +345,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import gameReducer from '../features/gameSlice'
 
 export const store = configureStore({
-  game: gameReducer,
+  reducer: gameReducer,
 })
 ```
 
