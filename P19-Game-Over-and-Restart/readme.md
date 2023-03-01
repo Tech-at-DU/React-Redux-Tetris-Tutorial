@@ -591,7 +591,7 @@ To track the completed rows you might follow these steps:
 
 - Define a new property on the state for rows Completed. This will need to go into the default state object in `utils/index.js`
 - The checkRows function calculates the rows completed and returns a score. You'll need to modify this to return the score and the number of rows completed.
-- In the `reducers/game-reducer.js` take a look at the code in `moveDown` case. Near the bottom, the code calls `checkRows()` if you modified the return value work with that here. Also, calculate the new row count here and set it on newState. 
+- In the `features/gameSlice.js` take a look at the code in `moveDown` case. Near the bottom, the code calls `checkRows()` if you modified the return value work with that here. Also, calculate the new row count here and set it on newState. 
 
 ## Edge Cases 
 
