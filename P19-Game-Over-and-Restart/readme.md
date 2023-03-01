@@ -593,6 +593,37 @@ To track the completed rows you might follow these steps:
 - The checkRows function calculates the rows completed and returns a score. You'll need to modify this to return the score and the number of rows completed.
 - In the `features/gameSlice.js` take a look at the code in `moveDown` case. Near the bottom, the code calls `checkRows()` if you modified the return value work with that here. Also, calculate the new row count here and set it on newState. 
 
+Add this to `utils.js`. 
+
+```JS
+// Checks for completed rows and scores points
+export const checkRows = (grid) => {
+  // Points increase for each row completed
+  // i.e. 40 points for completing one row, 100 points for two rows
+  const points = [0, 40, 100, 300, 1200]
+  let completedRows = 0
+  for (let row = 0; row < grid.length; row++) {
+    // No empty cells means it can't find a 0, so the row must be complete!
+    if (grid[row].indexOf(0) === -1) {
+      completedRows += 1
+      // Remove the row and add a new empty one at the top
+      grid.splice(row, 1)
+      grid.unshift(Array(10).fill(0))
+    }
+  }
+  return points[completedRows]
+}
+```
+
+This function takes the grid array as an argument, removes completed rows, and returns the number of points gained. 
+
+You can import this into your `gameSlice.js` call it at the bottom of `moveDown`. Add this at the end of the function function before the return statement. 
+
+```JS
+// Update the score based on if rows were completed or not
+state.score += checkRows(newGrid)
+```
+
 ## Edge Cases 
 
 The game has a bug. When a block is off the top edge of the grid if you move it left or right enough to move it off the grid the game registers this as a game over. You can try this yourself. When a block starts clicking left or right enough will cause a game over. You won't see the block. 
