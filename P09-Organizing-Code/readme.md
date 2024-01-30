@@ -39,7 +39,14 @@ Add a new file `/src/utils/index.js` with the following function in it:
 
 **Challenge**
 
-Write a function that takes in a min and max value and returns a number in this range inclusive. 
+Write a function that takes in a `min` and `max` value, and returns a number in this range inclusive. 
+
+```JavaScript
+export const random = (min, max) => {
+  // ???
+}
+random(1, 6) // returns 3 (or 1, 2, 3, 4, 5, 6)
+```
 
 - 
 -
