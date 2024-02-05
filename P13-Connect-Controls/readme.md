@@ -48,6 +48,8 @@ To send an action you'll call the action and pass the value returned as an argum
 
 Import `moveDown`, `moveLeft`, `moveRight`, `rotate` actions from `src/features/gameSlice.js`.
 
+Check your work against the solution below...
+
 -
 -
 -
@@ -97,6 +99,8 @@ The `useDispatch` function returns the dispatcher. Call it at the top of your Co
 **Challenge**
 
 You'll use the `isRunning` from state to disable the buttons when the game is paused. Get the `isRunning` property by calling `useSelector` passing a function as an argument, the argument function should define the state as a parameter and return the state. Get `isRunning` from the state. 
+
+Check your work against the solution below...
 
 -
 -
@@ -185,6 +189,8 @@ Either way would work the same!
 **Challenge**
 
 The "Move Right", "rotate", and "moveDown" buttons all need to call their eponymous actions, they should also be disabled when the game is not running. Your job is to complete these buttons!
+
+Check your work against the solution below...
 
 -
 -
@@ -285,6 +291,8 @@ No visual changes yet, we still have a couple more components to connect up. Mak
 
 Right now the buttons are all enabled (because `isRunning` is true.) Can you think of a way to disable the buttons? 
 
+Check your work against the solution below...
+
 -
 -
 -
@@ -321,4 +329,3 @@ $ git add .
 $ git commit -m 'Added connection for controls'
 $ git push
 ```
-

@@ -90,7 +90,7 @@ An example game board array might look like this:
 
 # Empty Array
 
-You need a function that will generate a default empty array. This function needs to return an array containing 18 arrays, each of the nested arrays should contain ten 0s. This represents an empty game board.
+You need a function that will generate a default empty array. This function needs to return an array containing 18 arrays (each representing a row), each of the nested arrays should contain ten 0s. This represents an empty game board.
 
 **Challenge**
 
@@ -110,6 +110,8 @@ export const gridDefault = () => {
   return array
 }
 ```
+
+Check your solution against the solution below... 
 
 - 
 - 
@@ -348,6 +350,8 @@ Return the index of a random shape from 1 to the number of items in `shapes`. Yo
 
 Add this to `src/utils.js` and export it.
 
+Check your work against the solution below...
+
 - 
 - 
 - 
@@ -459,7 +463,7 @@ Find the following properties in the default state:
 - `speed` - sets the speed of the game in milliseconds
 - `gameOver` - The value of `false` means the game is not over when it begins. 
 
-You now have a default state for our game, and we **used Redux to manage the application state!** We also covered the beginnings of **building systems that manage and merge complex arrays!**
+You now have a default state for our game, which will be **used with Redux to manage the application state!** You also covered the beginnings of **building systems that manage and merge complex arrays!**
 
 Notice you exported this `defaultState` function so you can use it elsewhere in your code. 
 

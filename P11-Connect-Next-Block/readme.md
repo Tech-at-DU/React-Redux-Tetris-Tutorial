@@ -44,7 +44,7 @@ To get state from Redux into this Component you'll need to connect the component
 
 # React-Redux Hooks: useSelector
 
-The useSelector hook gives your components access to the redux store. 
+The `useSelector` hook gives your components access to the redux store. 
 
 Add the following import near the top of `/src/components/NextBlock.js`:
 
@@ -85,6 +85,8 @@ export default function NextBlock() {
 **Challenge**
 
 Log `state` to the console in the function argument passed to `useSelector`. Inspect the values. 
+
+Check your work against the solution below... 
 
 - 
 - 
@@ -207,7 +209,7 @@ _Now you can use data mapped to props_. The `shape` key on props now holds the i
 
 # Product So Far
 
-Refresh the browser to see a different shape/orientation appear in the Next Block area! Our Next Block now **uses Redux/Flux to manage the application state!** We also covered working with **systems that manage and merge complex arrays,** and have gotten some more practice with **using functional programming methods like `map`!**
+Refresh the browser to see a different shape/orientation appear in the Next Block area! Our Next Block now **uses Redux to manage the application state!** We also covered working with **systems that manage and merge complex arrays,** and have gotten some more practice with **using functional programming methods like `map`!**
 
 ![random-next-block](assets/random-next-block.png)
 
@@ -227,6 +229,7 @@ You'll see all of the squares change color the shape. Refresh the page a couple 
 
 The challenge is to set the color prop to 0 when the value of `sqaure` is 0 and set the color prop to `nextShape` when a square is 1. 
 
+Check your work against the solution below...
 - 
 - 
 -
@@ -311,4 +314,3 @@ $ git add .
 $ git commit -m 'Added connection for next block'
 $ git push
 ```
-

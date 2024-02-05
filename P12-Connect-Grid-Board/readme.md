@@ -171,6 +171,7 @@ But where's the block that you mapped onto the grid? Shouldn't there be a block 
 
 Where's the block shape? Think about this and figure out where it is...
 
+Check your work agains the solution below... 
 -
 -
 -
@@ -215,6 +216,8 @@ It's off the top edge! Remember that the starting y value (in the initial state)
 
 Can you figure out a way to display the shape block as a test to see if you've mapped the block onto the grid correctly? 
 
+Check your solution aganst the one below...
+
 -
 -
 -
@@ -258,9 +261,9 @@ Here are two ideas:
 - Change the value used for y in this file to a number between 0 and 18. Change this line `const blockY = row - y` to something like: `const blockY = row - 10`
 - Change the initial state for y to something positive between 0 and 18 like 6 or 10. 
 
-Try that, then change your code back before continuing. If you refresh you should see a random shape each time. 
+Try that, if you refresh you should see a random shape each time. Change your code back before continuing.
 
-No visual changes quite yet, but make sure everything still loads correctly in the browser! Our Grid Board now **uses Redux/Flux to manage application state!** We also covered working with **systems that manage and merge complex arrays** in a lot more detail with the board, and have gotten _even more_ practice with **using functional programming methods like `map`!**
+No visual changes quite yet, but make sure everything still loads correctly in the browser! Our Grid Board now **uses Redux to manage application state!** We also covered working with **systems that manage and merge complex arrays** in a lot more detail with the board, and have gotten _even more_ practice with **using functional programming methods like `map`!**
 
 # Now Commit
 
@@ -269,4 +272,3 @@ $ git add .
 $ git commit -m 'Added connection for grid board'
 $ git push
 ```
-
