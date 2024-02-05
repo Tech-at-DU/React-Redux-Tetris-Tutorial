@@ -260,6 +260,8 @@ Add actions and reducer functions for the following actions:
 - `gameOver`
 - `restart`
 
+Check the solution below...
+
 - 
 - 
 - 
