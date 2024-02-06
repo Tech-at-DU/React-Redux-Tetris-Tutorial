@@ -209,6 +209,8 @@ Find the pause action. Define the function with `state` as a parameter. In the b
 
 Find the `resume` action. The reducer function should take `state` as a parameter, set `isRunning` on the state to `true` and return `state`.
 
+Check your work against the solution below...
+
 -
 -
 -

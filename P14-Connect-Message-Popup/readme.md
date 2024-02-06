@@ -37,6 +37,8 @@ Currently, the popup displays all the time. You can fix this in two steps:
 
 In `src/components/MessagePopup.js` import `useSelector`. You'll need this to access the state. 
 
+Check your work against the solution below...
+
 -
 -
 -
@@ -77,6 +79,8 @@ import { useSelector } from 'react-redux'
 **Challenge**
 
 Still, in `MessagePopup.js` get the values for `isRunning` and `gameOver`. Do this by calling `useSelector`, passing a function as an argument, defining the state as a parameter to this argument, and returning the state. You can deconstruct the properties. 
+
+Check your work against the solution below...
 
 -
 -
@@ -123,7 +127,7 @@ With that in place, you control the display of the message popup.
 
 This is an opportunity to see where Redux is helping you manage your application state. The MessagePopup component can easily be displayed or hidden based on state without having to do much work or without tightly coupling it to the rest of the application. 
 
-That last point: "...without tightly coupling it to the rest of the application" is really important. Notice here that with all of the components you've written, it doesn't matter where the component is in your application it has access to the application state. You can easily make changes and add new components without having to worry about how they will access the application state. 
+That last point: "...without tightly coupling it to the rest of the application" is really important. Notice here that with all of the components you've written, it doesn't matter where the component is in your application it has access to the application state. You can easily make changes and add new components without having to worry about how they will access the application state, which would normally be done by passing props.
 
 Use the following logic to hide and show the message popup.
 
@@ -136,6 +140,8 @@ and the message text should say 'Paused'.
 and the message text should say 'Game Over'.
 
 Again, try this on your own, and then check against the solution to see how well you matched up. You can test your work by mocking up the `isRunning` and `gameOver` values in the component or setting them in the default state. 
+
+Check your work against the solution below...
 
 -
 -

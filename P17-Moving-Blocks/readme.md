@@ -64,6 +64,8 @@ Sounds like a...
 
 Find the move right action, and write the reducer yourself! 
 
+Check your work against the solution below...
+
 -
 -
 -

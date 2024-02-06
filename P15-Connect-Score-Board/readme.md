@@ -41,6 +41,8 @@ You need to import both `useDispatch` and `useSelecvtor` from `react-redux` at t
 
 Edit `src/components/ScoreBaord.js` and import `useSelector` and `useDispatch`.
 
+Check your work against the solution below...
+
 -
 -
 -
@@ -79,6 +81,8 @@ import { useSelector, useDispatch } from 'react-redux'
 **Challenge**
 
 Next, import the `pause`, `resume`, and `restart` actions from your `gameSlice` at the top. 
+
+Check your work against the solution below...
 
 -
 -
@@ -119,6 +123,8 @@ import { pause, resume, restart } from '../features/gameSlice'
 **Challenge**
 
 Get the dispatcher in your `ScoreBoard` function at the top. 
+
+Check your work against the solution below...
 
 -
 -
@@ -161,6 +167,8 @@ export default function ScoreBoard() {
 **Challenge** 
 
 Get `score`, `isRunning`, and `gameOver` from your application state with `useSelectore`. 
+
+Check your work against the solution below...
 
 -
 -
@@ -207,6 +215,7 @@ export default function ScoreBoard() {
 
 Display the score. There is a div with the text "Score: 0"
 
+Check your work against the solution below...
 
 -
 -
@@ -246,6 +255,8 @@ Display the score. There is a div with the text "Score: 0"
 **Challenge**
 
 The restart button should dispatch the restart action when you click it. 
+
+Check your work against the solution below...
 
 -
 -
@@ -290,6 +301,8 @@ The restart button should dispatch the restart action when you click it.
 **Challenge**
 
 The Pause/Play button should display "Pause" if the `isRunning` is `true` and "Play" if `isRunning` is false. Try and solve this with the Ternary operator if you can! 
+
+Check your work against the solution below...
 
 -
 -
@@ -338,6 +351,8 @@ Clicking the Play/Pause button should do something different depending on the st
 - If the game is over it should do nothing
 - if the game is running the button should issue the pause action (through the dispatch)
 - If the game not running it should issue the resume action. 
+
+Check your work against the solution below...
 
 -
 -

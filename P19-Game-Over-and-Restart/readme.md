@@ -60,6 +60,8 @@ Import useSelector and then get the isRunning and gameOver values from the state
 
 Get the `gameOver` property from the state. 
 
+Check your work against the solution below...
+
 -
 -
 -
@@ -107,6 +109,8 @@ The `onClick` handler for each function should check
 or `gameOver` is `true` the buttons should not send actions.
 
 Update all of the `button` elements in the `return` block of `/src/components/controls.js` to check `isRunning` and `gameOver` before dispatching their actions.
+
+Check your work against the solution below...
 
 -
 -
@@ -156,6 +160,8 @@ Here's the "Move Left" button:
 **Challenge**
 
 Disable the other buttons when `isRunning` is false or `gameOver` is true. 
+
+Check your work against the solution below...
 
 -
 -
@@ -245,6 +251,8 @@ This is a tough one. Give it a try! You need to modify `addBlockToGrid` so that 
 The function needs to return both the newly updated grid and a boolean designating the game over status. 
 
 Note: This change will break the `moveDown` reducer! You'll need to fix that also, which is handled in the next step of this tutorial. 
+
+Check your work against the solution below...
 
 -
 -
@@ -383,6 +391,8 @@ Restarting the game will only require setting the game `state` in redux back to 
 **Challenge**
 
 Find the `restart` action and fill in its reducer function. You want to return the default state of the game by calling the `defaultState` function from utils. 
+
+Check your work against the solution below...
 
 -
 -
