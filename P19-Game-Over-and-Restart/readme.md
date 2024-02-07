@@ -246,11 +246,40 @@ The goal is to have the function return the new grid and a bool that says the ga
 
 **Optional Challenge**
 
-This is a tough one. Give it a try! You need to modify `addBlockToGrid` so that when placing a block if part of that block is off the top of the grid. If so the game is over. 
+This is a tough one. Give it a try! You need to modify `addBlockToGrid` so that when placing a block if part of that block is off the top of the grid the game is over. 
 
-The function needs to return both the newly updated grid and a boolean designating the game over status. 
+The function needs to return both the newly updated grid and a boolean designating the game over status. Normally you can't return more than one value so you should return a "tuple". JS doesn't have an offical tuple, you can use an object or an array. An object might look like this: `{ newGrid, gameOver }`. 
 
-Note: This change will break the `moveDown` reducer! You'll need to fix that also, which is handled in the next step of this tutorial. 
+Here is what you have currently, with a couple added hints: 
+
+```JS
+export const addBlockToGrid = (shape, grid, x, y, rotation) => {
+  // At this point the game is not over
+  let gameOver = false // Assume the gamne is not over
+  // Get the block array
+  const block = shapes[shape][rotation];
+  // Copy the grid
+  const newGrid = [...grid];            
+  // Map the Block onto the grid                                                           
+  for (let row = 0; row < block.length; row++) {
+    for (let col = 0; col < block[row].length; col++) {
+      if (block[row][col]) {
+        // Subtract the y index from the row if the value is 
+        // less than 0 the block extends off the top of the 
+        // grid and the game is over. 
+
+        // ?
+
+        newGrid[row + y][col + x] = shape;
+      }
+    }
+  }
+  // Return a tuple with grid and gameover
+  return { newGrid, gameOver };
+}
+```
+
+Note: This change will break the `moveDown` reducer in `src/features/gameSlice.js`. You'll need to modify this also! 
 
 Check your work against the solution below...
 
@@ -290,7 +319,7 @@ Check your work against the solution below...
 In `/src/utils/index.js`, update `addBlockToGrid` to the following:
 
 ```JavaScript
-// Adds a current shape to the grid
+// Adds current shape to grid
 export const addBlockToGrid = (shape, grid, x, y, rotation) => {
   // At this point the game is not over
   let gameOver = false
@@ -310,7 +339,7 @@ export const addBlockToGrid = (shape, grid, x, y, rotation) => {
       }
     }
   }
-  // Return both the newGrid and the gameOver bool 
+  // Return both the newGrid and the gameOver bool                                                
   return { newGrid, gameOver }
 }
 ```
@@ -319,7 +348,7 @@ Remember with these changes you have broken the `moveDown` reducer. Which will r
 
 # Modify the game-reducer
 
-Modify the MOVE_DOWN case for `/src/features/gameSlice.js`:
+Modify the `moveDown` case for `/src/features/gameSlice.js`:
 
 ```JS
 ...
@@ -687,4 +716,3 @@ using the keyboard you could introduce a positive and negative rotation. Current
 ## Saving High Scores 
 
 If you did the other React + Redux tutorials you worked with Local storage you could put these ideas to use here to save the game state and save the high score. 
-
