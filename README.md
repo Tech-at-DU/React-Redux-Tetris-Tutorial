@@ -1,54 +1,77 @@
-# React Redux Tetris Tutorial
+# 🎮 React + Redux Tetris Tutorial
 
-This tutorial recreates the classic arcade game Tetris with 
-React and Redux. 
+Welcome to the **Tetris Game Tutorial** built with **React** and **Redux**! In this step-by-step project, you'll implement a fully interactive version of the classic game while learning:
 
-## Tutorial Pages
+✅ Component-based UI design  
+✅ Game state management with Redux Toolkit  
+✅ Keyboard input and timers in React  
+✅ Grid-based logic and block rotations
 
-- [Introduction](P00-Introduction)
-- [Grid Square](P01-Grid-Square)
-- [Grid Board](P02-Grid-Board)
-- [Next Block](P03-Next-Block)
-- [Score Board](P04-Score-Board)
-- [Arranging the Page](P05-Arranging-the-Page)
-- [Controls](P06-Controls)
-- [Message Popup](P07-Message-Popup)
-- [Actions and Reducers](P08-Actions-and-Reducers)
-- [Organizing Code](P09-Organizing-Code)
-- [Default State and Block Shapes](P10-Default-State-and-Block-Shapes)
-- [Connect Next Block](P11-Connect-Next-Block)
-- [Connect Grid Board](P12-Connect-Grid-Board)
-- [Connect Controls](P13-Connect-Controls)
-- [Connect Message Popup](P14-Connect-Message-Popup)
-- [Connect Score Board](P15-Connect-Score-Board)
-- [Rotating Blocks](P16-Rotating-Blocks)
-- [Moving Blocks](P17-Moving-Blocks)
-- [Creating a Timer](P18-Creating-a-Timer)
-- [Game Over and Restart](P19-Game-Over-and-Restart)
+---
 
-## Version 
+## 🧱 What You’ll Build
+A playable Tetris clone where users can:
+- Move and rotate falling blocks
+- Complete lines to earn points
+- Watch their score and next piece
+- See game over conditions and restart
 
-Vesion: 2.0.0
+---
 
-This tutorial was built and tested with: 
+## 🔧 What You’ll Learn
+- Using `useSelector` and `useDispatch` with Redux
+- Organizing game state and reducers
+- Creating a live game loop with `setInterval`
+- React component design and conditional rendering
+- Keyboard event handling with `useEffect`
 
-- React 18.2.0
-- Redux Toolki 1.9.1
+---
 
-## Prerequisites
+## 📖 Tutorial Overview
+Each folder contains one step of the tutorial. Work through them in order, or jump to the part you’re interested in.
 
-To create this project you will need an understanding of 
+| Step | Title | Description |
+|------|---------------------------|---------------------------------------------------|
+| P00 | [Introduction](./00-Introduction.md)        | Tutorial overview and game concept               |
+| P01 | [Grid Square](./01-Grid-Square.md)          | Create individual square components              |
+| P02 | [Grid Board](./02-Grid-Board.md)            | Set up the full game board                       |
+| P03 | [Next Block](./03-Next-Block.md)            | Preview the upcoming piece                       |
+| P04 | [Score Board](./04-Score-Board.md)          | Display score and level                          |
+| P05 | [Arranging the Page](./05-Arranging-the-Page.md) | Build the full layout                       |
+| P06 | [Controls](./06-Controls.md)                | Add start/reset buttons and input UI             |
+| P07 | [Message Popup](./07-Message-Popup.md)      | Create a Game Over popup                         |
+| P08 | [Actions & Reducers](./08-Actions-and-Reducers.md) | Setup Redux actions and initial logic     |
+| P09 | [Organizing Code](./09-Organizing-Code.md)  | Split code into logical folders                  |
+| P10 | [Default State & Blocks](./10-Default-State-and-Block-Shapes.md) | Define game shapes & grid   |
+| P11 | [Connect Next Block](./11-Connect-Next-Block.md) | Connect preview to state                    |
+| P12 | [Connect Grid Board](./12-Connect-Grid-Board.md) | Sync board to Redux                         |
+| P13 | [Connect Controls](./13-Connect-Controls.md) | Wire buttons to game logic                      |
+| P14 | [Connect Popup](./14-Connect-Message-Popup.md) | Show popup on game end                        |
+| P15 | [Connect Score Board](./15-Connect-Score-Board.md) | Show real-time score                      |
+| P16 | [Rotate Blocks](./16-Rotating-Blocks.md)    | Add rotation logic                               |
+| P17 | [Move Blocks](./17-Moving-Blocks.md)        | Add horizontal/vertical movement                 |
+| P18 | [Game Timer](./18-Creating-a-Timer.md)      | Drop blocks automatically over time              |
+| P19 | [Game Over & Restart](./19-Game-Over-and-Restart.md) | Handle endgame and replay logic         |
+| P20 | [Final Thoughts](./20-final-thoughts.md)    | reflect on the process                           |
 
-- JavaScript: ES6
-- React
-  - Creating components 
-  - JSX
-- HTML/CSS
+---
 
-## Objectives 
+## 🔍 How to Use This Tutorial
+- Work through the steps in order 🧩
+- Use Git commits or folders to track progress 🗂️
+- Try the **stretch challenges** at the end of each step 💪
+- Ask AI questions along the way 🧠
 
-- Define Application state using Redux Toolkit and the flux pattern
-- Implement React-Redux
+💡 **AI Prompt Example:** "Can you explain how the reducer handles block collisions?"
 
-## Instructor FAQ
+---
+
+## ✅ Requirements
+- Node.js & npm
+- Basic knowledge of React and Redux
+
+---
+
+## 🎉 Ready to Start?
+Head over to **[P00 – Introduction](./P00-Introduction)** and let’s begin building Tetris in React + Redux!
 
