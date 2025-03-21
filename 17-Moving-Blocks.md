@@ -87,5 +87,5 @@ const handleKeyDown = (e) => {
 ---
 
 ## ➡️ Next Step
-Now that pieces move, let’s update the timer and automate piece drops in [P18 – Creating a Timer](../P18-Creating-a-Timer)!
+Now that pieces move, let’s update the timer and automate piece drops in [P18 – Creating a Timer](./18-Creating-a-Timer.md)!
 

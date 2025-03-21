@@ -53,4 +53,4 @@ useEffect(() => {
 ---
 
 ## ➡️ Next Step
-Now that the interface is fully wired up, we’re ready to begin **actual gameplay mechanics** like movement and collision in [P16 – Rotating Blocks](../P16-Rotating-Blocks)!
+Now that the interface is fully wired up, we’re ready to begin **actual gameplay mechanics** like movement and collision in [P16 – Rotating Blocks](./16-Rotating-Blocks.md)!

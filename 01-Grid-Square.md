@@ -62,5 +62,5 @@ You now have a reusable square component! Next, you’ll use it to build a full 
 ---
 
 ## ➡️ Next Step
-Move on to [P02 – Grid Board](../P02-Grid-Board) to assemble the game board out of `GridSquare` components!
+Move on to [P02 – Grid Board](./02-Grid-Board.md) to assemble the game board out of `GridSquare` components!
 

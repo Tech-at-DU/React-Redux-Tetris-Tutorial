@@ -106,5 +106,5 @@ export const store = configureStore({
 ---
 
 ## ➡️ Next Step
-Now that your core state logic is ready, move on to [P09 – Organizing Code](../P09-Organizing-Code) to clean up and prepare for future logic!
+Now that your core state logic is ready, move on to [P09 – Organizing Code](./09-Organizing-Code.md) to clean up and prepare for future logic!
 

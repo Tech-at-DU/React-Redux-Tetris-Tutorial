@@ -105,5 +105,5 @@ export default App;
 ---
 
 ## ➡️ Next Step
-Now that our layout is in place, we’ll build the control buttons in [P06 – Controls](../P06-Controls)!
+Now that our layout is in place, we’ll build the control buttons in [P06 – Controls](./06-Controls.md)!
 

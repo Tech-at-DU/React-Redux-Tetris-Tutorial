@@ -86,5 +86,5 @@ Place it inside the `.tetris-right` column below `ScoreBoard`.
 ---
 
 ## ➡️ Next Step
-In [P07 – Message Popup](../P07-Message-Popup), you’ll build a modal to display messages like "Game Over" and "Paused"!
+In [P07 – Message Popup](./07-Message-Popup.md), you’ll build a modal to display messages like "Game Over" and "Paused"!
 

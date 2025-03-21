@@ -61,5 +61,5 @@ Use this value instead of `1000` inside your interval.
 ---
 
 ## ➡️ Next Step
-You now have an automated dropping game! In [P19 – Game Over and Restart](../P19-Game-Over-and-Restart), you’ll detect when the game should end and show a replay option.
+You now have an automated dropping game! In [P19 – Game Over and Restart](./19-Game-Over-and-Restart.md), you’ll detect when the game should end and show a replay option.
 

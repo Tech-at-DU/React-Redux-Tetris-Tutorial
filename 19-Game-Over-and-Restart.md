@@ -116,5 +116,5 @@ You now have:
 - Timer-based gameplay loop
 - Restart functionality
 
-In the final page, we’ll wrap up the project in [P20 – Final Thoughts](../P20-Final-Thoughts)!
+In the final page, we’ll wrap up the project in [P20 – Final Thoughts](./20-final-thoughts.md)!
 

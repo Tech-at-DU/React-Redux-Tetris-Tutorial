@@ -99,5 +99,5 @@ const TetrisGame = () => {
 ---
 
 ## ➡️ Next Step
-In [P13 – Connect Controls](../P13-Connect-Controls), we’ll finally connect the Start and Reset buttons to dispatch Redux actions and control the game!
+In [P13 – Connect Controls](./13-Connect-Controls.md), we’ll finally connect the Start and Reset buttons to dispatch Redux actions and control the game!
 

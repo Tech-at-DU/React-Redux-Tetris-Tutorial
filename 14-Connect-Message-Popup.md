@@ -70,5 +70,5 @@ import { endGame } from "../features/game/gameSlice";
 ---
 
 ## ➡️ Next Step
-In [P15 – Connect Score Board](../P15-Connect-Score-Board), we’ll wire up the live score, level, and lines cleared from Redux!
+In [P15 – Connect Score Board](./15-Connect-Score-Board.md), we’ll wire up the live score, level, and lines cleared from Redux!
 

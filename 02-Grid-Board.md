@@ -96,4 +96,4 @@ export default App;
 ---
 
 ## ➡️ Next Step
-In [P03 – Next Block](../P03-Next-Block), we’ll create a separate mini-board to preview the upcoming piece!
+In [P03 – Next Block](./03-Next-Block.md), we’ll create a separate mini-board to preview the upcoming piece!

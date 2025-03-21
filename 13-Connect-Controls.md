@@ -65,5 +65,5 @@ If you've connected `ScoreBoard` or `NextBlock`, those will also reset according
 ---
 
 ## ➡️ Next Step
-In [P14 – Connect Message Popup](../P14-Connect-Message-Popup), we’ll display overlays like "Game Over" using live state from Redux!
+In [P14 – Connect Message Popup](./14-Connect-Message-Popup.md), we’ll display overlays like "Game Over" using live state from Redux!
 

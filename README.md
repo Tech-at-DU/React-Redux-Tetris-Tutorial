@@ -73,5 +73,5 @@ Each folder contains one step of the tutorial. Work through them in order, or ju
 ---
 
 ## 🎉 Ready to Start?
-Head over to **[P00 – Introduction](./P00-Introduction)** and let’s begin building Tetris in React + Redux!
+Head over to **[P00 – Introduction](./00-Introduction.md)** and let’s begin building Tetris in React + Redux!
 

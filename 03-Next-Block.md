@@ -83,5 +83,5 @@ export default App;
 ---
 
 ## ➡️ Next Step
-Now that the preview is in place, we’ll build the UI for tracking score and level in [P04 – Score Board](../P04-Score-Board)!
+Now that the preview is in place, we’ll build the UI for tracking score and level in [P04 – Score Board](./04-Score-Board.md)!
 

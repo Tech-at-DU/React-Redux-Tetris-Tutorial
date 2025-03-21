@@ -124,5 +124,5 @@ You now have a full system for:
 ---
 
 ## ➡️ Next Step
-In [P11 – Connect Next Block](../P11-Connect-Next-Block), you’ll connect your preview UI to show real random pieces!
+In [P11 – Connect Next Block](./11-Connect-Next-Block.md), you’ll connect your preview UI to show real random pieces!
 

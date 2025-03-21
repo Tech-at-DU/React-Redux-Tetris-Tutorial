@@ -89,5 +89,5 @@ useEffect(() => {
 ---
 
 ## ➡️ Next Step
-Now that your blocks can rotate, let’s start moving them left, right, and down in [P17 – Moving Blocks](../P17-Moving-Blocks)!
+Now that your blocks can rotate, let’s start moving them left, right, and down in [P17 – Moving Blocks](./17-Moving-Blocks.md)!
 

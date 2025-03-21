@@ -56,6 +56,6 @@ Each step includes code, explanations, and challenges. You'll also find AI promp
 ---
 
 ## 🔜 What’s Next?
-Let’s begin by creating our first component in [P01 – Grid Square](../P01-Grid-Square).
+Let’s begin by creating our first component in [P01 – Grid Square](./01-Grid-Square.md).
 
 **Ready? Let’s drop some blocks!** ⬇️🧱

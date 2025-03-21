@@ -86,5 +86,5 @@ export default App;
 ---
 
 ## ➡️ Next Step
-With all the core UI in place, we’ll begin assembling the page layout in [P05 – Arranging the Page](../P05-Arranging-the-Page)!
+With all the core UI in place, we’ll begin assembling the page layout in [P05 – Arranging the Page](./05-Arranging-the-Page.md)!
 

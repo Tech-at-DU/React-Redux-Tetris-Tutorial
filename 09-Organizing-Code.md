@@ -92,5 +92,5 @@ export const SHAPES = {
 ---
 
 ## ➡️ Next Step
-With your code organized, you're ready to connect components to Redux and render actual game state in [P10 – Default State & Block Shapes](../P10-Default-State-and-Block-Shapes)!
+With your code organized, you're ready to connect components to Redux and render actual game state in [P10 – Default State & Block Shapes](./10-Default-State-and-Block-Shapes.md)!
 

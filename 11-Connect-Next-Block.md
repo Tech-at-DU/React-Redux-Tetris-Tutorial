@@ -81,5 +81,5 @@ const TetrisGame = () => {
 ---
 
 ## ➡️ Next Step
-Next, we’ll connect the main board in [P12 – Connect Grid Board](../P12-Connect-Grid-Board) and begin rendering live game data!
+Next, we’ll connect the main board in [P12 – Connect Grid Board](./12-Connect-Grid-Board.md) and begin rendering live game data!
 

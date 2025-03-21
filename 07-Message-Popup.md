@@ -94,5 +94,5 @@ import MessagePopup from "./MessagePopup";
 ---
 
 ## ➡️ Next Step
-In [P08 – Actions and Reducers](../P08-Actions-and-Reducers), you’ll begin wiring up Redux state to control these interactions!
+In [P08 – Actions and Reducers](./08-Actions-and-Reducers.md), you’ll begin wiring up Redux state to control these interactions!
 
