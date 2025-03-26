@@ -1,8 +1,11 @@
 ## 🕹️ P00 – Introduction & Project Setup
 
-We're going to build a classic: **Tetris**, using **React** and **Redux**.
+You're going to build a classic: **Tetris**, using **React** and **Redux**.
 
-This is what we'll build:  
+This is the classic Tetris game: 
+![tetris classic](./assets/s-l300.gif)
+
+This is what you'll build:  
 ![Tetris Web Version](assets/Screen-Shot-small.png)
 
 ---
@@ -54,7 +57,7 @@ Delete the contents of `App.css` and `index.css`. You'll fill these in later wit
 
 > "What does `create-react-app` set up for you automatically?"
 
-> "How does the new `ReactDOM.createRoot` API differ from older versions?"
+> "What is Tetris? Where did it come from? and how was it originally programmed?"
 
 ---
 

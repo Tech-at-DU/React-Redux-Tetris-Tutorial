@@ -116,6 +116,8 @@ A translucent white popup box centered in the middle of the screen:
 
 > "Why does `transform: translate(-50%, -50%)` perfectly center the box?"
 
+> "How does absolute position work in CSS?"
+
 ---
 
 ### 🧠 Check for Understanding

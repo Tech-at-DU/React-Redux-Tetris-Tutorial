@@ -21,7 +21,7 @@ import React from 'react';
 export default function GridSquare({ color }) {
   const classes = `grid-square color-${color}`;
 
-  return <div className={classes} />;
+  return <div className={classes}></div>;
 }
 ```
 
@@ -54,6 +54,10 @@ Open `src/index.css` and add the following to define the color palette and CSS v
 }
 ```
 
+Here you have defined CSS custom properties that will be used by the game. 
+
+A CSS custom property name must begin with the double hyphen `--`. 
+
 ---
 
 ### 🧩 Step 3: Define Color Classes
@@ -71,6 +75,7 @@ Still in `index.css`, add:
 .color-7 { background-color: var(--color-7); }
 ```
 
+To access the value of a CSS custom property you must use `var()`. 
 ---
 
 ### 🧩 Step 4: Style the Grid Square
@@ -117,6 +122,8 @@ export default App;
 
 ✅ You should now see an orange square (`color-1`).
 
+![orange square](./assets/orange-square.png)
+
 ---
 
 ### 💬 Try This
@@ -126,6 +133,8 @@ export default App;
 ---
 
 ### 🤖 AI Prompts
+
+Include the relavant code snippet with the prompt.
 
 > "Why is the `color-${color}` string a useful pattern in React components?"
 

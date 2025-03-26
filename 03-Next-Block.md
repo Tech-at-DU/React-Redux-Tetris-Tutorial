@@ -87,6 +87,8 @@ export default App;
 
 ✅ You should now see the 10×18 game grid and the 4×4 next block preview.
 
+![next block](./assets/initial-next-block.png)
+
 ---
 
 ### 💬 Try This
@@ -100,7 +102,7 @@ export default App;
 
 > "How do the nested `.map()` calls in `NextBlock` generate a flat list of components?"
 
-> "Can you refactor `NextBlock` to accept a block array as a prop?"
+> "Can you refactor `NextBlock` to accept a tetris block array as a prop?"
 
 ---
 

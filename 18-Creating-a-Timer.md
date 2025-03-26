@@ -127,6 +127,10 @@ You should see blocks fall at 1-second intervals and stop when paused:
 
 > "How could this game speed up over time?"
 
+> "Is there a useTimer or useInterval hook? if not how could I write one for myself?"
+
+> "What is stale closure, and how might that affect this app?"
+
 ---
 
 ## 🧠 Check for Understanding

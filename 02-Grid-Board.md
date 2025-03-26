@@ -1,6 +1,6 @@
 ## 🧩 P02 – Grid Board
 
-Now that we have a single grid square, let’s build a full **10×18 Tetris board** using it.
+Now that you have a single grid square, let’s build a full **10×18 Tetris board** using it.
 
 ---
 
@@ -62,6 +62,8 @@ export default App;
 ```
 
 ✅ You should now see a vertical column of orange squares.
+
+![stack of squares](./assets/vertical-stack.png)
 
 ---
 

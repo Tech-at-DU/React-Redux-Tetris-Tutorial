@@ -45,6 +45,10 @@ This will be useful for selecting random blocks and shapes.
 
 ### 🤖 AI Prompts
 
+> "What is Math.random() and how deos it work?"
+
+> "If Math.random() only returns a number between 0.0 and 1.0 how can I get a range of random numbers like numbers 1 to 100? "
+
 > "Why use `Math.floor` instead of `Math.round` in a `random()` function?"
 
 > "How could you write a function that returns a random value from an array?"

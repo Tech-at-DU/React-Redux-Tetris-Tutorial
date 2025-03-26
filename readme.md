@@ -44,6 +44,8 @@ Each step builds on the one before it:
 - [18-Creating-a-Timer](./18-Creating-a-Timer.md) – Drop blocks over time  
 - [19-Game-Over-and-Restart](./19-Game-Over-and-Restart.md) – End and restart the game  
 
+### 🏆 Stretch Goals
+- [20-Stretch Goals](./20-Stretch-Challenges.md) - Try these stretch goals! 
 ---
 
 ## 🧠 What You'll Learn

@@ -181,6 +181,10 @@ export const shapes = [
 
 ✅ Each shape is a 4×4 grid, grouped by rotation. The shape index matches its color.
 
+IF the block of code above isn't making sense try this AI prompt: 
+
+> "<paste the code block above here> This somehow describes the blocks in the game Tetris, how does that work?"
+
 ---
 
 ### 🧩 Step 3: Add Utility Functions
@@ -266,6 +270,8 @@ export default gameSlice.reducer;
 ---
 
 ### 🤖 AI Prompts
+
+> "'m working on the game Tetris using Redux Toolkit. This is my gameSlice explain this to me as a beginner, intermediate, and advanced. <paste the code from gameSlice.js here>"
 
 > "How could you animate a tetromino falling based on this state?"
 

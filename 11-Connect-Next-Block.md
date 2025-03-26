@@ -101,6 +101,8 @@ export default function NextBlock() {
 
 ### 🤖 AI Prompts
 
+> "I'm building an app with Redux toolkit, explain useSelector() as beginner, intermediate, and advanced."
+
 > "Why do we use `useSelector` instead of passing props?"
 
 > "How could this component show a *rotated* preview if needed?"

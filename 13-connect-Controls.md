@@ -91,7 +91,7 @@ You won't see the effect of pressing these buttons yet, since the game is not ye
 
 ### 🤖 AI Prompts
 
-> "What does the `dispatch()` function actually do in Redux?"
+> "I'm using Redux Toolkit, explain `dispatch()` as beginner, intermediate, and advanced."
 
 > "What is the purpose of `useSelector` and how does it optimize re-renders?"
 

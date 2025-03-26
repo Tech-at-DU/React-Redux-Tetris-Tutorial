@@ -171,6 +171,8 @@ Be methodical! Test each feature, think of what the limits and edge cases are, a
 
 ### 🤖 AI Prompts
 
+> "I'm using redux Toolkit. What are reducers, explain them to me as a beginner, intermediate, and advanced developer."
+
 > "How does the reducer avoid modifying the original grid?"
 
 > "Why do we use `randomShape()` and `checkRows()` after locking a piece?"

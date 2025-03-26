@@ -112,6 +112,8 @@ A very basic scoreboard layout:
 
 > "How would you lift state up to share score between components?"
 
+> "If I'm using redux to handle state management will I need to lift state?"
+
 ---
 
 ### 🧠 Check for Understanding
